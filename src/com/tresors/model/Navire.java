@@ -4,6 +4,7 @@ import javafx.geometry.Point3D;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -15,7 +16,7 @@ public class Navire {
     private String name;
     private Color color;
     private int score;
-    private Point3D coordonnées;
+    private Point3D coordonnees;
     private List<Charge> emplacement;
 
     public String getName() {
@@ -45,17 +46,77 @@ public class Navire {
             this.score = score;
     }
 
-    public Point3D getCoordonnées() {
-        return coordonnées;
+    public Point3D getCoordonnees() {
+        return coordonnees;
     }
 
-    public void setCoordonnées(Point3D coordonnées) {
-        this.coordonnées = coordonnées;
+    public void setCoordonnees(Point3D coordonnées) {
+        this.coordonnees = coordonnées;
     }
+
+    public void setCoordonnees(double x,double y, double z){
+        this.coordonnees=new Point3D(x,y,z);
+    }
+
+    public void setEmplacement(List<Charge> emplacement) {
+        this.emplacement = emplacement;
+    }
+
 
     public Navire(String name, Color color) {
         this.name = name;
         this.color = color;
+    }
+
+    /**
+     * Donne le nombre de Pirate dans le navire
+     * @return le nombre de pirate dans le navire
+     */
+    public int getNbPirate(){
+        int nb=0;
+        for (Charge c : emplacement){
+            if(c instanceof Pirate)
+                nb++;
+        }
+        return nb;
+    }
+
+    /**
+     * Ajoute une charge à un emplacement du bateau
+     * @param pos La position de l'emplacement
+     * @param type le type de charge (P pour pirate, C pour canon)
+     */
+    public void ajouterCharge(int pos, char type){
+        switch (type){
+            case 'P':
+                emplacement.set(pos,new Pirate());
+                break;
+            case 'C':
+                emplacement.set(pos,new Canon());
+                break;
+        }
+    }
+
+    /**
+     * ajouter un trésor sur l'emplacement d'un bateau
+     * @param pos La position d'ajout du trésor
+     * @param montant Le montant du trésor
+     */
+    public void ajouterTresor(int pos, int montant){
+        if(montant>0)
+            emplacement.set(pos,new Tresor(montant));
+    }
+
+    /**
+     * Echange la position entre deux charges
+     * @param pos1 la premiere position
+     * @param pos2 la deuxieme position
+     */
+    public void echangerEmplacement(int pos1,int pos2){
+        Charge tmp;
+        tmp=emplacement.get(pos1);
+        emplacement.set(pos1,emplacement.get(pos2));
+        emplacement.set(pos2,tmp);
     }
 
     /**
@@ -80,7 +141,7 @@ public class Navire {
      * Vérification si le beateau a encore un pirate et un canon
      * @return true si le navire est bon, false sinon.
      */
-    private boolean checkConfigurationNavire(){
+    public boolean checkConfigurationNavire(){
         boolean checkPirate=false;
         boolean checkCanon=false;
         for(Charge c: this.emplacement){
@@ -96,7 +157,7 @@ public class Navire {
      * Verifie si le bateau est pillable
      * @return true si le bateau ets pillable, false si il ne l'est pas
      */
-    private boolean estPillable(){
+    public boolean estPillable(){
         if(checkConfigurationNavire()){
             boolean checkTresor=false;
             for (Charge c : emplacement){
@@ -106,6 +167,7 @@ public class Navire {
         }
         else
             return false;
+        return false;
     }
 
     /**
@@ -123,5 +185,17 @@ public class Navire {
             }
         }
         return totalDetruis;
+    }
+
+    /**
+     * Retourne le contenu du Navire (Position,Charge)
+     * @return le contenu du Navire (Position,Charge)
+     */
+    public HashMap<Integer,Charge> getContenuNavire() {
+        HashMap<Integer, Charge> list = new HashMap<Integer, Charge>();
+        for (int i = 0; i < 6; i++) {
+            list.put(i, emplacement.get(i));
+        }
+        return list;
     }
 }
