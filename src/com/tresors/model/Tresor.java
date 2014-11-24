@@ -12,7 +12,8 @@ public class Tresor extends Charge{
     }
 
     public void setMontant(int montant) {
-        this.montant = montant;
+        if(montant>0)
+            this.montant = montant;
     }
 
     public Tresor(int montant) {

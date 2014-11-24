@@ -14,7 +14,7 @@ import java.util.List;
 public class Navire {
 
     private String name;
-    private Color color;
+    private String color;
     private int score;
     private Point3D coordonnees;
     private List<Charge> emplacement;
@@ -27,11 +27,11 @@ public class Navire {
         this.name = name;
     }
 
-    public Color getColor() {
+    public String getColor() {
         return color;
     }
 
-    public void setColor(Color color) {
+    public void setColor(String color) {
         this.color = color;
     }
 
@@ -63,9 +63,13 @@ public class Navire {
     }
 
 
-    public Navire(String name, Color color) {
+    public Navire(String name, String color) {
         this.name = name;
         this.color = color;
+        this.score=0;
+        this.emplacement=new ArrayList<Charge>();
+        //TODO: Vérifier les coordonnées de départ
+        this.coordonnees=new Point3D(0,0,0);
     }
 
     /**
@@ -79,6 +83,22 @@ public class Navire {
                 nb++;
         }
         return nb;
+    }
+
+    /**
+     * Ajoute un nombre de points à un score
+     * @param score le nombre de points à ajouter
+     */
+    public void addScore(int score){
+        this.score=+score;
+    }
+
+    /**
+     * Detecte si le joueur à atteint le score de victoire
+     * @return true si le joueur est vainqueur.
+     */
+    public boolean estVainqueur(){
+        return score >=10;
     }
 
     /**
@@ -171,20 +191,17 @@ public class Navire {
     }
 
     /**
-     * Actualise les emplacements du navire (il prend des dégats)
-     * @param list Liste des position du tableau à détuire(ex:"1,4")
-     * @return le nombre d'emplacement detuits non vide au départ
+     * Supprime un emplacements du navire (il prend des dégats)
+     * @param pos La position à détruire
+     * @return true si l'emplacement est détruit, false si il etait vide
      */
-    private int faireDegats(ArrayList<Integer> list){
-        int totalDetruis=0;
-        for(int a : list){
-            Charge tmp = emplacement.get(a);
-            if(tmp!=null){
-                emplacement.set(a,null);
-                totalDetruis++;
-            }
+    private boolean supprimerEmplacement(int pos){
+        if(emplacement.get(pos)==null)
+            return false;
+        else {
+            emplacement.remove(pos);
+            return true;
         }
-        return totalDetruis;
     }
 
     /**
