@@ -1,6 +1,10 @@
 package com.tresors.model;
 
+import javafx.geometry.Point3D;
+
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Classe Navire
@@ -11,8 +15,8 @@ public class Navire {
     private String name;
     private Color color;
     private int score;
-    private Point coordonnées;
-    private Charge[] emplacement;
+    private Point3D coordonnées;
+    private List<Charge> emplacement;
 
     public String getName() {
         return name;
@@ -41,11 +45,11 @@ public class Navire {
             this.score = score;
     }
 
-    public Point getCoordonnées() {
+    public Point3D getCoordonnées() {
         return coordonnées;
     }
 
-    public void setCoordonnées(Point coordonnées) {
+    public void setCoordonnées(Point3D coordonnées) {
         this.coordonnées = coordonnées;
     }
 
@@ -60,10 +64,58 @@ public class Navire {
      * @return false si l'emplacement est déja pris
      */
     private boolean isEmplacementEmpty(int pos){
-        return emplacement[pos] == null;
-    }
-    private Charge getEmplacement(int pos){
-        return emplacement[pos];
+        return emplacement.get(pos) == null;
     }
 
+    /**
+     * Retourne la charge à l'emplacement
+     * @param pos position de l'emplacement
+     * @return la charge à l'emplacement. NULL si l'emplacement est vide.
+     */
+    private Charge getEmplacement(int pos){
+        return emplacement.get(pos);
+    }
+
+    /**
+     * Vérification si le beateau a encore un pirate et un canon
+     * @return true si le navire est bon, false sinon.
+     */
+    private boolean checkConfigurationNavire(){
+        boolean checkPirate=false;
+        boolean checkCanon=false;
+        for(Charge c: this.emplacement){
+            if(c instanceof Pirate)
+                checkPirate=true;
+            if (c instanceof Canon)
+                checkCanon=true;
+        }
+        return checkCanon&&checkPirate;
+    }
+
+    /**
+     * Verifie si le bateau est pillable
+     * @return true si le bateau ets pillable, false si il ne l'est pas
+     */
+    private boolean estPillable(){
+        if(checkConfigurationNavire()){
+            boolean checkTresor=false;
+            for (Charge c : emplacement){
+                if(c instanceof Tresor)
+                    return true;
+            }
+        }
+        else
+            return false;
+    }
+    private int faireDegats(ArrayList<Integer> list){
+        int totalDetruis=0;
+        for(int a : list){
+            Charge tmp = emplacement.get(a);
+            if(tmp!=null){
+
+            }
+
+
+        }
+    }
 }
