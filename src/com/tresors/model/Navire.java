@@ -107,15 +107,21 @@ public class Navire {
         else
             return false;
     }
+
+    /**
+     * Actualise les emplacements du navire (il prend des dégats)
+     * @param list Liste des position du tableau à détuire(ex:"1,4")
+     * @return le nombre d'emplacement detuits non vide au départ
+     */
     private int faireDegats(ArrayList<Integer> list){
         int totalDetruis=0;
         for(int a : list){
             Charge tmp = emplacement.get(a);
             if(tmp!=null){
-
+                emplacement.set(a,null);
+                totalDetruis++;
             }
-
-
         }
+        return totalDetruis;
     }
 }
