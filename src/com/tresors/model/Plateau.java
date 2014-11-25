@@ -1,12 +1,13 @@
 package com.tresors.model;
 
 import com.tresors.controller.HexToolbox;
-import javafx.geometry.Point3D;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.awt.*;
 import java.awt.geom.Point2D;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.TreeMap;
 
 
 public class Plateau {

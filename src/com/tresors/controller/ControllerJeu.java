@@ -10,7 +10,7 @@ import java.util.TreeMap;
  */
 public class ControllerJeu{
 
-    private TreeMap<String, String> listJoueurs = getListJoueurs();
+    /*private TreeMap<String, String> listJoueurs = getListJoueurs();
 
     private Plateau plateau = new Plateau(listJoueurs);
 
@@ -27,6 +27,6 @@ public class ControllerJeu{
         plateau.nextJoueur();
 
 
-    }
+    }*/
 
 }

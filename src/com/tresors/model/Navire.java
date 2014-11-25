@@ -1,7 +1,5 @@
 package com.tresors.model;
 
-import javafx.geometry.Point3D;
-
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -109,10 +107,10 @@ public class Navire {
     public void ajouterCharge(int pos, char type){
         switch (type){
             case 'P':
-                emplacement.set(pos,new Pirate());
+                emplacement.set(pos,new Pirate(pos));
                 break;
             case 'C':
-                emplacement.set(pos,new Canon());
+                emplacement.set(pos,new Canon(pos));
                 break;
         }
     }
@@ -124,7 +122,7 @@ public class Navire {
      */
     public void ajouterTresor(int pos, int montant){
         if(montant>0)
-            emplacement.set(pos,new Tresor(montant));
+            emplacement.set(pos,new Tresor(montant,pos));
     }
 
     /**
