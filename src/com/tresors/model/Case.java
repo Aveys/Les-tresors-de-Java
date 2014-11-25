@@ -9,6 +9,7 @@ import java.awt.*;
 
 public abstract class Case {
 
+
     private Point coord= new Point();
 
     public Case(Point point) {
@@ -17,6 +18,7 @@ public abstract class Case {
     public Case(int x, int y) {
         this.coord = new Point(x,y);
     }
+    public Case(){ };
 
     public String toString(){
         return getCoord().toString();

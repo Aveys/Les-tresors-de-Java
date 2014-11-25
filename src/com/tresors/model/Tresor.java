@@ -16,7 +16,8 @@ public class Tresor extends Charge{
             this.montant = montant;
     }
 
-    public Tresor(int montant) {
+    public Tresor(int montant, int position) {
+        super(position);
         this.montant = montant;
     }
 }

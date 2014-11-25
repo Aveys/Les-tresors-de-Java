@@ -8,11 +8,11 @@ import java.util.List;
  * Projet java ${PROJECT}
  */
 public class Repaire extends Case{
-    private List<Charge> emplacement;
+    private List<Charge> Charges;
     private int montantTresors;
 
-    public Repaire(List<Charge> emplacement,int montantTresors) {
-        this.emplacement = emplacement;
+    public Repaire(List<Charge> Charges,int montantTresors) {
+        this.Charges = Charges;
         this.montantTresors=montantTresors;
     }
     public Repaire(Charge c1,Charge c2,Charge c3,Charge c4,Charge c5,Charge c6,int montantTresors) {
@@ -32,10 +32,10 @@ public class Repaire extends Case{
      * @return true si l'emplacement est détruit, false si il etait vide
      */
     private boolean faireDegats(int pos){
-        if(emplacement.get(pos)==null)
+        if(Charges.get(pos)==null)
             return false;
         else {
-            emplacement.remove(pos);
+            Charges.remove(pos);
             return true;
         }
     }
@@ -47,7 +47,7 @@ public class Repaire extends Case{
     public boolean checkConfigurationNavire(){
         boolean checkPirate=false;
         boolean checkCanon=false;
-        for(Charge c: this.emplacement){
+        for(Charge c: this.Charges){
             if(c instanceof Pirate)
                 checkPirate=true;
             if (c instanceof Canon)
@@ -56,13 +56,13 @@ public class Repaire extends Case{
         return checkCanon&&checkPirate;
     }
     public boolean estPillable(){
-        for(Charge c: this.emplacement){
+        for(Charge c: this.Charges){
             if(c instanceof Tresor)
                 return true;
         }
         return false;
     }
     public void supprimerEmplacement(int pos){
-        emplacement.remove(pos);
+        Charges.remove(pos);
     }
 }
