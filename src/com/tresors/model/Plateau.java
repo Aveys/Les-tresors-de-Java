@@ -29,6 +29,7 @@ public class Plateau {
 
     private ArrayList<Navire> listJoueurs;
     private Case[][] plateau;
+
     //TODO: Creer une liste de x,y de chaque repaire pour y acceder sans parcourt labourieux ???
 
     /**
@@ -102,4 +103,8 @@ public class Plateau {
         //TODO: Verifier si il n'y a plus de trésors sur la map -> fin du jeu
     }
     //TODO : BEAUCOUP DE METHODE DE PATHFINDING
+
+    public ArrayList<Navire> getListJoueurs() {
+        return listJoueurs;
+    }
 }

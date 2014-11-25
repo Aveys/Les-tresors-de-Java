@@ -14,6 +14,17 @@ public class ControllerJeu{
 
     private Plateau plateau = new Plateau(listJoueurs);
 
+    private boolean victoire = false;
 
+    while(!victoire){
+
+
+
+
+
+        plateau.nextJoueur();
+
+
+    }
 
 }
