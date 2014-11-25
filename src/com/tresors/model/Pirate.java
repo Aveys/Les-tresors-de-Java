@@ -5,4 +5,7 @@ package com.tresors.model;
  * Projet java ${PROJECT}
  */
 public class Pirate extends Charge {
+    public Pirate(int position) {
+        super(position);
+    }
 }

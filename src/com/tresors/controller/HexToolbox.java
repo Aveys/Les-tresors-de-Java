@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class HexToolbox {
 
 
-    public static ArrayList<Repaire> templateRepaire;
+    public static repaireAleatoir
     /**
      * Donne les coordonnées des cases voisines
      * @param source Les coordonnées de départ
