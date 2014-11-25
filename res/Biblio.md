@@ -1,3 +1,3 @@
 Bibliographie
 =============
-* http://www.redblobgames.com/grids/hexagons/
+* [Creation de grille hexagonale](http://www.redblobgames.com/grids/hexagons/)

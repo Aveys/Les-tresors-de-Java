@@ -5,5 +5,5 @@ package com.tresors.model;
  * Projet java ${PROJECT}
  */
 public abstract class Case {
-
+    int z;
 }
