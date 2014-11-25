@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
  * Created by Nicolas Sagon on 25/11/2014.
  */
 public class vuePlateau extends JFrame {
-    private JPanel mainPanelv;
+    private JPanel mainPanel;
     private JMenuBar menuBar;
     private JMenu file;
     private JMenuItem menuItemFileSave;
@@ -51,7 +51,7 @@ public class vuePlateau extends JFrame {
         this.setJMenuBar(menuBar);
 
         //Main panel
-        mainPanelv.setLayout(new GridBagLayout());
+        mainPanel.setLayout(new GridBagLayout());
 
         //Panel score
         panelScore = new JPanel();
@@ -67,7 +67,7 @@ public class vuePlateau extends JFrame {
         constraintsPanelScore.gridy = 0;
         constraintsPanelScore.anchor = GridBagConstraints.PAGE_START;
 
-        mainPanelv.add(panelScore, constraintsPanelScore);
+        mainPanel.add(panelScore, constraintsPanelScore);
 
         //Panel Plateau
         plateauPanel = new PlateauPanel();
@@ -80,7 +80,7 @@ public class vuePlateau extends JFrame {
         constraintsPanelPlateau.gridy = 1;
         constraintsPanelPlateau.anchor = GridBagConstraints.PAGE_START;
 
-        mainPanelv.add(plateauPanel, constraintsPanelPlateau);
+        mainPanel.add(plateauPanel, constraintsPanelPlateau);
 
 
         //Panel Action
@@ -133,14 +133,14 @@ public class vuePlateau extends JFrame {
         constraintsBateauPanel.insets = new Insets(120, 75, 0, 0);
         constraintsBateauPanel.anchor = GridBagConstraints.PAGE_START;
 
-        mainPanelv.add(labelAction, constraintsLabelAction);
-        mainPanelv.add(buttonAction1, constraintsButtonAction1);
-        mainPanelv.add(buttonAction2, constraintsButtonAction2);
-        mainPanelv.add(buttonPassTour, constraintsButtonPassTour);
-        mainPanelv.add(bateauPanel, constraintsBateauPanel);
+        mainPanel.add(labelAction, constraintsLabelAction);
+        mainPanel.add(buttonAction1, constraintsButtonAction1);
+        mainPanel.add(buttonAction2, constraintsButtonAction2);
+        mainPanel.add(buttonPassTour, constraintsButtonPassTour);
+        mainPanel.add(bateauPanel, constraintsBateauPanel);
 
         //add to JFrame
-        this.add(mainPanelv);
+        this.add(mainPanel);
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         Toolkit tk = Toolkit.getDefaultToolkit();
@@ -149,12 +149,12 @@ public class vuePlateau extends JFrame {
 
     }
 
-    public JPanel getMainPanelv() {
-        return mainPanelv;
+    public JPanel getMainPanel() {
+        return mainPanel;
     }
 
-    public void setMainPanelv(JPanel mainPanelv) {
-        this.mainPanelv = mainPanelv;
+    public void setMainPanel(JPanel mainPanel) {
+        this.mainPanel = mainPanel;
     }
 
     public void setMenuBar(JMenuBar menuBar) {
@@ -272,14 +272,14 @@ public class vuePlateau extends JFrame {
      * @noinspection ALL
      */
     private void $$$setupUI$$$() {
-        mainPanelv = new JPanel();
-        mainPanelv.setLayout(new GridBagLayout());
+        mainPanel = new JPanel();
+        mainPanel.setLayout(new GridBagLayout());
     }
 
     /**
      * @noinspection ALL
      */
     public JComponent $$$getRootComponent$$$() {
-        return mainPanelv;
+        return mainPanel;
     }
 }
