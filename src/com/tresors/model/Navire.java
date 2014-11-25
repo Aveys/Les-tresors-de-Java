@@ -15,7 +15,7 @@ public class Navire {
     private String capitaine;
     private String color;
     private int score;
-    private Point3D coordonnees;
+    private Point coordonnees;
     private List<Charge> emplacement;
 
     public String getCapitaine() {
@@ -45,16 +45,16 @@ public class Navire {
             this.score = score;
     }
 
-    public Point3D getCoordonnees() {
+    public Point getCoordonnees() {
         return coordonnees;
     }
 
-    public void setCoordonnees(Point3D coordonnees) {
+    public void setCoordonnees(Point coordonnees) {
         this.coordonnees = coordonnees;
     }
 
-    public void setCoordonnees(double x,double y, double z){
-        this.coordonnees=new Point3D(x,y,z);
+    public void setCoordonnees(int x,int y){
+        this.coordonnees=new Point(x,y);
     }
 
     public void setEmplacement(List<Charge> emplacement) {
@@ -68,7 +68,7 @@ public class Navire {
         this.score=0;
         this.emplacement=new ArrayList<Charge>();
         //TODO: Vérifier les coordonnées de départ
-        this.coordonnees=new Point3D(0,0,0);
+        this.coordonnees=new Point(0,0);
     }
 
     /**

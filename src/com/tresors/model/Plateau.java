@@ -1,13 +1,12 @@
 package com.tresors.model;
 
+import com.tresors.controller.HexToolbox;
 import javafx.geometry.Point3D;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.awt.*;
 import java.awt.geom.Point2D;
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 
 public class Plateau {
@@ -85,11 +84,63 @@ public class Plateau {
         }
     }
 
-    public void getVoisinsAttaquable(int x,int y,int z) throws NotImplementedException{
-        //TODO: Donne une liste des repaires et Navires attaquables autour d'une position.
+    /**
+     * Marche comme {@link #getVoisinsAttaquable(Point point)}
+     */
+    public ArrayList<Point> getVoisinsAttaquable(int x,int y){
+        return getVoisinsAttaquable(new Point(x,y));
     }
-    public void getVoisinsAttaquable(Point3D point)throws NotImplementedException{
-        //TODO: Donne une liste des repaires et Navires attaquables autour d'une position. CF Methode précédente
+
+    /**
+     * Renvoi les coordonnées de toutes les cases attaquable
+     * @param point le point source
+     * @return la liste des points correpsondants à des hexagones attaquable
+     * @throws NotImplementedException DEBUG
+     */
+    public ArrayList<Point> getVoisinsAttaquable(Point point)throws NotImplementedException{
+        ArrayList<Point> attaquable = new ArrayList<Point>();
+        ArrayList<Point> voisins = HexToolbox.getVoisins(point);
+        Case tmp;
+        for (Point p :voisins){
+            tmp = plateau[p.x][p.y];
+            if (tmp instanceof Repaire){
+                if (((Repaire) tmp).checkConfigurationRepaire())
+                    attaquable.add(p);
+            }
+
+            ArrayList<Navire> listNavire = getNavire(p);
+            for (Navire n : listNavire){
+                if (n.checkConfigurationNavire())
+                    attaquable.add(p);
+            }
+
+        }
+        return attaquable;
+    }
+
+    /**
+     * Retourne les Navires situé à un point particulier
+     * @param p Le point à analyser
+     * @return la liste des navires présent sur le point
+     */
+    public ArrayList<Navire> getNavire(Point p){
+        ArrayList<Navire> list = new ArrayList<Navire>();
+        for (Navire n:listJoueurs){
+            if(n.getCoordonnees().equals(p)){
+               list.add(n);
+            }
+        }
+        return list;
+    }
+
+    /**
+     * voir {@link #getNavire(Point p)}
+     * @param x la position en x
+     * @param y la position en y
+     * @return la liste des navires présent sur le point
+     */
+    public ArrayList<Navire> getNavire(int x,int y){
+        return getNavire(new Point(x,y));
     }
 
     /**
@@ -127,7 +178,6 @@ public class Plateau {
         else
             return '0';
     }
-
     public void isNoTreseasures(){
         //TODO: Verifier si il n'y a plus de trésors sur la map -> fin du jeu
     }

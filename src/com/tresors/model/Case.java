@@ -31,4 +31,5 @@ public abstract class Case {
     public Point getCoord() {
         return coord;
     }
+
 }

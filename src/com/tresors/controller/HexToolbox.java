@@ -13,13 +13,13 @@ import java.util.ArrayList;
 public class HexToolbox {
 
 
-    public static repaireAleatoir
+    public static ArrayList<Repaire> templateRepaire;
     /**
      * Donne les coordonnées des cases voisines
      * @param source Les coordonnées de départ
      * @return Un tableau de point avec les coordonnées des voisins
      */
-    public static ArrayList<Point> detecteVoisins(Point source){
+    public static ArrayList<Point> getVoisins(Point source){
         ArrayList<Point> res = new ArrayList<Point>();
         int neighbors[][]={{+1,  0},{+1, -1},{ 0, -1},{-1,  0},{-1, +1},{ 0, +1}};
         for (int[] calc : neighbors){
@@ -29,16 +29,22 @@ public class HexToolbox {
     }
 
     /**
-     *
-     * @param hex1
-     * @param hex2
-     * @return
+     * Donne la distance absolue entre les deux centres des hexagones
+     * @param hex1 L'hexagone source
+     * @param hex2 L'hexagone de destination
+     * @return La distance absolue entre deux
      */
     public static int distanceHex(Point hex1, Point hex2){
         return ((Math.abs(hex1.y-hex2.x)+ Math.abs(hex1.y-hex2.y))+Math.abs(hex1.x+hex1.y-hex2.x-hex2.y))/2;
     }
 
-    public static boolean estNaviguable(Case[][] plateau, Point p) {
+    /**
+     * Verifie si la case est navigable
+     * @param plateau Le plateau de jeu
+     * @param p la case à vérifier
+     * @return True si la case est navigable, false sinon
+     */
+    public static boolean estNavigable(Case[][] plateau, Point p) {
         Case c = plateau[p.x][p.y];
         return !(c instanceof Repaire) && c != null;
 
