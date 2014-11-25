@@ -21,7 +21,7 @@ public class HexToolbox {
      */
     public static ArrayList<Point> detecteVoisins(Point source){
         ArrayList<Point> res = new ArrayList<Point>();
-         int neighbors[][]={{+1,  0},{+1, -1},{ 0, -1},{-1,  0},{-1, +1},{ 0, +1}};
+        int neighbors[][]={{+1,  0},{+1, -1},{ 0, -1},{-1,  0},{-1, +1},{ 0, +1}};
         for (int[] calc : neighbors){
             res.add(new Point(source.x+calc[0],source.y+calc[1]));
         }

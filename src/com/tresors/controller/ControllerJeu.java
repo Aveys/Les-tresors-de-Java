@@ -16,9 +16,11 @@ public class ControllerJeu{
 
     private boolean victoire = false;
 
+    private
+
     while(!victoire){
 
-
+        plateau.getListJoueurs().get(0);
 
 
 

@@ -2,7 +2,6 @@ package com.tresors.model;
 
 import javafx.geometry.Point3D;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,18 +12,18 @@ import java.util.List;
  */
 public class Navire {
 
-    private String name;
+    private String capitaine;
     private String color;
     private int score;
     private Point3D coordonnees;
     private List<Charge> emplacement;
 
-    public String getName() {
-        return name;
+    public String getCapitaine() {
+        return capitaine;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCapitaine(String capitaine) {
+        this.capitaine = capitaine;
     }
 
     public String getColor() {
@@ -63,8 +62,8 @@ public class Navire {
     }
 
 
-    public Navire(String name, String color) {
-        this.name = name;
+    public Navire(String capitaine, String color) {
+        this.capitaine = capitaine;
         this.color = color;
         this.score=0;
         this.emplacement=new ArrayList<Charge>();
