@@ -8,14 +8,15 @@ import java.util.List;
  * Projet java ${PROJECT}
  */
 public class Repaire extends Case{
-    private List<Charge> emplacement;
+    private List<Charge> Charges;
     private int montantTresors;
 
-    public Repaire(List<Charge> emplacement,int montantTresors) {
-        this.emplacement = emplacement;
+    public Repaire(List<Charge> Charges,int montantTresors) {
+        this.Charges = Charges;
         this.montantTresors=montantTresors;
     }
     public Repaire(Charge c1,Charge c2,Charge c3,Charge c4,Charge c5,Charge c6,int montantTresors) {
+        super();
         List<Charge> list = new ArrayList<Charge>();
         list.add(c1);
         list.add(c2);
@@ -32,22 +33,23 @@ public class Repaire extends Case{
      * @return true si l'emplacement est détruit, false si il etait vide
      */
     private boolean faireDegats(int pos){
-        if(emplacement.get(pos)==null)
+        if(Charges.get(pos)==null)
             return false;
         else {
-            emplacement.remove(pos);
+            Charges.remove(pos);
             return true;
         }
     }
 
     /**
-     * Vérification si le beateau a encore un pirate et un canon
-     * @return true si le navire est bon, false sinon.
+     * Vérification si le repaire a encore un pirate et un canon
+     * @return true si le repaire est bon, false sinon.
      */
-    public boolean checkConfigurationNavire(){
+    //TODO: REFAIRE LA METHODE AVEC LES CANON INVINCIBLE
+    public boolean checkConfigurationRepaire(){
         boolean checkPirate=false;
         boolean checkCanon=false;
-        for(Charge c: this.emplacement){
+        for(Charge c: this.Charges){
             if(c instanceof Pirate)
                 checkPirate=true;
             if (c instanceof Canon)
@@ -56,13 +58,13 @@ public class Repaire extends Case{
         return checkCanon&&checkPirate;
     }
     public boolean estPillable(){
-        for(Charge c: this.emplacement){
+        for(Charge c: this.Charges){
             if(c instanceof Tresor)
                 return true;
         }
         return false;
     }
     public void supprimerEmplacement(int pos){
-        emplacement.remove(pos);
+        Charges.remove(pos);
     }
 }

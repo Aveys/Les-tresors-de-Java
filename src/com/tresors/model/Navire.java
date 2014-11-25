@@ -1,7 +1,5 @@
 package com.tresors.model;
 
-import javafx.geometry.Point3D;
-
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,18 +11,18 @@ import java.util.List;
  */
 public class Navire {
 
-    private String name;
+    private String capitaine;
     private String color;
     private int score;
-    private Point3D coordonnees;
+    private Point coordonnees;
     private List<Charge> emplacement;
 
-    public String getName() {
-        return name;
+    public String getCapitaine() {
+        return capitaine;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCapitaine(String capitaine) {
+        this.capitaine = capitaine;
     }
 
     public String getColor() {
@@ -46,16 +44,16 @@ public class Navire {
             this.score = score;
     }
 
-    public Point3D getCoordonnees() {
+    public Point getCoordonnees() {
         return coordonnees;
     }
 
-    public void setCoordonnees(Point3D coordonnées) {
-        this.coordonnees = coordonnées;
+    public void setCoordonnees(Point coordonnees) {
+        this.coordonnees = coordonnees;
     }
 
-    public void setCoordonnees(double x,double y, double z){
-        this.coordonnees=new Point3D(x,y,z);
+    public void setCoordonnees(int x,int y){
+        this.coordonnees=new Point(x,y);
     }
 
     public void setEmplacement(List<Charge> emplacement) {
@@ -63,13 +61,13 @@ public class Navire {
     }
 
 
-    public Navire(String name, String color) {
-        this.name = name;
+    public Navire(String capitaine, String color) {
+        this.capitaine = capitaine;
         this.color = color;
         this.score=0;
         this.emplacement=new ArrayList<Charge>();
         //TODO: Vérifier les coordonnées de départ
-        this.coordonnees=new Point3D(0,0,0);
+        this.coordonnees=new Point(0,0);
     }
 
     /**
@@ -109,10 +107,10 @@ public class Navire {
     public void ajouterCharge(int pos, char type){
         switch (type){
             case 'P':
-                emplacement.set(pos,new Pirate());
+                emplacement.set(pos,new Pirate(pos));
                 break;
             case 'C':
-                emplacement.set(pos,new Canon());
+                emplacement.set(pos,new Canon(pos));
                 break;
         }
     }
@@ -124,7 +122,7 @@ public class Navire {
      */
     public void ajouterTresor(int pos, int montant){
         if(montant>0)
-            emplacement.set(pos,new Tresor(montant));
+            emplacement.set(pos,new Tresor(montant,pos));
     }
 
     /**

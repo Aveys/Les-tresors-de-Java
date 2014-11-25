@@ -5,5 +5,13 @@ package com.tresors.model;
  * Projet java ${PROJECT}
  */
 public abstract class Charge {
+    int position;
 
+    public Charge(int position) {
+        this.position = position;
+    }
+
+    public int getPosition() {
+        return position;
+    }
 }

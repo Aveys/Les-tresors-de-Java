@@ -5,4 +5,7 @@ package com.tresors.model;
  * Projet java ${PROJECT}
  */
 public class Canon extends Charge {
+    public Canon(int position) {
+        super(position);
+    }
 }
