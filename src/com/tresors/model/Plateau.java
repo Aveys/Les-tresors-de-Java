@@ -11,6 +11,21 @@ import java.util.TreeMap;
 
 
 public class Plateau {
+    /*  Type de Cases :
+        1. Non affiché (terre)
+        2. Port
+        3. Mer
+        4. Repaire  */
+    private int grilleRef[][] = {   {1,1,1,1,1,1,1,1,1},  //1
+            {2,2,5,1,1,1,1,1,1},  //2
+            {3,3,3,3,4,1,1,1,1},  //3
+            {3,3,3,3,3,3,4,1,1},  //4
+            {4,1,3,3,3,3,3,3,1},  //5
+            {1,1,4,3,4,3,4,3,4},  //6
+            {1,1,1,3,3,3,3,3,3},  //7
+            {1,1,1,1,1,4,3,3,4},  //8
+            {1,1,1,1,1,1,1,4,1}}; //9
+
     private ArrayList<Navire> listJoueurs;
     private Case[][] plateau;
     //TODO: Creer une liste de x,y de chaque repaire pour y acceder sans parcourt labourieux ???
@@ -20,6 +35,32 @@ public class Plateau {
             this.listJoueurs.add(new Navire(e.getKey(), e.getValue()));
         }
     }
+
+
+
+    public void initGrille(){
+        for (int i = 0; i< 9 ; i++){
+            for (int j = 0 ; j < 9 ; j++){
+                if( this.grilleRef[i][j] == 1)
+                    this.plateau[i][j] = null;
+                if( this.grilleRef[i][j] == 2)
+                    this.plateau[i][j] = new Port();
+                if( this.grilleRef[i][j] == 3)
+                    this.plateau[i][j] = new Mer();
+                if( this.grilleRef[i][j] == 2)
+                    this.plateau[i][j] = new Repaire();
+            }
+        }
+    }
+
+    public void afficheGrille(){
+        for (int i = 0; i< 9 ; i++){
+            for (int j = 0 ; j < 9 ; j++){
+                System.out.println(plateau[i][j].toString());
+            }
+        }
+    }
+
     public void getVoisinsAttaquable(int x,int y,int z) throws NotImplementedException{
         //TODO: Donne une liste des repaires et Navires attaquables autour d'une position.
     }
