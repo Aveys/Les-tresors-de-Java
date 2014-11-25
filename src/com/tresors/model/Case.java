@@ -19,7 +19,7 @@ public abstract class Case {
     }
 
     public String toString(){
-        String str = getCoord().toString();
+        return getCoord().toString();
     }
 
     public void setCoord(Point coord) {
