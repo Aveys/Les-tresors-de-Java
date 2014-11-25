@@ -16,7 +16,7 @@ public class PlateauPanel extends JPanel{
     public PlateauPanel() {
 
         super();
-        setSize(993, 614);
+        setSize(1037, 641);
         File ficImg = new File("res/images/plateauFull.png");
         try {
             bgImage = ImageIO.read(ficImg);

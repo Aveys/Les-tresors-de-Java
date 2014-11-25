@@ -1,6 +1,6 @@
 package com.tresors;
 
-import com.tresors.vue.VuePlateau;
+import com.tresors.vue.vuePlateau;
 
 /**
  * Created by Nicolas Sagon on 25/11/2014.
@@ -8,6 +8,6 @@ import com.tresors.vue.VuePlateau;
 public class Main {
     public static void main(String[] args) {
 
-        VuePlateau test = new VuePlateau();
+        vuePlateau test = new vuePlateau();
     }
 }
