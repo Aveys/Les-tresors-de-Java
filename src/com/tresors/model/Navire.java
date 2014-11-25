@@ -50,8 +50,8 @@ public class Navire {
         return coordonnees;
     }
 
-    public void setCoordonnees(Point3D coordonnées) {
-        this.coordonnees = coordonnées;
+    public void setCoordonnees(Point3D coordonnees) {
+        this.coordonnees = coordonnees;
     }
 
     public void setCoordonnees(double x,double y, double z){
