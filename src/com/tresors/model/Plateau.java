@@ -32,7 +32,6 @@ public class Plateau {
     public static ArrayList<Repaire> templateRepaire;
 
     public void initRepaire (){
-
         Canon canonP0 = new Canon(0);
         Canon canonP1 = new Canon(1);
         Canon canonP2 = new Canon(2);
@@ -50,13 +49,19 @@ public class Plateau {
         this.templateRepaire.add(new Repaire(canonP0, canonP0,pirateP1, null, null, null, 3 ));
         this.templateRepaire.add(new  Repaire(canonP1, canonP2, pirateP3, null, null, null,2));
         this.templateRepaire.add(new Repaire(canonP0, canonP1, canonP2,canonP3,pirateP4,null, 4 ));
-
-
+        this.templateRepaire.add(new Repaire(canonP0, canonP0, canonP1,canonP2, canonP3, pirateP4, 5));
+        this.templateRepaire.add(new Repaire(canonP0, pirateP1,pirateP2, pirateP3, null, null, 5));
+        this.templateRepaire.add(new Repaire(canonP1, canonP2, pirateP3, pirateP4, null, null, 3));
+        this.templateRepaire.add(new Repaire(canonP0, pirateP1, pirateP2, null, null, null, 4));
     }
 
     public Repaire repaireAleatoir(){
-
+        int nmbAleatoir =  (int)Math.random()*this.templateRepaire.size();
+        Repaire repaireTemp = this.templateRepaire.get(nmbAleatoir);
+        this.templateRepaire.remove(nmbAleatoir);
+        return repaireTemp;
     }
+
     private Case[][] plateau;
 
     //TODO: Creer une liste de x,y de chaque repaire pour y acceder sans parcourt labourieux ???
