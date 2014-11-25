@@ -29,14 +29,13 @@ public class Plateau {
     private ArrayList<Navire> listJoueurs;
     private Case[][] plateau;
     //TODO: Creer une liste de x,y de chaque repaire pour y acceder sans parcourt labourieux ???
-    public Plateau(TreeMap<String,String> listJoueurs) {
-        //TODO: cree la matrice de cases, l'emplacement de départ
-        for (Map.Entry<String,String> e:listJoueurs.entrySet()) {
-            this.listJoueurs.add(new Navire(e.getKey(), e.getValue()));
-        }
-    }
 
-    public void initGrille(){
+    /**
+     *
+     * @param listJoueurs Map de Joueurs de Type nom,couleur
+     */
+    public Plateau(TreeMap<String,String> listJoueurs) {
+        // Génération de la Carte
         for (int i = 0; i< 9 ; i++){
             for (int j = 0 ; j < 9 ; j++){
                 if( this.grilleRef[i][j] == 1)
@@ -49,6 +48,14 @@ public class Plateau {
                     this.plateau[i][j] = new Repaire();
             }
         }
+        //Attribution des navire pour chaque joueur
+        for (Map.Entry<String,String> e:listJoueurs.entrySet()) {
+            this.listJoueurs.add(new Navire(e.getKey(), e.getValue()));
+        }
+    }
+
+    public void initGrille(){
+
     }
 
     public void afficheGrille(){

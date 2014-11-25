@@ -2,14 +2,18 @@ package com.tresors.controller;
 
 import com.tresors.model.*;
 
+import java.util.TreeMap;
+
 /**
  * Created by arthurveys on 21/11/14.
  * Projet java ${PROJECT}
  */
 public class ControllerJeu{
 
-    Plateau plateau = new Plateau();
-    plateau.initGrille();
+    private TreeMap<String, String> listJoueurs = getListJoueurs();
+
+    Plateau plateau = new Plateau(listJoueurs);
+
 
 
 }
