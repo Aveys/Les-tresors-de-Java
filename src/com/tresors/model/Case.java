@@ -6,6 +6,7 @@ import java.awt.*;
  * Created by arthurveys on 21/11/14.
  * Projet java ${PROJECT}
  */
+
 public abstract class Case {
 
     private Point coord= new Point();
@@ -15,5 +16,17 @@ public abstract class Case {
     }
     public Case(int x, int y) {
         this.coord = new Point(x,y);
+    }
+
+    public String toString(){
+        String str = getCoord().toString();
+    }
+
+    public void setCoord(Point coord) {
+        this.coord = coord;
+    }
+
+    public Point getCoord() {
+        return coord;
     }
 }
