@@ -44,6 +44,7 @@ public class HexToolbox {
      * @param p la case à vérifier
      * @return True si la case est navigable, false sinon
      */
+    //TODO prendre en compte la sortie de port pour la fonction de deplassement Plateau.caseSurLequelJePeuAller()
     public static boolean estNavigable(Case[][] plateau, Point p) {
         Case c = plateau[p.x][p.y];
         return !(c instanceof Repaire) && c != null;

@@ -28,5 +28,7 @@ public class ControllerJeu{
 
 
     }*/
+    Plateau monPlateau;
+
 
 }

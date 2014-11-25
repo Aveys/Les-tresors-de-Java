@@ -31,6 +31,9 @@ public class Plateau {
 
     public static ArrayList<Repaire> templateRepaire;
 
+    /**
+     * inisialisation de la liste predefinie des repaires
+     */
     public void initRepaire (){
         Canon canonP0 = new Canon(0);
         Canon canonP1 = new Canon(1);
@@ -55,6 +58,10 @@ public class Plateau {
         this.templateRepaire.add(new Repaire(canonP0, pirateP1, pirateP2, null, null, null, 4));
     }
 
+    /**
+     *
+     * @return Repaire un repaire a positionenr
+     */
     public Repaire repaireAleatoir(){
         int nmbAleatoir =  (int)Math.random()*this.templateRepaire.size();
         Repaire repaireTemp = this.templateRepaire.get(nmbAleatoir);
@@ -81,7 +88,7 @@ public class Plateau {
                 if( this.grilleRef[i][j] == 3)
                     this.plateau[i][j] = new Mer();
                 if( this.grilleRef[i][j] == 2)
-                    this.plateau[i][j] = new Repaire();
+                    this.plateau[i][j] = this.repaireAleatoir();
             }
         }
         //Attribution des navires pour chaque joueur
@@ -90,6 +97,57 @@ public class Plateau {
         }
     }
 
+    /**
+     * methode de deplacement retournent la liste des cases autorise au joueur
+     * @param positionInisiale position du joueur lors de l'appel initial
+     * @param nmbDePirate nombre de deplacement autorise pour ce joueur
+     * @return la liste des cases autoriser (a colorier en verts)
+     */
+    public ArrayList<Case> caseSurLequelJePeuAller(ArrayList<Case> positionInisiale, int nmbDePirate){
+        if(nmbDePirate!=0){
+            //pas fini la recursion
+            ArrayList<Case> listeCase = positionInisiale;
+            // pour toute les dernieres case quelle sont les cases a coté ou on a le droits d'aller
+            for (Case tmpCase : positionInisiale){
+                ArrayList<Point> listeCaseTemp;
+                listeCaseTemp = HexToolbox.getVoisins(tmpCase.getCoord());
+                //est-ce que ces voisins sont des cases navigable
+                for (Point point : listeCaseTemp){
+                    if(HexToolbox.estNavigable(this.plateau,point)){
+                        listeCaseTemp.remove(point);
+                    }
+                }
+                // optenir les cases correspondante a la liste des points et les ajoute au navigable
+                for (Point point : listeCaseTemp){
+                    listeCase.add(getCase(point));
+                }
+            }
+            return caseSurLequelJePeuAller(listeCase,nmbDePirate--);
+
+        }
+        else
+            return positionInisiale;
+    }
+
+    public Case getCase(Point p){
+        for (Case ligne[] : this.plateau){
+            for (Case tmpCase : ligne){
+                if(tmpCase.getCoord() == p)
+                    return tmpCase;
+            }
+        }
+        return null;
+    }
+
+    public Case getCase(int x, int y){
+        for (Case ligne[] : this.plateau){
+            for (Case tmpCase : ligne){
+                if(tmpCase.getCoord().y == y && tmpCase.getCoord().x == x )
+                    return tmpCase;
+            }
+        }
+        return null;
+    }
     /**
      * Marche comme {@link #getVoisinsAttaquable(Point point)}
      */
