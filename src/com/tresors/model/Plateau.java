@@ -11,7 +11,8 @@ import java.util.TreeMap;
 
 
 public class Plateau {
-    /*  Type de Cases :
+    /* Structure de la Carte et type des Cases
+    Type de Cases :
         1. Non affiché (terre)
         2. Port
         3. Mer
@@ -48,21 +49,9 @@ public class Plateau {
                     this.plateau[i][j] = new Repaire();
             }
         }
-        //Attribution des navire pour chaque joueur
+        //Attribution des navires pour chaque joueur
         for (Map.Entry<String,String> e:listJoueurs.entrySet()) {
             this.listJoueurs.add(new Navire(e.getKey(), e.getValue()));
-        }
-    }
-
-    public void initGrille(){
-
-    }
-
-    public void afficheGrille(){
-        for (int i = 0; i< 9 ; i++){
-            for (int j = 0 ; j < 9 ; j++){
-                System.out.println(plateau[i][j].toString());
-            }
         }
     }
 

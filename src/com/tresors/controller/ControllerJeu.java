@@ -12,7 +12,7 @@ public class ControllerJeu{
 
     private TreeMap<String, String> listJoueurs = getListJoueurs();
 
-    Plateau plateau = new Plateau(listJoueurs);
+    private Plateau plateau = new Plateau(listJoueurs);
 
 
 
