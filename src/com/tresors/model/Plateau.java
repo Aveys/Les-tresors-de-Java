@@ -71,7 +71,9 @@ public class Plateau {
 
     private Case[][] plateau;
 
-    //TODO: Creer une liste de x,y de chaque repaire pour y acceder sans parcourt labourieux ???
+
+    ArrayList<Repaire> listDesRepaires;//liste des repaire pour y acceder rapidement
+
 
     /**
      *
@@ -87,8 +89,12 @@ public class Plateau {
                     this.plateau[i][j] = new Port();
                 if( this.grilleRef[i][j] == 3)
                     this.plateau[i][j] = new Mer();
-                if( this.grilleRef[i][j] == 2)
-                    this.plateau[i][j] = this.repaireAleatoir();
+                if( this.grilleRef[i][j] == 2){
+                    Repaire repaireTemp = this.repaireAleatoir();
+                    this.plateau[i][j] = repaireTemp;
+                    listDesRepaires.add(repaireTemp);
+                }
+
             }
         }
         //Attribution des navires pour chaque joueur
@@ -96,7 +102,7 @@ public class Plateau {
             this.listJoueurs.add(new Navire(e.getKey(), e.getValue()));
         }
     }
-
+//TODO renomer la fonction car je n'ai pas eu d'idee de nom
     /**
      * methode de deplacement retournent la liste des cases autorise au joueur
      * @param positionInisiale position du joueur lors de l'appel initial
@@ -214,7 +220,7 @@ public class Plateau {
      * @return M pour une case Mer, P pour une case Port, R pour une case de Repaire, 0 si la case n'est d'aucun type
      */
     public char getTypeCase(int x,int y){
-        //TODO : Verifier pour le nombre de points
+        if (x<9 && y<9){
         Case tmp=plateau[x][y];
         if(tmp instanceof Mer)
             return 'M';
@@ -222,8 +228,9 @@ public class Plateau {
             return 'P';
         else if (tmp instanceof Repaire)
             return 'R';
-        else
-            return '0';
+        }
+
+        return '0';
     }
     /**
      * Retourne le type de case par rapport la coordonnée en parametre
@@ -242,10 +249,19 @@ public class Plateau {
         else
             return '0';
     }
-    public void isNoTreseasures(){
-        //TODO: Verifier si il n'y a plus de trésors sur la map -> fin du jeu
+    public boolean isNoTreseasures(){
+        for (Repaire repaireTmp : this.listDesRepaires){
+            if(repaireTmp.getMontantTresors()>0)
+                return false;
+        }
+        for (Navire NavireTmp : this.listJoueurs ){
+            if (NavireTmp.estPillable()==true)
+                return false;
+        }
+
+        return true;
     }
-    //TODO : BEAUCOUP DE METHODE DE PATHFINDING
+    //TODO : Si veux une methode de pathfinding mais les chemin possible sont deja fait
 
     public ArrayList<Navire> getListJoueurs() {
         return listJoueurs;
