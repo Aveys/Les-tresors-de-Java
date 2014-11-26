@@ -42,10 +42,10 @@ public class Repaire extends Case{
     }
 
     /**
-     * Vérification si le repaire a encore un pirate ou un canon (des qu'on a plus d'un on a gagner)
+     * Vérification si le repaire a encore un pirate et un canon (des qu'on a plus d'un on a gagner)
      * @return true si le repaire est bon, false sinon.
      */
-    public boolean checkConfigurationRepaire(){
+    public boolean checkRepaireAttaquable(){
         boolean checkPirate=false;
         boolean checkCanon=false;
 
@@ -55,7 +55,7 @@ public class Repaire extends Case{
             if (c instanceof Canon)
                 checkCanon=true;
         }
-        return (checkCanon||checkPirate);
+        return (checkCanon&&checkPirate);
     }
 
     /**
