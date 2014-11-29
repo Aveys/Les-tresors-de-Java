@@ -174,7 +174,7 @@ public class Plateau {
         for (Point p :voisins){
             tmp = plateau[p.x][p.y];
             if (tmp instanceof Repaire){
-                if (((Repaire) tmp).checkConfigurationRepaire())
+                if (((Repaire) tmp).checkRepaireAttaquable())
                     attaquable.add(p);
             }
 
