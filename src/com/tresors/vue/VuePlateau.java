@@ -24,7 +24,7 @@ public class VuePlateau extends JFrame {
     private JLabel labelAction;
     private JButton buttonPassTour;
 
-    public vuePlateau() {
+    public VuePlateau() {
 
         super("Les trésors de Java");
 

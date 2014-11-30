@@ -17,7 +17,8 @@ public class Plateau {
         2. Port
         3. Mer
         4. Repaire  */
-    private int grilleRef[][] = {   {1,1,1,1,1,1,1,1,1},  //1
+    private int grilleRef[][] = {
+            {1,1,1,1,1,1,1,1,1},  //1
             {2,2,5,1,1,1,1,1,1},  //2
             {3,3,3,3,4,1,1,1,1},  //3
             {3,3,3,3,3,3,4,1,1},  //4
@@ -61,7 +62,7 @@ public class Plateau {
 
     /**
      *
-     * @return Repaire un repaire a positionenr
+     * @return Repaire aleatoire
      */
     public Repaire repaireAleatoire(){
         int nmbAleatoir =  (int)Math.random()*this.templateRepaire.size();
@@ -100,16 +101,16 @@ public class Plateau {
 //TODO renomer la fonction car je n'ai pas eu d'idee de nom
     /**
      * methode de deplacement retournent la liste des cases autorise au joueur
-     * @param positionInisiale position du joueur lors de l'appel initial
+     * @param positionInitiale position du joueur lors de l'appel initial
      * @param nmbDePirate nombre de deplacement autorise pour ce joueur
      * @return la liste des cases autoriser (a colorier en verts)
      */
-    public ArrayList<Case> caseSurLequelJePeuAller(ArrayList<Case> positionInisiale, int nmbDePirate){
+    public ArrayList<Case> caseAuthorized(ArrayList<Case> positionInitiale, int nmbDePirate){
         if(nmbDePirate!=0){
             //pas fini la recursion
-            ArrayList<Case> listeCase = positionInisiale;
+            ArrayList<Case> listeCase = positionInitiale;
             // pour toute les dernieres case quelle sont les cases a coté ou on a le droits d'aller
-            for (Case tmpCase : positionInisiale){
+            for (Case tmpCase : positionInitiale){
                 ArrayList<Point> listeCaseTemp;
                 listeCaseTemp = HexToolbox.getVoisins(tmpCase.getCoord());
                 //est-ce que ces voisins sont des cases navigable
@@ -118,21 +119,21 @@ public class Plateau {
                         listeCaseTemp.remove(point);
                     }
                 }
-                // optenir les cases correspondante a la liste des points et les ajoute au navigable
+                //  cases correspondant a la liste des points et les ajoute au navigable
                 for (Point point : listeCaseTemp){
                     listeCase.add(getCase(point));
                 }
             }
-            return caseSurLequelJePeuAller(listeCase,nmbDePirate--);
+            return caseAuthorized(listeCase, nmbDePirate--);
 
         }
         else
-            return positionInisiale;
+            return positionInitiale;
     }
 
     public Case getCase(Point p){
-        for (Case ligne[] : this.plateau){
-            for (Case tmpCase : ligne){
+        for (Case lign[] : this.plateau){
+            for (Case tmpCase : lign){
                 if(tmpCase.getCoord() == p)
                     return tmpCase;
             }
@@ -141,8 +142,8 @@ public class Plateau {
     }
 
     public Case getCase(int x, int y){
-        for (Case ligne[] : this.plateau){
-            for (Case tmpCase : ligne){
+        for (Case lign[] : this.plateau){
+            for (Case tmpCase : lign){
                 if(tmpCase.getCoord().y == y && tmpCase.getCoord().x == x )
                     return tmpCase;
             }
@@ -244,7 +245,7 @@ public class Plateau {
         else
             return '0';
     }
-    public boolean isNoTreseasures(){
+    public boolean isNoTreasures(){
         for (Repaire repaireTmp : this.listDesRepaires){
             if(repaireTmp.getMontantTresors()>0)
                 return false;

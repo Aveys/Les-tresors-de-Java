@@ -31,7 +31,6 @@ public class VueMenu extends JFrame {
         super("Les trésors de Java");
 
         //Menu :
-
         menuBar = new JMenuBar();
         file = new JMenu("File");
         menuItemFileLoad = new JMenuItem("Charger une partie");
