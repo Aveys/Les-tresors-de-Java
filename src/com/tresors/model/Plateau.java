@@ -28,8 +28,9 @@ public class Plateau {
             {1,1,1,1,1,1,1,4,1}}; //9
 
     private ArrayList<Navire> listJoueurs;
-
     public static ArrayList<Repaire> templateRepaire;
+    private Case[][] plateau;
+    ArrayList<Repaire> listDesRepaires;//liste des repaires
 
     /**
      * inisialisation de la liste predefinie des repaires
@@ -50,7 +51,7 @@ public class Plateau {
         this.templateRepaire.add(new Repaire(canonP0, canonP1, canonP2, pirateP3, pirateP4, null, 5));
         this.templateRepaire.add(new Repaire(canonP1, pirateP2, null, null, null, null, 2));
         this.templateRepaire.add(new Repaire(canonP0, canonP0,pirateP1, null, null, null, 3 ));
-        this.templateRepaire.add(new  Repaire(canonP1, canonP2, pirateP3, null, null, null,2));
+        this.templateRepaire.add(new Repaire(canonP1, canonP2, pirateP3, null, null, null,2));
         this.templateRepaire.add(new Repaire(canonP0, canonP1, canonP2,canonP3,pirateP4,null, 4 ));
         this.templateRepaire.add(new Repaire(canonP0, canonP0, canonP1,canonP2, canonP3, pirateP4, 5));
         this.templateRepaire.add(new Repaire(canonP0, pirateP1,pirateP2, pirateP3, null, null, 5));
@@ -62,18 +63,12 @@ public class Plateau {
      *
      * @return Repaire un repaire a positionenr
      */
-    public Repaire repaireAleatoir(){
+    public Repaire repaireAleatoire(){
         int nmbAleatoir =  (int)Math.random()*this.templateRepaire.size();
         Repaire repaireTemp = this.templateRepaire.get(nmbAleatoir);
         this.templateRepaire.remove(nmbAleatoir);
         return repaireTemp;
     }
-
-    private Case[][] plateau;
-
-
-    ArrayList<Repaire> listDesRepaires;//liste des repaire pour y acceder rapidement
-
 
     /**
      *
@@ -89,8 +84,8 @@ public class Plateau {
                     this.plateau[i][j] = new Port();
                 if( this.grilleRef[i][j] == 3)
                     this.plateau[i][j] = new Mer();
-                if( this.grilleRef[i][j] == 2){
-                    Repaire repaireTemp = this.repaireAleatoir();
+                if( this.grilleRef[i][j] == 4){
+                    Repaire repaireTemp = this.repaireAleatoire();
                     this.plateau[i][j] = repaireTemp;
                     listDesRepaires.add(repaireTemp);
                 }
