@@ -1,16 +1,22 @@
 package com.tresors.controller;
 
 import com.tresors.model.*;
+import com.tresors.vue.Vue;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.TreeMap;
 
 /**
  * Created by arthurveys on 21/11/14.
  * Projet java ${PROJECT}
  */
-public class ControllerJeu{
+public class ControllerJeu implements ActionListener{
 
+    private Model model = new Model();
+    private Vue vue = new Vue();
     /*private TreeMap<String, String> listJoueurs = getListJoueurs();
+
 
     private Plateau plateau = new Plateau(listJoueurs);
 
@@ -31,4 +37,8 @@ public class ControllerJeu{
     Plateau monPlateau;
 
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+    }
 }
