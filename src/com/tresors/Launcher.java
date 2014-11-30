@@ -5,13 +5,13 @@ import com.tresors.controller.ControllerJeu;
 /**
  * Created by Paul on 25/11/2014.
  */
-public class Laucher {
+public class Launcher {
 
 
 
     public void main(){
 
-        ControllerJeu controllerJeu = new ControllerJeu();
+        ControllerJeu controllerJeu = new ControllerJeu(    );
 
 
 
