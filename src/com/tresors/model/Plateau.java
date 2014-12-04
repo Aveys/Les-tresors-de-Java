@@ -1,7 +1,6 @@
 package com.tresors.model;
 
 import com.tresors.controller.HexToolbox;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.awt.*;
 import java.awt.geom.Point2D;
@@ -164,7 +163,8 @@ public class Plateau extends Observable{
      * @return la liste des points correpsondants à des hexagones attaquable
      * @throws NotImplementedException DEBUG
      */
-    public ArrayList<Point> getVoisinsAttaquable(Point point)throws NotImplementedException{
+     //TODO : Tester cette méthode !
+    public ArrayList<Point> getVoisinsAttaquable(Point point){
         ArrayList<Point> attaquable = new ArrayList<Point>();
         ArrayList<Point> voisins = HexToolbox.getVoisins(point);
         Case tmp;
