@@ -7,10 +7,11 @@ import java.awt.*;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Observable;
 import java.util.TreeMap;
 
 
-public class Plateau {
+public class Plateau extends Observable{
     /* Structure de la Carte et type des Cases
     Type de Cases :
         1. Non affiché (terre)
