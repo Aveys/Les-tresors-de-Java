@@ -1,46 +1,75 @@
 package com.tresors.repair.model;
 
 import javax.swing.event.EventListenerList;
-
+//TODO Finish Javadoc
+//TODO Implement to project
+/**
+ * A class that is the Model in the Model View Controller architecture
+ * It contains the data
+ * Created by Paul on 30/11/2014.
+ * @author Paul Ribierre
+ */
 public class RepairModel {
     private int nbPirates;
     private int nbCanons;
     private final EventListenerList listeners = new EventListenerList();
 
-    public RepairModel(){
-        /**
-         * Creates a Model with 3 canons and 3 pirates by default
-         */
-        this(3,3);
-    }
+    /**
+     * Creates a Model with 3 canons and 3 pirates by default
+     */
+    public RepairModel(){this(3,3);}
 
+    /**
+     * Creates a Model with 3 canons and 3 pirates by default
+     * @param nbCanons The number of canons by default
+     * @param nbPirates The number of pirates by default
+     */
     public RepairModel(int nbCanons, int nbPirates){
         super();
-
         this.nbPirates = nbPirates;
         this.nbCanons = nbCanons;
     }
 
+    /**
+     * Returns the amount of canons on the ship
+     * @return the amount of canons on the ship
+     */
     public int getNbCanons() {
         return nbCanons;
     }
 
+    /**
+     * Sets the amount of canons on the ship
+     * @param nbCanons the amount of canons on the ship
+     */
     public void setNbCanons(int nbCanons) {
         int old = getNbCanons();
         this.nbCanons = nbCanons;
         fireNbCanonsChanged(old,nbCanons);
     }
 
+    /**
+     * Returns the amount of pirates on the ship
+     * @return the amount of pirates on the ship
+     */
     public int getNbPirates() {
         return nbPirates;
     }
 
+    /**
+     * Sets the amount of pirates on the ship
+     * @param nbPirates the amount of pirates on the ship
+     */
     public void setNbPirates(int nbPirates) {
         int old = getNbPirates();
         this.nbPirates = nbPirates;
         fireNbPiratesChanged(old, nbPirates);
     }
 
+    /**
+     * Returns the list of
+     * @return
+     */
     public EventListenerList getListeners() {
         return listeners;
     }
