@@ -7,6 +7,7 @@ import com.tresors.repair.vue.RepairView;
 /**
  * A Class that is the controller to every repair action
  * Created by Paul on 30/11/2014.
+ * @author Paul Ribierre
  */
 public class RepairController {
     /*The Repair View, initialized to NULL*/
