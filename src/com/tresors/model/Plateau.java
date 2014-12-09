@@ -28,10 +28,10 @@ public class Plateau extends Observable{
             {1,1,1,1,1,4,3,3,4},  //8
             {1,1,1,1,1,1,1,4,1}}; //9
 
-    private ArrayList<Navire> listJoueurs;
-    public static ArrayList<Repaire> templateRepaire;
+    private ArrayList<Navire> listJoueurs = new ArrayList<Navire>();
+    public static ArrayList<Repaire> templateRepaire = new ArrayList<Repaire>();
     private Case[][] plateau;
-    ArrayList<Repaire> listDesRepaires;//liste des repaires
+    ArrayList<Repaire> listDesRepaires = new ArrayList<Repaire>();//liste des repaires
 
     /**
      * initialisation de la liste predefinie des repaires
@@ -76,7 +76,9 @@ public class Plateau extends Observable{
      * @param listJoueurs Map de Joueurs de Type nom,couleur
      */
     public Plateau(TreeMap<String,String> listJoueurs) {
+        initRepaire();
         // Génération de la Carte
+        this.plateau = new Case[9][9];
         for (int i = 0; i< 9 ; i++){
             for (int j = 0 ; j < 9 ; j++){
                 if( this.grilleRef[i][j] == 1)
@@ -98,7 +100,7 @@ public class Plateau extends Observable{
             this.listJoueurs.add(new Navire(e.getKey(), e.getValue()));
         }
     }
-//TODO renomer la fonction car je n'ai pas eu d'idee de nom
+//TODO rennomer la fonction car je n'ai pas eu d'idee de nom
     /**
      * methode de deplacement retournent la liste des cases autorise au joueur
      * @param positionInitiale position du joueur lors de l'appel initial
