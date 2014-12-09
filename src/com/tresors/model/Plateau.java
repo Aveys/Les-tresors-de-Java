@@ -103,7 +103,7 @@ public class Plateau extends Observable{
             this.listJoueurs.add(new Navire(e.getKey(), e.getValue()));
         }
     }
-//TODO rennomer la fonction car je n'ai pas eu d'idee de nom
+    //TODO rennomer la fonction car je n'ai pas eu d'idee de nom
     /**
      * methode de deplacement retournent la liste des cases autorise au joueur
      * @param positionInitiale position du joueur lors de l'appel initial
