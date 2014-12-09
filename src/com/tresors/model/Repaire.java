@@ -42,29 +42,44 @@ public class Repaire extends Case{
     }
 
     /**
-     * Vérification si le repaire a encore un pirate et un canon
+     * Vérification si le repaire a encore un pirate et un canon (des qu'on a plus d'un on a gagner)
      * @return true si le repaire est bon, false sinon.
      */
-    //TODO: REFAIRE LA METHODE AVEC LES CANON INVINCIBLE
-    public boolean checkConfigurationRepaire(){
+    public boolean checkRepaireAttaquable(){
         boolean checkPirate=false;
         boolean checkCanon=false;
+
         for(Charge c: this.Charges){
             if(c instanceof Pirate)
                 checkPirate=true;
             if (c instanceof Canon)
                 checkCanon=true;
         }
-        return checkCanon&&checkPirate;
+        return (checkCanon&&checkPirate);
     }
+
+    /**
+     * verifier la presence d'un montant equivalent a un tresore
+     * @return true si il y a une montant/tresor
+     */
+    //TODO un repaire ne possede pas de tresore mais un montant, doit on changer ça?
     public boolean estPillable(){
-        for(Charge c: this.Charges){
-            if(c instanceof Tresor)
-                return true;
-        }
-        return false;
+        if (this.montantTresors!=0)
+            return true;
+        else
+            return false;
     }
+
+
     public void supprimerEmplacement(int pos){
         Charges.remove(pos);
+    }
+
+    public int getMontantTresors() {
+        return montantTresors;
+    }
+
+    public void setMontantTresors(int montantTresors) {
+        this.montantTresors = montantTresors;
     }
 }

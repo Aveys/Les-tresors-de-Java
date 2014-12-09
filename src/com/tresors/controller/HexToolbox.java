@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * Created by arthurveys on 25/11/14.
  */
 public class HexToolbox {
-
+//TODO est-ce que ces fonction ne vont pas dans plateau?
 
     public static ArrayList<Repaire> templateRepaire;
     /**

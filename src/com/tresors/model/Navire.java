@@ -16,6 +16,7 @@ public class Navire {
     private int score;
     private Point coordonnees;
     private List<Charge> emplacement;
+    //TODO verifier que l'emplacement commence a 1 pour que ça correspond au de
 
     public String getCapitaine() {
         return capitaine;
@@ -44,6 +45,10 @@ public class Navire {
             this.score = score;
     }
 
+    public List<Charge> getListEmplacement() {
+        return emplacement;
+    }
+
     public Point getCoordonnees() {
         return coordonnees;
     }
@@ -56,9 +61,6 @@ public class Navire {
         this.coordonnees=new Point(x,y);
     }
 
-    public void setEmplacement(List<Charge> emplacement) {
-        this.emplacement = emplacement;
-    }
 
 
     public Navire(String capitaine, String color) {
@@ -66,8 +68,7 @@ public class Navire {
         this.color = color;
         this.score=0;
         this.emplacement=new ArrayList<Charge>();
-        //TODO: Vérifier les coordonnées de départ
-        this.coordonnees=new Point(0,0);
+        this.coordonnees=new Point(1,0);
     }
 
     /**

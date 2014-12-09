@@ -1,23 +1,24 @@
 package com.tresors.model;
 
 import com.tresors.controller.HexToolbox;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.awt.*;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Observable;
 import java.util.TreeMap;
 
 
-public class Plateau {
+public class Plateau extends Observable{
     /* Structure de la Carte et type des Cases
     Type de Cases :
         1. Non affiché (terre)
         2. Port
         3. Mer
         4. Repaire  */
-    private int grilleRef[][] = {   {1,1,1,1,1,1,1,1,1},  //1
+    private int grilleRef[][] = {
+            {1,1,1,1,1,1,1,1,1},  //1
             {2,2,5,1,1,1,1,1,1},  //2
             {3,3,3,3,4,1,1,1,1},  //3
             {3,3,3,3,3,3,4,1,1},  //4
@@ -28,8 +29,9 @@ public class Plateau {
             {1,1,1,1,1,1,1,4,1}}; //9
 
     private ArrayList<Navire> listJoueurs;
-
     public static ArrayList<Repaire> templateRepaire;
+    private Case[][] plateau;
+    ArrayList<Repaire> listDesRepaires;//liste des repaires
 
     /**
      * inisialisation de la liste predefinie des repaires
@@ -50,7 +52,7 @@ public class Plateau {
         this.templateRepaire.add(new Repaire(canonP0, canonP1, canonP2, pirateP3, pirateP4, null, 5));
         this.templateRepaire.add(new Repaire(canonP1, pirateP2, null, null, null, null, 2));
         this.templateRepaire.add(new Repaire(canonP0, canonP0,pirateP1, null, null, null, 3 ));
-        this.templateRepaire.add(new  Repaire(canonP1, canonP2, pirateP3, null, null, null,2));
+        this.templateRepaire.add(new Repaire(canonP1, canonP2, pirateP3, null, null, null,2));
         this.templateRepaire.add(new Repaire(canonP0, canonP1, canonP2,canonP3,pirateP4,null, 4 ));
         this.templateRepaire.add(new Repaire(canonP0, canonP0, canonP1,canonP2, canonP3, pirateP4, 5));
         this.templateRepaire.add(new Repaire(canonP0, pirateP1,pirateP2, pirateP3, null, null, 5));
@@ -60,18 +62,14 @@ public class Plateau {
 
     /**
      *
-     * @return Repaire un repaire a positionenr
+     * @return Repaire aleatoire
      */
-    public Repaire repaireAleatoir(){
+    public Repaire repaireAleatoire(){
         int nmbAleatoir =  (int)Math.random()*this.templateRepaire.size();
         Repaire repaireTemp = this.templateRepaire.get(nmbAleatoir);
         this.templateRepaire.remove(nmbAleatoir);
         return repaireTemp;
     }
-
-    private Case[][] plateau;
-
-    //TODO: Creer une liste de x,y de chaque repaire pour y acceder sans parcourt labourieux ???
 
     /**
      *
@@ -87,8 +85,12 @@ public class Plateau {
                     this.plateau[i][j] = new Port();
                 if( this.grilleRef[i][j] == 3)
                     this.plateau[i][j] = new Mer();
-                if( this.grilleRef[i][j] == 2)
-                    this.plateau[i][j] = this.repaireAleatoir();
+                if( this.grilleRef[i][j] == 4){
+                    Repaire repaireTemp = this.repaireAleatoire();
+                    this.plateau[i][j] = repaireTemp;
+                    listDesRepaires.add(repaireTemp);
+                }
+
             }
         }
         //Attribution des navires pour chaque joueur
@@ -96,19 +98,19 @@ public class Plateau {
             this.listJoueurs.add(new Navire(e.getKey(), e.getValue()));
         }
     }
-
+//TODO renomer la fonction car je n'ai pas eu d'idee de nom
     /**
      * methode de deplacement retournent la liste des cases autorise au joueur
-     * @param positionInisiale position du joueur lors de l'appel initial
+     * @param positionInitiale position du joueur lors de l'appel initial
      * @param nmbDePirate nombre de deplacement autorise pour ce joueur
      * @return la liste des cases autoriser (a colorier en verts)
      */
-    public ArrayList<Case> caseSurLequelJePeuAller(ArrayList<Case> positionInisiale, int nmbDePirate){
+    public ArrayList<Case> caseAuthorized(ArrayList<Case> positionInitiale, int nmbDePirate){
         if(nmbDePirate!=0){
             //pas fini la recursion
-            ArrayList<Case> listeCase = positionInisiale;
+            ArrayList<Case> listeCase = positionInitiale;
             // pour toute les dernieres case quelle sont les cases a coté ou on a le droits d'aller
-            for (Case tmpCase : positionInisiale){
+            for (Case tmpCase : positionInitiale){
                 ArrayList<Point> listeCaseTemp;
                 listeCaseTemp = HexToolbox.getVoisins(tmpCase.getCoord());
                 //est-ce que ces voisins sont des cases navigable
@@ -117,21 +119,21 @@ public class Plateau {
                         listeCaseTemp.remove(point);
                     }
                 }
-                // optenir les cases correspondante a la liste des points et les ajoute au navigable
+                //  cases correspondant a la liste des points et les ajoute au navigable
                 for (Point point : listeCaseTemp){
                     listeCase.add(getCase(point));
                 }
             }
-            return caseSurLequelJePeuAller(listeCase,nmbDePirate--);
+            return caseAuthorized(listeCase, nmbDePirate--);
 
         }
         else
-            return positionInisiale;
+            return positionInitiale;
     }
 
     public Case getCase(Point p){
-        for (Case ligne[] : this.plateau){
-            for (Case tmpCase : ligne){
+        for (Case lign[] : this.plateau){
+            for (Case tmpCase : lign){
                 if(tmpCase.getCoord() == p)
                     return tmpCase;
             }
@@ -140,8 +142,8 @@ public class Plateau {
     }
 
     public Case getCase(int x, int y){
-        for (Case ligne[] : this.plateau){
-            for (Case tmpCase : ligne){
+        for (Case lign[] : this.plateau){
+            for (Case tmpCase : lign){
                 if(tmpCase.getCoord().y == y && tmpCase.getCoord().x == x )
                     return tmpCase;
             }
@@ -161,14 +163,15 @@ public class Plateau {
      * @return la liste des points correpsondants à des hexagones attaquable
      * @throws NotImplementedException DEBUG
      */
-    public ArrayList<Point> getVoisinsAttaquable(Point point)throws NotImplementedException{
+     //TODO : Tester cette méthode !
+    public ArrayList<Point> getVoisinsAttaquable(Point point){
         ArrayList<Point> attaquable = new ArrayList<Point>();
         ArrayList<Point> voisins = HexToolbox.getVoisins(point);
         Case tmp;
         for (Point p :voisins){
             tmp = plateau[p.x][p.y];
             if (tmp instanceof Repaire){
-                if (((Repaire) tmp).checkConfigurationRepaire())
+                if (((Repaire) tmp).checkRepaireAttaquable())
                     attaquable.add(p);
             }
 
@@ -214,7 +217,7 @@ public class Plateau {
      * @return M pour une case Mer, P pour une case Port, R pour une case de Repaire, 0 si la case n'est d'aucun type
      */
     public char getTypeCase(int x,int y){
-        //TODO : Verifier pour le nombre de points
+        if (x<9 && y<9){
         Case tmp=plateau[x][y];
         if(tmp instanceof Mer)
             return 'M';
@@ -222,8 +225,9 @@ public class Plateau {
             return 'P';
         else if (tmp instanceof Repaire)
             return 'R';
-        else
-            return '0';
+        }
+
+        return '0';
     }
     /**
      * Retourne le type de case par rapport la coordonnée en parametre
@@ -242,10 +246,19 @@ public class Plateau {
         else
             return '0';
     }
-    public void isNoTreseasures(){
-        //TODO: Verifier si il n'y a plus de trésors sur la map -> fin du jeu
+    public boolean isNoTreasures(){
+        for (Repaire repaireTmp : this.listDesRepaires){
+            if(repaireTmp.getMontantTresors()>0)
+                return false;
+        }
+        for (Navire NavireTmp : this.listJoueurs ){
+            if (NavireTmp.estPillable()==true)
+                return false;
+        }
+
+        return true;
     }
-    //TODO : BEAUCOUP DE METHODE DE PATHFINDING
+    //TODO : Si veux une methode de pathfinding mais les chemin possible sont deja fait
 
     public ArrayList<Navire> getListJoueurs() {
         return listJoueurs;
