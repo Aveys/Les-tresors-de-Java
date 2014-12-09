@@ -2,6 +2,7 @@ package com.tresors.model;
 
 import org.junit.*;
 
+import java.util.ArrayList;
 import java.util.TreeMap;
 
 /**
@@ -28,7 +29,15 @@ public class PlateauTest {
     }
     @Test
     public void repaireAleatoireTest(){
-        Assert.assertNull( pl.repaireAleatoire());
-
+        Assert.assertNull(pl.repaireAleatoire());
     }
+    @Test
+    public void isNoTreasureStartTest(){
+        Assert.assertFalse(pl.isNoTreasures());
+    }
+    @Test
+    public void getNavireEmptyCaseTest(){
+        Assert.assertEquals(new ArrayList<Navire>(), pl.getNavire(1, 1));
+    }
+
 }
