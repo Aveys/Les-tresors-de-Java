@@ -1,4 +1,4 @@
-package com.tresors.repair.model;
+package com.tresors.model;
 
 import com.tresors.event.IRepairCanonListener;
 import com.tresors.event.IRepairPirateListener;

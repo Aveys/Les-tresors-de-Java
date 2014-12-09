@@ -1,6 +1,6 @@
-package com.tresors.repair.vue;
+package com.tresors.vue;
 
-import com.tresors.repair.controller.RepairController;
+import com.tresors.controller.RepairController;
 import com.tresors.event.IRepairCanonListener;
 import com.tresors.event.IRepairPirateListener;
 

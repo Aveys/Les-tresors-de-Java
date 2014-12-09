@@ -1,8 +1,8 @@
-package com.tresors.repair.controller;
+package com.tresors.controller;
 
-import com.tresors.repair.model.RepairModel;
-import com.tresors.repair.vue.JFrameFieldRepair;
-import com.tresors.repair.vue.RepairView;
+import com.tresors.model.RepairModel;
+import com.tresors.vue.JFrameRepair;
+import com.tresors.vue.RepairView;
 
 /**
  * A Class that is the controller to every repair action
@@ -21,7 +21,7 @@ public class RepairController {
      */
     public RepairController(RepairModel model){
         this.model = model;
-        view = new JFrameFieldRepair(this, model.getNbPirates(), model.getNbCanons());
+        view = new JFrameRepair(this, model.getNbPirates(), model.getNbCanons());
         addListenersToModel();
     }
 
