@@ -6,7 +6,9 @@ import org.junit.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+import static com.tresors.controller.HexToolbox.distanceHex;
 import static com.tresors.controller.HexToolbox.getVoisins;
+import static org.junit.Assert.*;
 import static org.junit.Assert.fail;
 
 /**
@@ -33,6 +35,24 @@ public class HexToolboxTest {
                 fail("ret est hor champs");
             }
         }
+    }
+    @Test
+    public void distanceHexTest(){// TODO passe pas test. quesque la distance absolue?
+        Point hex1= new Point(0,0);
+        Point hex2= new Point(4,4);
+        assertEquals("Mauvaise distance base", 4, distanceHex( hex1,  hex2));
+
+        hex1= new Point(3,1);// non droit
+        hex2= new Point(6,6);
+        assertEquals("Mauvaise distance en L", 5, distanceHex( hex1,  hex2));
+
+        hex1= new Point(3,2);// sans inverse
+        hex2= new Point(0,0);
+        assertEquals("Mauvaise distance en sens inverse", 5, distanceHex( hex1,  hex2));
+
+        hex1= new Point(6,4);// hors champ
+        hex2= new Point(9,7);
+        assertEquals("Mauvaise distance hors champ", null, distanceHex( hex1,  hex2));
 
     }
 

@@ -36,6 +36,7 @@ public class HexToolbox {
      * @param hex2 L'hexagone de destination
      * @return La distance absolue entre deux
      */
+    //TODO quesque la distance absolue? c'est pas le nombre de case minimum en tous cas. Passe pas test
     public static int distanceHex(Point hex1, Point hex2){
         return ((Math.abs(hex1.y-hex2.x)+ Math.abs(hex1.y-hex2.y))+Math.abs(hex1.x+hex1.y-hex2.x-hex2.y))/2;
     }
