@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 /**
  * Created by Nicolas Sagon on 25/11/2014.
  */
-public class VuePlateau extends JFrame {
+public class vuePlateau extends JFrame {
     private JPanel mainPanel;
     private JMenuBar menuBar;
     private JMenu file;
@@ -24,7 +24,7 @@ public class VuePlateau extends JFrame {
     private JLabel labelAction;
     private JButton buttonPassTour;
 
-    public VuePlateau() {
+    public vuePlateau() {
 
         super("Les trésors de Java");
 
