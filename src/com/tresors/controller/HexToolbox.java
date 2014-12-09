@@ -1,7 +1,6 @@
 package com.tresors.controller;
 
 import com.tresors.model.Case;
-import com.tresors.model.Mer;
 import com.tresors.model.Repaire;
 
 import java.awt.*;

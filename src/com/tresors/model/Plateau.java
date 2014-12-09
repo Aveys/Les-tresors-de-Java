@@ -34,7 +34,7 @@ public class Plateau extends Observable{
     ArrayList<Repaire> listDesRepaires;//liste des repaires
 
     /**
-     * inisialisation de la liste predefinie des repaires
+     * initialisation de la liste predefinie des repaires
      */
     public void initRepaire (){
         Canon canonP0 = new Canon(0);
@@ -124,7 +124,7 @@ public class Plateau extends Observable{
                     listeCase.add(getCase(point));
                 }
             }
-            return caseAuthorized(listeCase, nmbDePirate--);
+            return caseAuthorized(listeCase, nmbDePirate-1);
 
         }
         else
@@ -161,7 +161,6 @@ public class Plateau extends Observable{
      * Renvoi les coordonnées de toutes les cases attaquable
      * @param point le point source
      * @return la liste des points correpsondants à des hexagones attaquable
-     * @throws NotImplementedException DEBUG
      */
      //TODO : Tester cette méthode !
     public ArrayList<Point> getVoisinsAttaquable(Point point){
@@ -252,10 +251,9 @@ public class Plateau extends Observable{
                 return false;
         }
         for (Navire NavireTmp : this.listJoueurs ){
-            if (NavireTmp.estPillable()==true)
+            if (NavireTmp.estPillable())
                 return false;
         }
-
         return true;
     }
     //TODO : Si veux une methode de pathfinding mais les chemin possible sont deja fait

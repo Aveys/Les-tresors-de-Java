@@ -64,10 +64,7 @@ public class Repaire extends Case{
      */
     //TODO un repaire ne possede pas de tresore mais un montant, doit on changer ça?
     public boolean estPillable(){
-        if (this.montantTresors!=0)
-            return true;
-        else
-            return false;
+        return this.montantTresors != 0;
     }
 
 
