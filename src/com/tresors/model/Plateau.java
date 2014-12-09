@@ -65,9 +65,11 @@ public class Plateau extends Observable{
      * @return Repaire aleatoire
      */
     public Repaire repaireAleatoire(){
-        int nmbAleatoir =  (int)Math.random()*this.templateRepaire.size();
-        Repaire repaireTemp = this.templateRepaire.get(nmbAleatoir);
-        this.templateRepaire.remove(nmbAleatoir);
+        if(templateRepaire.isEmpty())
+            return null;
+        int nmbAleatoir =  (int)Math.random()*templateRepaire.size();
+        Repaire repaireTemp = templateRepaire.get(nmbAleatoir);
+        templateRepaire.remove(nmbAleatoir);
         return repaireTemp;
     }
 

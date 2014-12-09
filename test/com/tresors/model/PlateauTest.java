@@ -19,10 +19,16 @@ public class PlateauTest {
         list.put("Rackam","Rouge");
         list.put("Davy Jones","Vert");
         this.pl = new Plateau(list);
+
     }
 
     @Test
     public void getTypeCaseTest(){
         Assert.assertEquals("Type de case incorrect",'P',pl.getTypeCase(1,1));
+    }
+    @Test
+    public void repaireAleatoireTest(){
+        Assert.assertNull( pl.repaireAleatoire());
+
     }
 }
