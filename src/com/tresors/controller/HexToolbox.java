@@ -20,9 +20,12 @@ public class HexToolbox {
      */
     public static ArrayList<Point> getVoisins(Point source){
         ArrayList<Point> res = new ArrayList<Point>();
-        int neighbors[][]={{+1,  0},{+1, -1},{ 0, -1},{-1,  0},{-1, +1},{ 0, +1}};
+        int neighbors[][]={{+1,  0},{+1, +1},{ 0, +1},{-1,  0},{-1, -1},{ 0, -1}};
         for (int[] calc : neighbors){
-            res.add(new Point(source.x+calc[0],source.y+calc[1]));
+            Point tempPoint =new Point(source.x+calc[0],source.y+calc[1]);
+            if ((tempPoint.x>=0 && tempPoint.x<9)&&(tempPoint.y>=0 && tempPoint.y<9)){
+                res.add(tempPoint);
+            }
         }
         return res;
     }
