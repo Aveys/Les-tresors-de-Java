@@ -1,12 +1,12 @@
-package com.tresors.repair.vue;
+package repair.vue;
 
 /**
  * Created by Paul on 30/11/2014.
  */
 
-import com.tresors.repair.controller.RepairController;
-import com.tresors.event.RepairChangeNbCanonEvent;
-import com.tresors.event.RepairChangeNbPirateEvent;
+import repair.controller.RepairController;
+import repair.model.RepairChangeNbCanonEvent;
+import repair.model.RepairChangeNbPirateEvent;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

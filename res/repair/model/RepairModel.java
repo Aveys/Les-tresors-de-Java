@@ -1,13 +1,9 @@
-package com.tresors.repair.model;
-
-import com.tresors.event.IRepairCanonListener;
-import com.tresors.event.IRepairPirateListener;
-import com.tresors.event.RepairChangeNbCanonEvent;
-import com.tresors.event.RepairChangeNbPirateEvent;
+package repair.model;
 
 import javax.swing.event.EventListenerList;
 //TODO Finish Javadoc
 //TODO Implement to project
+
 /**
  * A class that is the Model in the Model View Controller architecture
  * It contains the data
