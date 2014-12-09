@@ -123,6 +123,13 @@ public class vuePlateau extends JFrame {
         constraintsButtonPassTour.insets = new Insets(90, 0, 0, 0);
         constraintsButtonPassTour.anchor = GridBagConstraints.PAGE_START;
 
+        buttonPassTour.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                bateauPanel.changeCouleur(BateauPanel.Couleur.Violet);
+            }
+        });
+
         bateauPanel = new BateauPanel(BateauPanel.Couleur.Bleu);
         GridBagConstraints constraintsBateauPanel = new GridBagConstraints();
         constraintsBateauPanel.fill = GridBagConstraints.BOTH;
