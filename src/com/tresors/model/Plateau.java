@@ -28,7 +28,7 @@ public class Plateau extends Observable{
      *
      * @param listJoueurs Map de Joueurs de Type nom,couleur
      */
-    public Plateau(TreeMap<String,String> listJoueurs) {
+    public Plateau(ArrayList<Navire> listJoueurs) {
         initRepaire();
         int grilleRef[][] = {
                 {1,1,1,1,1,1,1,1,1},  //1
@@ -58,10 +58,11 @@ public class Plateau extends Observable{
 
             }
         }
+        //WTF
         //Attribution des navires pour chaque joueur
-        for (Map.Entry<String,String> e:listJoueurs.entrySet()) {
-            this.listJoueurs.add(new Navire(e.getKey(), e.getValue()));
-        }
+        //for (Map.Entry<String,ENavireColor> e:listJoueurs.entrySet()) {
+        //    this.listJoueurs.add(new Navire(e.getKey(), e.getValue()));
+        //}
     }
     /**
      * initialisation de la liste predefinie des repaires

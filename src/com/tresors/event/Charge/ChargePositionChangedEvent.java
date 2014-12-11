@@ -1,4 +1,4 @@
-package com.tresors.event;
+package com.tresors.event.charge;
 
 import javax.swing.event.ChangeEvent;
 

@@ -1,9 +1,7 @@
 package com.tresors.model;
 
-import com.tresors.event.IRepairCanonListener;
-import com.tresors.event.IRepairPirateListener;
-import com.tresors.event.RepairChangeNbCanonEvent;
-import com.tresors.event.RepairChangeNbPirateEvent;
+import com.tresors.event.*;
+import com.tresors.event.navire.*;
 
 import javax.swing.event.EventListenerList;
 import java.awt.*;
@@ -16,16 +14,17 @@ import java.util.List;
  * Classe modele pour un joueur (Un Navire = Un joueur)
  */
 public class Navire {
-
+    //Attributes
     private String capitaine;
-    private String color;
+    private ENavireColor color;
     private int score;
     private Point coordonnees;
     private ArrayList<Charge> emplacement;
+
     private final EventListenerList listeners = new EventListenerList();
     //TODO verifier que l'emplacement commence a 1 pour que ça correspond au de
 
-    public Navire(String capitaine, String color) {
+    public Navire(String capitaine, ENavireColor color) {
         this.capitaine = capitaine;
         this.color = color;
         this.score=0;
@@ -33,6 +32,7 @@ public class Navire {
         this.coordonnees=new Point(1,0);
     }
 
+    //Methods
     /**
      * Ajoute un nombre de points à un score
      * @param score le nombre de points à ajouter
@@ -179,6 +179,8 @@ public class Navire {
         }
         return list;
     }
+
+    // Listeners
     public EventListenerList getListeners() {
         return listeners;
     }
@@ -195,48 +197,17 @@ public class Navire {
         listeners.remove(IRepairCanonListener.class, l);
     }
 
-    public void fireNbCanonsChanged(int NbCanons, String type){
-        IRepairCanonListener[] listenerList = (IRepairCanonListener[])listeners.getListeners(IRepairCanonListener.class);
-        if (type=="ajout") {
-            for (IRepairCanonListener listener : listenerList) {
-                listener.canonsChanged(new RepairChangeNbCanonEvent(this, getNbCanons()));
-                listener.canonsIncreased(new RepairChangeNbCanonEvent(this, getNbCanons()));
-            }
-        }
-        else if (type=="suppression"){
-            for (IRepairCanonListener listener : listenerList) {
-                listener.canonsChanged(new RepairChangeNbCanonEvent(this, getNbCanons()));
-                listener.canonsDecreased(new RepairChangeNbCanonEvent(this, getNbCanons()));
-            }
-        }
-    }
-
-    public void fireNbPiratesChanged(int NbPirates, String type){
-        IRepairPirateListener[] listenerList = (IRepairPirateListener[])listeners.getListeners(IRepairPirateListener.class);
-        if (type=="ajout") {
-            for (IRepairPirateListener listener : listenerList) {
-                listener.piratesChanged(new RepairChangeNbPirateEvent(this, getNbPirates()));
-                listener.piratesIncreased(new RepairChangeNbPirateEvent(this, getNbPirates()));
-            }
-        }
-        else if (type=="suppression"){
-            for (IRepairPirateListener listener : listenerList) {
-                listener.piratesChanged(new RepairChangeNbPirateEvent(this, getNbPirates()));
-                listener.piratesDecreased(new RepairChangeNbPirateEvent(this, getNbPirates()));
-            }
-        }
-    }
-//Getters Setters
+   //Getters Setters
     public String getCapitaine() {
         return capitaine;
     }
     public void setCapitaine(String capitaine) {
         this.capitaine = capitaine;
     }
-    public String getColor() {
+    public ENavireColor getColor() {
         return color;
     }
-    public void setColor(String color) {
+    public void setColor(ENavireColor color) {
         this.color = color;
     }
     public int getScore() {
@@ -283,5 +254,81 @@ public class Navire {
                 nb++;
         }
         return nb;
+    }
+
+    //Fire Change in View
+    public void fireNbCanonsChanged(int NbCanons, String type){
+        IRepairCanonListener[] listenerList = (IRepairCanonListener[])listeners.getListeners(IRepairCanonListener.class);
+        if (type=="ajout") {
+            for (IRepairCanonListener listener : listenerList) {
+                listener.canonsChanged(new RepairChangeNbCanonEvent(this, getNbCanons()));
+                listener.canonsIncreased(new RepairChangeNbCanonEvent(this, getNbCanons()));
+            }
+        }
+        else if (type=="suppression"){
+            for (IRepairCanonListener listener : listenerList) {
+                listener.canonsChanged(new RepairChangeNbCanonEvent(this, getNbCanons()));
+                listener.canonsDecreased(new RepairChangeNbCanonEvent(this, getNbCanons()));
+            }
+        }
+    }
+    public void fireNbPiratesChanged(int NbPirates, String type){
+        IRepairPirateListener[] listenerList = (IRepairPirateListener[])listeners.getListeners(IRepairPirateListener.class);
+        if (type=="ajout") {
+            for (IRepairPirateListener listener : listenerList) {
+                listener.piratesChanged(new RepairChangeNbPirateEvent(this, getNbPirates()));
+                listener.piratesIncreased(new RepairChangeNbPirateEvent(this, getNbPirates()));
+            }
+        }
+        else if (type=="suppression"){
+            for (IRepairPirateListener listener : listenerList) {
+                listener.piratesChanged(new RepairChangeNbPirateEvent(this, getNbPirates()));
+                listener.piratesDecreased(new RepairChangeNbPirateEvent(this, getNbPirates()));
+            }
+        }
+    }
+
+    public void fireEmplacementChanged(Point P){
+        INavirePositionListener[] listenerList = (INavirePositionListener[])listeners.getListeners(INavirePositionListener.class);
+        for (INavirePositionListener listener : listenerList) {
+            listener.positionChanged(new NavirePositionChangedEvent(this, getCoordonnees()));
+        }
+    }
+
+    public void fireNameChanged(String name){
+        INavireNameListener[] listenerList = (INavireNameListener[])listeners.getListeners(INavireNameListener.class);
+        for (INavireNameListener listener : listenerList) {
+            listener.nameChanged(new NavireNameChangedEvent(this, getCapitaine()));
+        }
+    }
+
+    public void fireColorChanged(String color){
+        INavireColorListener[] listenerList = (INavireColorListener[])listeners.getListeners(INavireColorListener.class);
+        for (INavireColorListener listener : listenerList) {
+            listener.colorChanged(new NavireColorChangedEvent(this, getColor()));
+        }
+    }
+
+    public void fireScoreChanged(String color){
+        INavireScoreListener[] listenerList = (INavireScoreListener[])listeners.getListeners(INavireScoreListener.class);
+        for (INavireScoreListener listener : listenerList) {
+            listener.scoreChanged(new NavireScoreChangedEvent(this, getScore()));
+        }
+    }
+
+    public void fireChargeAdded(Charge charge){
+        INavireChargeListener[] listenerList = (INavireChargeListener[])listeners.getListeners(INavireChargeListener.class);
+        for (INavireChargeListener listener : listenerList) {
+            //TODO gérer le traitement de l'ajout d'une charge
+            //listener.chargeAdded(new NavireChargeAddedEvent(this, get()));
+        }
+    }
+
+    public void fireChargeDeleted(Charge charge){
+        INavireChargeListener[] listenerList = (INavireChargeListener[])listeners.getListeners(INavireChargeListener.class);
+        for (INavireChargeListener listener : listenerList) {
+            //TODO gérer le traitement de l'ajout d'une charge
+            //listener.chargeAdded(new NavireChargeAddedEvent(this, get()));
+        }
     }
 }

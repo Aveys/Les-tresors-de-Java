@@ -1,7 +1,7 @@
 package com.tresors.model;
 
-import com.tresors.event.ChargePositionChangedEvent;
-import com.tresors.event.IPositionChangedListener;
+import com.tresors.event.charge.ChargePositionChangedEvent;
+import com.tresors.event.charge.IChargePositionChangedListener;
 
 import javax.swing.event.EventListenerList;
 
@@ -31,17 +31,17 @@ public abstract class Charge {
         return listeners;
     }
 
-    public void addPositionChangedListener(IPositionChangedListener listener){
-        listeners.add(IPositionChangedListener.class, listener);
+    public void addPositionChangedListener(IChargePositionChangedListener listener){
+        listeners.add(IChargePositionChangedListener.class, listener);
     }
 
-    public void removePositionChangedListener(IPositionChangedListener l){
-        listeners.remove(IPositionChangedListener.class, l);
+    public void removePositionChangedListener(IChargePositionChangedListener l){
+        listeners.remove(IChargePositionChangedListener.class, l);
     }
 
     public void firePositionChanged(int oldPosition, int newPosition){
-        IPositionChangedListener[] listenerList = (IPositionChangedListener[])listeners.getListeners(IPositionChangedListener.class);
-        for (IPositionChangedListener listener : listenerList) {
+        IChargePositionChangedListener[] listenerList = (IChargePositionChangedListener[])listeners.getListeners(IChargePositionChangedListener.class);
+        for (IChargePositionChangedListener listener : listenerList) {
             listener.positionChanged(new ChargePositionChangedEvent(this, getPosition()));
         }
     }
