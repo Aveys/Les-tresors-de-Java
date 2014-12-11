@@ -5,9 +5,7 @@ import com.tresors.controller.HexToolbox;
 import java.awt.*;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.Observable;
-import java.util.TreeMap;
 
 
 public class Plateau extends Observable{
@@ -25,8 +23,7 @@ public class Plateau extends Observable{
     ArrayList<Repaire> listDesRepaires = new ArrayList<Repaire>();//liste des repaires
 
     /**
-     * Constructor
-     * @param listJoueurs ArrayList de Navires
+     * Constructor by default
      */
     public Plateau() {
         initRepaire();

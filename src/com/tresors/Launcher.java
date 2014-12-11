@@ -1,6 +1,5 @@
 package com.tresors;
 
-import com.tresors.controller.ControllerJeu;
 import com.tresors.controller.ControllerMenu;
 import com.tresors.model.Plateau;
 import com.tresors.vue.VueMenu;
