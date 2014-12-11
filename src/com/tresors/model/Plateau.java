@@ -28,7 +28,7 @@ public class Plateau extends Observable{
      * Constructor
      * @param listJoueurs ArrayList de Navires
      */
-    public Plateau(ArrayList<Navire> listJoueurs) {
+    public Plateau() {
         initRepaire();
         int grilleRef[][] = {
                 {1,1,1,1,1,1,1,1,1},  //1

@@ -11,9 +11,8 @@ import java.util.TreeMap;
  */
 public class JRepair {
     public static void main(String[] args) {
-        TreeMap<String,String> listJoueurs = new TreeMap<String,String>();
 
-        Plateau model = new Plateau(listJoueurs);
+        Plateau model = new Plateau();
 
     }
 }

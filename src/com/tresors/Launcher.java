@@ -1,6 +1,8 @@
 package com.tresors;
 
 import com.tresors.controller.ControllerJeu;
+import com.tresors.controller.ControllerMenu;
+import com.tresors.model.Plateau;
 import com.tresors.vue.VueMenu;
 
 import javax.swing.*;
@@ -14,11 +16,12 @@ public class Launcher {
 
     public static void main(String[] args) {
 
-        ControllerJeu controllerJeu = new ControllerJeu();
 
+        Plateau plateau = new Plateau();
+        ControllerMenu controllerMenu = new ControllerMenu(plateau);
         JFrame test = new JFrame();
 
-        VueMenu vueMenu =  new VueMenu();
+        VueMenu vueMenu =  new VueMenu(controllerMenu);
         test.add(vueMenu);
         Toolkit tk = Toolkit.getDefaultToolkit();
         test.setSize((int) tk.getScreenSize().getWidth(), (int) tk.getScreenSize().getHeight());

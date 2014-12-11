@@ -1,5 +1,7 @@
 package com.tresors.event.navire;
 
+import com.tresors.model.ENavireColor;
+
 import javax.swing.event.ChangeEvent;
 
 /**
