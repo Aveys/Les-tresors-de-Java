@@ -1,153 +1,109 @@
 package com.tresors.vue;
 
+import com.tresors.model.ENavireColor;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * Created by Paul on 30/11/2014.
+ * Created by Nicolas Sagon on 11/12/2014.
  */
-public class VueMenu extends JFrame {
-    //Déclaration des objets de la Frame
-    private JPanel mainPanel;
-    private JPanel panelNewGame;
-    //
-    private JMenuBar menuBar;
+public class VueMenu extends JPanel{
 
-    private JMenu file;
+    JLabel labelNbjoueur;
+    int nbJoueur = 0;
+    JTextField nameJoueur;
+    JButton buttonAddJoueur;
 
-    private JMenuItem menuItemFileExit;
-    private JMenuItem menuItemFileLoad;
+    public VueMenu() {
 
-    private JButton buttonAddPlayer;
-    private JButton buttonRemovePlayer;
-    private JButton buttonStart;
+        this.setLayout(new GridLayout(0, 3));
+        labelNbjoueur = new JLabel(nbJoueur + " joueur");
+        buttonAddJoueur = new JButton("Ajouter un joueur");
 
-    /**
-     * Constructeur
-     */
-    public VueMenu(){
-        super("Les trésors de Java");
+        nameJoueur = new JTextField();
 
-        //Menu :
-        menuBar = new JMenuBar();
-        file = new JMenu("File");
-        menuItemFileLoad = new JMenuItem("Charger une partie");
-        menuItemFileExit = new JMenuItem("Quitter");
+        this.add(labelNbjoueur);
+        this.add(nameJoueur);
+        this.add(buttonAddJoueur);
 
-        file.add(menuItemFileLoad);
-        file.add(menuItemFileExit);
-
-        menuItemFileLoad.addActionListener(new ActionListener() {
+        buttonAddJoueur.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //TODO Ajouter routine de chargement d'une partie
+                JLabel labelJoueurAdd = new JLabel(getNameJoueur().getText() + ", Couleur : " + getStringCouleur());
+                setNbJoueur(getNbJoueur() + 1);
+                getLabelNbjoueur().setText(getNbJoueur() + "joueur");
+                addComponent(labelJoueurAdd);
+                if(getNbJoueur() == 6) {
+                    getButtonAddJoueur().setEnabled(false);
+                }
             }
         });
 
-        menuItemFileExit.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-            }
-        });
-
-        menuBar.add(file);
-        this.setJMenuBar(menuBar);
-
-        mainPanel.setLayout(new GridBagLayout());
-        //Panel score
-        panelNewGame = new JPanel();
-        panelNewGame.setLayout(new FlowLayout());
-
-        GridBagConstraints constraintsPanelScore = new GridBagConstraints();
-        constraintsPanelScore.fill = GridBagConstraints.HORIZONTAL;
-        constraintsPanelScore.weighty = 1;
-        constraintsPanelScore.weightx = 1;
-        constraintsPanelScore.gridx = 0;
-        constraintsPanelScore.gridy = 0;
-        constraintsPanelScore.anchor = GridBagConstraints.PAGE_START;
-
-        mainPanel.add(panelNewGame, constraintsPanelScore);
-
-        //Panel Plateau
-        GridBagConstraints constraintsPanelPlateau = new GridBagConstraints();
-        constraintsPanelPlateau.fill = GridBagConstraints.BOTH;
-        constraintsPanelPlateau.weighty = 30;
-        constraintsPanelPlateau.weightx = 1;
-        constraintsPanelPlateau.ipadx = 920;
-        constraintsPanelPlateau.gridx = 0;
-        constraintsPanelPlateau.gridy = 1;
-        constraintsPanelPlateau.anchor = GridBagConstraints.PAGE_START;
-
-        //add to JFrame
-        this.add(mainPanel);
-
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        Toolkit tk = Toolkit.getDefaultToolkit();
-        setSize((int) tk.getScreenSize().getWidth(), (int) tk.getScreenSize().getHeight());
-        this.setVisible(true);
-    }
-    public JPanel getMainPanel() {
-        return mainPanel;
     }
 
-    public void setMainPanel(JPanel mainPanel) {
-        this.mainPanel = mainPanel;
+    public String getStringCouleur() {
+
+        String couleur = "";
+        switch(nbJoueur){
+            case 0:
+                couleur = ENavireColor.Blanc.getStringCouleur();
+                break;
+            case 1:
+                couleur = ENavireColor.Bleu.getStringCouleur();
+                break;
+            case 2:
+                couleur = ENavireColor.Jaune.getStringCouleur();
+                break;
+            case 3:
+                couleur = ENavireColor.Orange.getStringCouleur();
+                break;
+            case 4:
+                couleur = ENavireColor.Rouge.getStringCouleur();
+                break;
+            case 5:
+                couleur = ENavireColor.Violet.getStringCouleur();
+                break;
+        }
+        return couleur;
     }
 
-    public void setMenuBar(JMenuBar menuBar) {
-        this.menuBar = menuBar;
+    public void addComponent(Component c) {
+        this.add(c);
     }
 
-    public JMenu getFile() {
-        return file;
+    public int getNbJoueur() {
+        return nbJoueur;
     }
 
-    public void setFile(JMenu file) {
-        this.file = file;
+    public void setNbJoueur(int nbJoueur) {
+        this.nbJoueur = nbJoueur;
     }
 
-    public JMenuItem getMenuItemFileLoad() {
-        return menuItemFileLoad;
+    public JTextField getNameJoueur() {
+        return nameJoueur;
     }
 
-    public void setMenuItemFileLoad(JMenuItem menuItemFileLoad) {
-        this.menuItemFileLoad = menuItemFileLoad;
+    public void setNameJoueur(JTextField nameJoueur) {
+        this.nameJoueur = nameJoueur;
     }
 
-    public JMenuItem getMenuItemFileExit() {
-        return menuItemFileExit;
+    public JButton getButtonAddJoueur() {
+        return buttonAddJoueur;
     }
 
-    public void setMenuItemFileExit(JMenuItem menuItemFileExit) {
-        this.menuItemFileExit = menuItemFileExit;
+    public void setButtonAddJoueur(JButton buttonAddJoueur) {
+        this.buttonAddJoueur = buttonAddJoueur;
     }
 
-    {
-// GUI initializer generated by IntelliJ IDEA GUI Designer
-// >>> IMPORTANT!! <<<
-// DO NOT EDIT OR ADD ANY CODE HERE!
-        $$$setupUI$$$();
+    public JLabel getLabelNbjoueur() {
+        return labelNbjoueur;
     }
 
-    /**
-     * Method generated by IntelliJ IDEA GUI Designer
-     * >>> IMPORTANT!! <<<
-     * DO NOT edit this method OR call it in your code!
-     *
-     * @noinspection ALL
-     */
-    private void $$$setupUI$$$() {
-        mainPanel = new JPanel();
-        mainPanel.setLayout(new GridBagLayout());
-    }
-
-    /**
-     * @noinspection ALL
-     */
-    public JComponent $$$getRootComponent$$$() {
-        return mainPanel;
+    public void setLabelNbjoueur(JLabel labelNbjoueur) {
+        this.labelNbjoueur = labelNbjoueur;
     }
 }
+

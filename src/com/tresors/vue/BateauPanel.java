@@ -1,5 +1,7 @@
 package com.tresors.vue;
 
+import com.tresors.model.ENavireColor;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -14,87 +16,13 @@ public class BateauPanel extends JPanel {
     private Image bgImage;
     private ChargePanel[] tabCharge = new ChargePanel[6];
 
-    public enum Couleur {
-        Bleu,
-        Orange,
-        Violet,
-        Jaune,
-        Rouge,
-        Blanc;
 
-        public Color getCouleur(){
 
-            Color tmp;
-            switch (this){
-                case Bleu :
-                    tmp = Color.BLUE;
-                    break;
-
-                case Orange :
-                    tmp = Color.ORANGE;
-                    break;
-
-                case Violet :
-                    tmp = Color.MAGENTA;
-                    break;
-
-                case Jaune :
-                    tmp = Color.YELLOW;
-                    break;
-
-                case Rouge :
-                    tmp = Color.RED;
-                    break;
-
-                case Blanc :
-                    tmp = Color.WHITE;
-                    break;
-                default:
-                    tmp = Color.WHITE;
-            }
-        return tmp;
-        }
-    }
-
-    public String getUrlImage(Couleur c){
-
-        String url = "";
-
-        switch (c){
-           case Bleu :
-               url = "res/images/bleu.png";
-                break;
-
-            case Orange :
-                url = "res/images/orange.png";
-                break;
-
-            case Violet :
-                url = "res/images/violet.png";
-                break;
-
-            case Jaune :
-                url = "res/images/jaune.png";
-                break;
-
-            case Rouge :
-                url = "res/images/rouge.png";
-                break;
-
-            case Blanc :
-                url = "res/images/blanc.png";
-                break;
-
-        }
-
-        return url;
-    }
-
-    public BateauPanel(Couleur c) {
+    public BateauPanel(ENavireColor c) {
 
         super();
         setSize(220, 428);
-        File ficImg = new File(this.getUrlImage(c));
+        File ficImg = new File(c.getUrlImage());
         try {
             bgImage = ImageIO.read(ficImg);
         } catch (IOException e) {
@@ -128,9 +56,9 @@ public class BateauPanel extends JPanel {
         this.add(tabCharge[5]);
     }
 
-    public void changeCouleur(Couleur c) {
+    public void changeCouleur(ENavireColor c) {
 
-        File ficImg = new File(this.getUrlImage(c));
+        File ficImg = new File(c.getUrlImage());
         try {
             bgImage = ImageIO.read(ficImg);
         } catch (IOException e) {
