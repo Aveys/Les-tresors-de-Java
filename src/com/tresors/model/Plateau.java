@@ -25,6 +25,45 @@ public class Plateau extends Observable{
     ArrayList<Repaire> listDesRepaires = new ArrayList<Repaire>();//liste des repaires
 
     /**
+     *
+     * @param listJoueurs Map de Joueurs de Type nom,couleur
+     */
+    public Plateau(TreeMap<String,String> listJoueurs) {
+        initRepaire();
+        int grilleRef[][] = {
+                {1,1,1,1,1,1,1,1,1},  //1
+                {2,2,5,1,1,1,1,1,1},  //2
+                {3,3,3,3,4,1,1,1,1},  //3
+                {3,3,3,3,3,3,4,1,1},  //4
+                {4,1,3,3,3,3,3,3,1},  //5
+                {1,1,4,3,4,3,4,3,4},  //6
+                {1,1,1,3,3,3,3,3,3},  //7
+                {1,1,1,1,1,4,3,3,4},  //8
+                {1,1,1,1,1,1,1,4,1}}; //9
+        // Génération de la Carte
+        this.plateau = new Case[9][9];
+        for (int i = 0; i< 9 ; i++){
+            for (int j = 0 ; j < 9 ; j++){
+                if( grilleRef[i][j] == 1)
+                    this.plateau[i][j] = null;
+                if( grilleRef[i][j] == 2)
+                    this.plateau[i][j] = new Port();
+                if( grilleRef[i][j] == 3)
+                    this.plateau[i][j] = new Mer();
+                if( grilleRef[i][j] == 4){
+                    Repaire repaireTemp = this.repaireAleatoire();
+                    this.plateau[i][j] = repaireTemp;
+                    listDesRepaires.add(repaireTemp);
+                }
+
+            }
+        }
+        //Attribution des navires pour chaque joueur
+        for (Map.Entry<String,String> e:listJoueurs.entrySet()) {
+            this.listJoueurs.add(new Navire(e.getKey(), e.getValue()));
+        }
+    }
+    /**
      * initialisation de la liste predefinie des repaires
      */
     public void initRepaire (){
@@ -64,45 +103,6 @@ public class Plateau extends Observable{
         return repaireTemp;
     }
 
-    /**
-     *
-     * @param listJoueurs Map de Joueurs de Type nom,couleur
-     */
-    public Plateau(TreeMap<String,String> listJoueurs) {
-        initRepaire();
-        int grilleRef[][] = {
-                {1,1,1,1,1,1,1,1,1},  //1
-                {2,2,5,1,1,1,1,1,1},  //2
-                {3,3,3,3,4,1,1,1,1},  //3
-                {3,3,3,3,3,3,4,1,1},  //4
-                {4,1,3,3,3,3,3,3,1},  //5
-                {1,1,4,3,4,3,4,3,4},  //6
-                {1,1,1,3,3,3,3,3,3},  //7
-                {1,1,1,1,1,4,3,3,4},  //8
-                {1,1,1,1,1,1,1,4,1}}; //9
-        // Génération de la Carte
-        this.plateau = new Case[9][9];
-        for (int i = 0; i< 9 ; i++){
-            for (int j = 0 ; j < 9 ; j++){
-                if( grilleRef[i][j] == 1)
-                    this.plateau[i][j] = null;
-                if( grilleRef[i][j] == 2)
-                    this.plateau[i][j] = new Port();
-                if( grilleRef[i][j] == 3)
-                    this.plateau[i][j] = new Mer();
-                if( grilleRef[i][j] == 4){
-                    Repaire repaireTemp = this.repaireAleatoire();
-                    this.plateau[i][j] = repaireTemp;
-                    listDesRepaires.add(repaireTemp);
-                }
-
-            }
-        }
-        //Attribution des navires pour chaque joueur
-        for (Map.Entry<String,String> e:listJoueurs.entrySet()) {
-            this.listJoueurs.add(new Navire(e.getKey(), e.getValue()));
-        }
-    }
 //TODO rennomer la fonction car je n'ai pas eu d'idee de nom
     /**
      * methode de deplacement retournent la liste des cases autorise au joueur
