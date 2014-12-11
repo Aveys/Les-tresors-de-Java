@@ -1,5 +1,6 @@
 package com.tresors.vue;
 
+import com.tresors.controller.ControllerMenu;
 import com.tresors.model.ENavireColor;
 
 import javax.swing.*;
@@ -16,26 +17,57 @@ public class VueMenu extends JPanel{
     int nbJoueur = 0;
     JTextField nameJoueur;
     JButton buttonAddJoueur;
+    JPanel pageStart;
+    JPanel listJoueur;
+    JPanel pageEnd;
+    JButton commencerPartie;
+    ControllerMenu controller;
 
-    public VueMenu() {
+    public VueMenu(ControllerMenu controller) {
 
-        this.setLayout(new GridLayout(0, 3));
+        this.controller = controller;
+        this.setLayout(new BorderLayout());
         labelNbjoueur = new JLabel(nbJoueur + " joueur");
         buttonAddJoueur = new JButton("Ajouter un joueur");
 
         nameJoueur = new JTextField();
+        nameJoueur.setPreferredSize(new Dimension(150, 30));
 
-        this.add(labelNbjoueur);
-        this.add(nameJoueur);
-        this.add(buttonAddJoueur);
+        commencerPartie = new JButton("Commencer la partie");
+
+        pageStart = new JPanel();
+        pageStart.setLayout(new FlowLayout());
+
+        pageStart.add(labelNbjoueur);
+        pageStart.add(nameJoueur);
+        pageStart.add(buttonAddJoueur);
+
+        listJoueur = new JPanel();
+        listJoueur.setLayout(new GridLayout(0,3));
+
+        pageEnd = new JPanel();
+        pageEnd.setLayout(new FlowLayout());
+        pageEnd.add(commencerPartie);
+
+        this.add(pageStart, BorderLayout.PAGE_START);
+        this.add(listJoueur, BorderLayout.CENTER);
+        this.add(pageEnd, BorderLayout.PAGE_END);
 
         buttonAddJoueur.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JLabel labelJoueurAdd = new JLabel(getNameJoueur().getText() + ", Couleur : " + getStringCouleur());
+                String nameJoueur = getNameJoueur().getText();
+                ENavireColor couleurJoueur = getCouleur();
+                JLabel labelJoueurAdd = new JLabel(nameJoueur + ", Couleur : " + couleurJoueur.getStringCouleur());
                 setNbJoueur(getNbJoueur() + 1);
-                getLabelNbjoueur().setText(getNbJoueur() + "joueur");
-                addComponent(labelJoueurAdd);
+                if (nbJoueur > 1){
+                    getLabelNbjoueur().setText(getNbJoueur() + " joueurs");
+                }
+                else {
+                    getLabelNbjoueur().setText(getNbJoueur() + " joueur");
+                }
+                addJoueur(labelJoueurAdd);
+                getController().notifyAddJoueur(nameJoueur, couleurJoueur);
                 if(getNbJoueur() == 6) {
                     getButtonAddJoueur().setEnabled(false);
                 }
@@ -44,34 +76,44 @@ public class VueMenu extends JPanel{
 
     }
 
-    public String getStringCouleur() {
+    public ControllerMenu getController() {
+        return controller;
+    }
 
-        String couleur = "";
+    public void setController(ControllerMenu controller) {
+        this.controller = controller;
+    }
+
+    public ENavireColor getCouleur() {
+
+        ENavireColor couleur;
         switch(nbJoueur){
             case 0:
-                couleur = ENavireColor.Blanc.getStringCouleur();
+                couleur = ENavireColor.Blanc;
                 break;
             case 1:
-                couleur = ENavireColor.Bleu.getStringCouleur();
+                couleur = ENavireColor.Bleu;
                 break;
             case 2:
-                couleur = ENavireColor.Jaune.getStringCouleur();
+                couleur = ENavireColor.Jaune;
                 break;
             case 3:
-                couleur = ENavireColor.Orange.getStringCouleur();
+                couleur = ENavireColor.Orange;
                 break;
             case 4:
-                couleur = ENavireColor.Rouge.getStringCouleur();
+                couleur = ENavireColor.Rouge;
                 break;
             case 5:
-                couleur = ENavireColor.Violet.getStringCouleur();
+                couleur = ENavireColor.Violet;
                 break;
+            default:
+                couleur = ENavireColor.Blanc;
         }
         return couleur;
     }
 
-    public void addComponent(Component c) {
-        this.add(c);
+    public void addJoueur(Component c) {
+        listJoueur.add(c);
     }
 
     public int getNbJoueur() {

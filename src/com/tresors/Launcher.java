@@ -4,6 +4,7 @@ import com.tresors.controller.ControllerJeu;
 import com.tresors.vue.VueMenu;
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * Created by Paul on 25/11/2014.
@@ -19,7 +20,8 @@ public class Launcher {
 
         VueMenu vueMenu =  new VueMenu();
         test.add(vueMenu);
-        test.pack();
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        test.setSize((int) tk.getScreenSize().getWidth(), (int) tk.getScreenSize().getHeight());
         test.setVisible(true);
 
 
