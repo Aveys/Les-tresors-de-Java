@@ -270,11 +270,4 @@ public class Plateau extends Observable{
         return listJoueurs;
     }
 
-    //Fire Change in View
-    public void fireAddPlayer(Navire player){
-        IPlateauPlayerListener[] listenerList = (IPlateauPlayerListener[])listeners.getListeners(IPlateauPlayerListener.class);
-        for (IPlateauPlayerListener listener : listenerList) {
-            listener.positionChanged(new PlateauPlayerAddedEvent(this, get()));
-        }
-    }
 }
