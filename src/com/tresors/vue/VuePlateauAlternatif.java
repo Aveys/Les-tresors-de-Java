@@ -1,8 +1,7 @@
-import com.tresors.controller.ControllerMenu;
+package com.tresors.vue;
+
 import com.tresors.controller.ControllerPlateau;
 import com.tresors.model.ENavireColor;
-import com.tresors.vue.BateauPanel;
-import com.tresors.vue.PlateauPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -147,6 +146,7 @@ public class VuePlateauAlternatif extends JPanel {
         this.add(buttonPassTour, constraintsButtonPassTour);
         this.add(bateauPanel, constraintsBateauPanel);
 
+        this.repaint();
     }
 
     public JPanel getPanelScore() {

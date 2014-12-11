@@ -11,7 +11,7 @@ import java.awt.*;
  * Created by Paul on 25/11/2014.
  * Projet java ${PROJECT}
  */
-public class Launcher {
+public class LaunchVueMenu {
 
     public static void main(String[] args) {
 
