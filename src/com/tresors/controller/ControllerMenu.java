@@ -1,5 +1,6 @@
 package com.tresors.controller;
 
+import com.tresors.model.ENavireColor;
 import com.tresors.model.Navire;
 import com.tresors.model.Plateau;
 import com.tresors.vue.VueMenu;
@@ -23,11 +24,11 @@ public class ControllerMenu {
      * A Method that adds listeners to the model
      */
     private void addListenersToModel() {
-        model.addRepairCanonListener(view);
-        model.addRepairPirateListener(view);
+        //model.addRepairCanonListener(view);
+        //model.addRepairPirateListener(view);
     }
 
-    public void notifyPiratesIncreased(Navire player){
-        model.getListJoueurs.add(player);
+    public void notifyAddJoueur(String nameJoueur, ENavireColor couleurJoueur){
+        model.getListJoueurs().add(new Navire(nameJoueur,couleurJoueur));
     }
 }
