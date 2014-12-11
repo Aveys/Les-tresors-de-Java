@@ -1,5 +1,6 @@
 package com.tresors.controller;
 
+import com.tresors.model.Navire;
 import com.tresors.model.Plateau;
 import com.tresors.vue.VueMenu;
 
@@ -24,5 +25,9 @@ public class ControllerMenu {
     private void addListenersToModel() {
         model.addRepairCanonListener(view);
         model.addRepairPirateListener(view);
+    }
+
+    public void notifyPiratesIncreased(Navire player){
+        model.getListJoueurs.add(player);
     }
 }
