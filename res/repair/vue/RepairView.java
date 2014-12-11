@@ -1,8 +1,8 @@
-package com.tresors.repair.vue;
+package repair.vue;
 
-import com.tresors.repair.controller.RepairController;
-import com.tresors.repair.model.IRepairCanonListener;
-import com.tresors.repair.model.IRepairPirateListener;
+import repair.controller.RepairController;
+import repair.model.IRepairCanonListener;
+import repair.model.IRepairPirateListener;
 
 /**
  * Created by Paul on 30/11/2014.

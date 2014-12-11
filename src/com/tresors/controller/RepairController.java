@@ -1,30 +1,27 @@
 package com.tresors.controller;
 
-import com.tresors.model.*;
+import com.tresors.model.RepairModel;
 import com.tresors.vue.JFrameRepair;
 import com.tresors.vue.RepairView;
-import com.tresors.vue.Vue;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.TreeMap;
 
 /**
- * Created by arthurveys on 21/11/14.
- * Projet java ${PROJECT}
+ * A Class that is the controller to every repair action
+ * Created by Paul on 30/11/2014.
+ * @author Paul Ribierre
  */
-public class ControllerJeu {
-
-    private Model model = new Model();
-    private Vue view = new Vue();
+public class RepairController {
+    /*The Repair View, initialized to NULL*/
+    public RepairView view = null;
+    /*The Repair Model, initialized to NULL*/
+    private RepairModel model = null;
 
     /**
      * Creates a RepairController with a model as parameter
      * @param model a RepairModel used by the controller as database
      */
-    public ControllerJeu(Model model){
+    public RepairController(RepairModel model){
         this.model = model;
-        view = new JFrameTresors(this, model.getNbPirates(), model.getNbCanons());
+        view = new JFrameRepair(this, model.getNbPirates(), model.getNbCanons());
         addListenersToModel();
     }
 
@@ -42,12 +39,14 @@ public class ControllerJeu {
     public void displayViews(){
         view.display();
     }
+
     /**
      * Closes the window
      */
     public void closeViews(){
         view.close();
     }
+
     /**
      * A Method that indicates to the model that data has been modified
      * @param nbPirates the new amount of pirates on the ship
@@ -95,3 +94,4 @@ public class ControllerJeu {
         model.setNbCanons(nbCanons);
     }
 }
+

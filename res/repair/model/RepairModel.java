@@ -1,8 +1,9 @@
-package com.tresors.repair.model;
+package repair.model;
 
 import javax.swing.event.EventListenerList;
 //TODO Finish Javadoc
 //TODO Implement to project
+
 /**
  * A class that is the Model in the Model View Controller architecture
  * It contains the data

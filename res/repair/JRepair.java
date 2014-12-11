@@ -1,7 +1,7 @@
-package com.tresors.repair;
+package repair;
 
-import com.tresors.repair.controller.RepairController;
-import com.tresors.repair.model.RepairModel;
+import repair.controller.RepairController;
+import repair.model.RepairModel;
 
 /**
  * Created by Paul on 30/11/2014.

@@ -1,4 +1,4 @@
-package com.tresors.repair.model;
+package com.tresors.event;
 import java.util.EventListener;
 
 /**

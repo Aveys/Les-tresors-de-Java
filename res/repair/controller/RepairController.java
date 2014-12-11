@@ -1,8 +1,8 @@
-package com.tresors.repair.controller;
+package repair.controller;
 
-import com.tresors.repair.model.RepairModel;
-import com.tresors.repair.vue.JFrameFieldRepair;
-import com.tresors.repair.vue.RepairView;
+import repair.model.RepairModel;
+import repair.vue.JFrameFieldRepair;
+import repair.vue.RepairView;
 
 /**
  * A Class that is the controller to every repair action

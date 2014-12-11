@@ -1,5 +1,11 @@
 package com.tresors.model;
 
+import com.tresors.event.IRepairCanonListener;
+import com.tresors.event.IRepairPirateListener;
+import com.tresors.event.RepairChangeNbCanonEvent;
+import com.tresors.event.RepairChangeNbPirateEvent;
+
+import javax.swing.event.EventListenerList;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,7 +21,8 @@ public class Navire {
     private String color;
     private int score;
     private Point coordonnees;
-    private List<Charge> emplacement;
+    private ArrayList<Charge> emplacement;
+    private final EventListenerList listeners = new EventListenerList();
     //TODO verifier que l'emplacement commence a 1 pour que ça correspond au de
 
     public String getCapitaine() {
@@ -61,8 +68,6 @@ public class Navire {
         this.coordonnees=new Point(x,y);
     }
 
-
-
     public Navire(String capitaine, String color) {
         this.capitaine = capitaine;
         this.color = color;
@@ -75,10 +80,23 @@ public class Navire {
      * Donne le nombre de Pirate dans le navire
      * @return le nombre de pirate dans le navire
      */
-    public int getNbPirate(){
+    public int getNbPirates(){
         int nb=0;
         for (Charge c : emplacement){
             if(c instanceof Pirate)
+                nb++;
+        }
+        return nb;
+    }
+
+    /**
+     * Donne le nombre de canon dans le navire
+     * @return le nombre de canon dans le navire
+     */
+    public int getNbCanons(){
+        int nb=0;
+        for (Charge c : emplacement){
+            if(c instanceof Canon)
                 nb++;
         }
         return nb;
@@ -109,11 +127,29 @@ public class Navire {
         switch (type){
             case 'P':
                 emplacement.set(pos,new Pirate(pos));
+                fireNbPiratesChanged(this.getNbPirates(),"ajout");
                 break;
             case 'C':
                 emplacement.set(pos,new Canon(pos));
+                fireNbCanonsChanged(this.getNbCanons(),"ajout");
                 break;
         }
+    }
+
+    /**
+     * Ajouter un Pirate à la fin de l'arraylist sans spécifier de position
+     */
+    public void ajouterPirate(){
+        this.emplacement.add(new Pirate(emplacement.size()));
+        fireNbPiratesChanged(this.getNbPirates(),"ajout");
+    }
+
+    /**
+     * Ajouter un Canon à la fin de l'arraylist sans spécifier de position
+     */
+    public void ajouterCanon(){
+        this.emplacement.add(new Pirate(emplacement.size()));
+        fireNbCanonsChanged(this.getNbCanons(),"ajout");
     }
 
     /**
@@ -198,7 +234,17 @@ public class Navire {
         if(emplacement.get(pos)==null)
             return false;
         else {
-            emplacement.remove(pos);
+           if(emplacement.get(pos) instanceof Pirate)
+           {
+               emplacement.remove(pos);
+               fireNbPiratesChanged(this.getNbPirates(),"suppression");
+           }
+           else if (emplacement.get(pos) instanceof Canon)
+           {
+               emplacement.remove(pos);
+               fireNbCanonsChanged(this.getNbCanons(),"suppression");
+           }
+
             return true;
         }
     }
@@ -213,5 +259,54 @@ public class Navire {
             list.put(i, emplacement.get(i));
         }
         return list;
+    }
+
+    public EventListenerList getListeners() {
+        return listeners;
+    }
+    public void addRepairPirateListener(IRepairPirateListener listener){
+        listeners.add(IRepairPirateListener.class, listener);
+    }
+    public void removeRepairPirateListener(IRepairPirateListener l){
+        listeners.remove(IRepairPirateListener.class, l);
+    }
+    public void addRepairCanonListener(IRepairCanonListener listener){
+        listeners.add(IRepairCanonListener.class, listener);
+    }
+    public void removeRepairCanonListener(IRepairCanonListener l){
+        listeners.remove(IRepairCanonListener.class, l);
+    }
+
+
+    public void fireNbCanonsChanged(int NbCanons, String type){
+        IRepairCanonListener[] listenerList = (IRepairCanonListener[])listeners.getListeners(IRepairCanonListener.class);
+        if (type=="ajout") {
+            for (IRepairCanonListener listener : listenerList) {
+                listener.canonsChanged(new RepairChangeNbCanonEvent(this, getNbCanons()));
+                listener.canonsIncreased(new RepairChangeNbCanonEvent(this, getNbCanons()));
+            }
+        }
+        else if (type=="suppression"){
+            for (IRepairCanonListener listener : listenerList) {
+                listener.canonsChanged(new RepairChangeNbCanonEvent(this, getNbCanons()));
+                listener.canonsDecreased(new RepairChangeNbCanonEvent(this, getNbCanons()));
+            }
+        }
+    }
+
+    public void fireNbPiratesChanged(int NbPirates, String type){
+        IRepairPirateListener[] listenerList = (IRepairPirateListener[])listeners.getListeners(IRepairPirateListener.class);
+        if (type=="ajout") {
+            for (IRepairPirateListener listener : listenerList) {
+                listener.piratesChanged(new RepairChangeNbPirateEvent(this, getNbPirates()));
+                listener.piratesIncreased(new RepairChangeNbPirateEvent(this, getNbPirates()));
+            }
+        }
+        else if (type=="suppression"){
+            for (IRepairPirateListener listener : listenerList) {
+                listener.piratesChanged(new RepairChangeNbPirateEvent(this, getNbPirates()));
+                listener.piratesDecreased(new RepairChangeNbPirateEvent(this, getNbPirates()));
+            }
+        }
     }
 }

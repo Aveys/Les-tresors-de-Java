@@ -17,21 +17,12 @@ public class Plateau extends Observable{
         2. Port
         3. Mer
         4. Repaire  */
-    private int grilleRef[][] = {
-            {1,1,1,1,1,1,1,1,1},  //1
-            {2,2,5,1,1,1,1,1,1},  //2
-            {3,3,3,3,4,1,1,1,1},  //3
-            {3,3,3,3,3,3,4,1,1},  //4
-            {4,1,3,3,3,3,3,3,1},  //5
-            {1,1,4,3,4,3,4,3,4},  //6
-            {1,1,1,3,3,3,3,3,3},  //7
-            {1,1,1,1,1,4,3,3,4},  //8
-            {1,1,1,1,1,1,1,4,1}}; //9
 
-    private ArrayList<Navire> listJoueurs;
-    public static ArrayList<Repaire> templateRepaire;
+
+    private ArrayList<Navire> listJoueurs = new ArrayList<Navire>();
+    public static ArrayList<Repaire> templateRepaire = new ArrayList<Repaire>();
     private Case[][] plateau;
-    ArrayList<Repaire> listDesRepaires;//liste des repaires
+    ArrayList<Repaire> listDesRepaires = new ArrayList<Repaire>();//liste des repaires
 
     /**
      * initialisation de la liste predefinie des repaires
@@ -48,16 +39,16 @@ public class Plateau extends Observable{
         Pirate pirateP4 = new Pirate(4);
 
 
-        this.templateRepaire.add(new Repaire(canonP1,canonP2,pirateP3,pirateP4,null, null,3));
-        this.templateRepaire.add(new Repaire(canonP0, canonP1, canonP2, pirateP3, pirateP4, null, 5));
-        this.templateRepaire.add(new Repaire(canonP1, pirateP2, null, null, null, null, 2));
-        this.templateRepaire.add(new Repaire(canonP0, canonP0,pirateP1, null, null, null, 3 ));
-        this.templateRepaire.add(new Repaire(canonP1, canonP2, pirateP3, null, null, null,2));
-        this.templateRepaire.add(new Repaire(canonP0, canonP1, canonP2,canonP3,pirateP4,null, 4 ));
-        this.templateRepaire.add(new Repaire(canonP0, canonP0, canonP1,canonP2, canonP3, pirateP4, 5));
-        this.templateRepaire.add(new Repaire(canonP0, pirateP1,pirateP2, pirateP3, null, null, 5));
-        this.templateRepaire.add(new Repaire(canonP1, canonP2, pirateP3, pirateP4, null, null, 3));
-        this.templateRepaire.add(new Repaire(canonP0, pirateP1, pirateP2, null, null, null, 4));
+        templateRepaire.add(new Repaire(canonP1,canonP2,pirateP3,pirateP4,null, null,3));
+        templateRepaire.add(new Repaire(canonP0, canonP1, canonP2, pirateP3, pirateP4, null, 5));
+        templateRepaire.add(new Repaire(canonP1, pirateP2, null, null, null, null, 2));
+        templateRepaire.add(new Repaire(canonP0, canonP0,pirateP1, null, null, null, 3 ));
+        templateRepaire.add(new Repaire(canonP1, canonP2, pirateP3, null, null, null,2));
+        templateRepaire.add(new Repaire(canonP0, canonP1, canonP2,canonP3,pirateP4,null, 4 ));
+        templateRepaire.add(new Repaire(canonP0, canonP0, canonP1,canonP2, canonP3, pirateP4, 5));
+        templateRepaire.add(new Repaire(canonP0, pirateP1,pirateP2, pirateP3, null, null, 5));
+        templateRepaire.add(new Repaire(canonP1, canonP2, pirateP3, pirateP4, null, null, 3));
+        templateRepaire.add(new Repaire(canonP0, pirateP1, pirateP2, null, null, null, 4));
     }
 
     /**
@@ -65,9 +56,11 @@ public class Plateau extends Observable{
      * @return Repaire aleatoire
      */
     public Repaire repaireAleatoire(){
-        int nmbAleatoir =  (int)Math.random()*this.templateRepaire.size();
-        Repaire repaireTemp = this.templateRepaire.get(nmbAleatoir);
-        this.templateRepaire.remove(nmbAleatoir);
+        if(templateRepaire.isEmpty())
+            return null;
+        int nmbAleatoir = (int) (Math.random()*templateRepaire.size());
+        Repaire repaireTemp = templateRepaire.get(nmbAleatoir);
+        templateRepaire.remove(nmbAleatoir);
         return repaireTemp;
     }
 
@@ -76,16 +69,28 @@ public class Plateau extends Observable{
      * @param listJoueurs Map de Joueurs de Type nom,couleur
      */
     public Plateau(TreeMap<String,String> listJoueurs) {
+        initRepaire();
+        int grilleRef[][] = {
+                {1,1,1,1,1,1,1,1,1},  //1
+                {2,2,5,1,1,1,1,1,1},  //2
+                {3,3,3,3,4,1,1,1,1},  //3
+                {3,3,3,3,3,3,4,1,1},  //4
+                {4,1,3,3,3,3,3,3,1},  //5
+                {1,1,4,3,4,3,4,3,4},  //6
+                {1,1,1,3,3,3,3,3,3},  //7
+                {1,1,1,1,1,4,3,3,4},  //8
+                {1,1,1,1,1,1,1,4,1}}; //9
         // Génération de la Carte
+        this.plateau = new Case[9][9];
         for (int i = 0; i< 9 ; i++){
             for (int j = 0 ; j < 9 ; j++){
-                if( this.grilleRef[i][j] == 1)
+                if( grilleRef[i][j] == 1)
                     this.plateau[i][j] = null;
-                if( this.grilleRef[i][j] == 2)
+                if( grilleRef[i][j] == 2)
                     this.plateau[i][j] = new Port();
-                if( this.grilleRef[i][j] == 3)
+                if( grilleRef[i][j] == 3)
                     this.plateau[i][j] = new Mer();
-                if( this.grilleRef[i][j] == 4){
+                if( grilleRef[i][j] == 4){
                     Repaire repaireTemp = this.repaireAleatoire();
                     this.plateau[i][j] = repaireTemp;
                     listDesRepaires.add(repaireTemp);
@@ -98,7 +103,7 @@ public class Plateau extends Observable{
             this.listJoueurs.add(new Navire(e.getKey(), e.getValue()));
         }
     }
-//TODO renomer la fonction car je n'ai pas eu d'idee de nom
+//TODO rennomer la fonction car je n'ai pas eu d'idee de nom
     /**
      * methode de deplacement retournent la liste des cases autorise au joueur
      * @param positionInitiale position du joueur lors de l'appel initial
@@ -166,6 +171,7 @@ public class Plateau extends Observable{
     public ArrayList<Point> getVoisinsAttaquable(Point point){
         ArrayList<Point> attaquable = new ArrayList<Point>();
         ArrayList<Point> voisins = HexToolbox.getVoisins(point);
+        voisins.add(new Point(point.x,point.y));
         Case tmp;
         for (Point p :voisins){
             tmp = plateau[p.x][p.y];
@@ -234,7 +240,6 @@ public class Plateau extends Observable{
      * @return M pour une case Mer, P pour une case Port, R pour une case de Repaire, 0 si la case n'est d'aucun type
      */
     public char getTypeCase(Point2D point){
-        //TODO : Verifier pour le nombre de points
         Case tmp=plateau[(int)point.getX()][(int)point.getY()];
         if(tmp instanceof Mer)
             return 'M';

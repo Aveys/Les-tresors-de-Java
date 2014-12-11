@@ -1,18 +1,18 @@
-package com.tresors.repair.vue;
+package com.tresors.vue;
 
 /**
  * Created by Paul on 30/11/2014.
  */
 
-import com.tresors.repair.controller.RepairController;
-import com.tresors.repair.model.RepairChangeNbCanonEvent;
-import com.tresors.repair.model.RepairChangeNbPirateEvent;
+import com.tresors.controller.RepairController;
+import com.tresors.event.RepairChangeNbCanonEvent;
+import com.tresors.event.RepairChangeNbPirateEvent;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class JFrameFieldRepair extends RepairView {
+public class JFrameRepair extends RepairView {
 
     //Objets awt IHM
     private JFrame frame = null;
@@ -26,11 +26,11 @@ public class JFrameFieldRepair extends RepairView {
     private JLabel pirates = null;
     private JLabel canons = null;
 
-    public JFrameFieldRepair(RepairController controller) {
+    public JFrameRepair(RepairController controller) {
         this(controller, 3, 3);
     }
 
-    public JFrameFieldRepair(RepairController controller, int nbCanons, int nbPirates){
+    public JFrameRepair(RepairController controller, int nbCanons, int nbPirates){
         super(controller);
 
         buildFrame(nbCanons, nbPirates);
