@@ -184,7 +184,7 @@ public class Navire {
     public EventListenerList getListeners() {
         return listeners;
     }
-    public void addRepairPirateListener(IRepairPirateListener listener){
+    /*public void addRepairPirateListener(IRepairPirateListener listener){
         listeners.add(IRepairPirateListener.class, listener);
     }
     public void removeRepairPirateListener(IRepairPirateListener l){
@@ -195,7 +195,7 @@ public class Navire {
     }
     public void removeRepairCanonListener(IRepairCanonListener l){
         listeners.remove(IRepairCanonListener.class, l);
-    }
+    }*/
 
    //Getters Setters
     public String getCapitaine() {
@@ -316,19 +316,19 @@ public class Navire {
         }
     }
 
-    public void fireChargeAdded(Charge charge){
+    public void fireChargeAdded(Charge charge, int emplacement){
         INavireChargeListener[] listenerList = (INavireChargeListener[])listeners.getListeners(INavireChargeListener.class);
         for (INavireChargeListener listener : listenerList) {
             //TODO gérer le traitement de l'ajout d'une charge
-            //listener.chargeAdded(new NavireChargeAddedEvent(this, get()));
+            listener.chargeAdded(new NavireChargeAddedEvent(this, getEmplacement(emplacement)));
         }
     }
 
-    public void fireChargeDeleted(Charge charge){
+    public void fireChargeRemoved(Charge charge, int emplacement){
         INavireChargeListener[] listenerList = (INavireChargeListener[])listeners.getListeners(INavireChargeListener.class);
         for (INavireChargeListener listener : listenerList) {
             //TODO gérer le traitement de l'ajout d'une charge
-            //listener.chargeAdded(new NavireChargeAddedEvent(this, get()));
+            listener.chargeRemoved(new NavireChargeRemovedEvent(this, getEmplacement(emplacement)));
         }
     }
 }

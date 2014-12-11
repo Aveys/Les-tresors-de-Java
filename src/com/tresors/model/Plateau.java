@@ -18,15 +18,15 @@ public class Plateau extends Observable{
         3. Mer
         4. Repaire  */
 
-
+    //Attributes
     private ArrayList<Navire> listJoueurs = new ArrayList<Navire>();
     public static ArrayList<Repaire> templateRepaire = new ArrayList<Repaire>();
     private Case[][] plateau;
     ArrayList<Repaire> listDesRepaires = new ArrayList<Repaire>();//liste des repaires
 
     /**
-     *
-     * @param listJoueurs Map de Joueurs de Type nom,couleur
+     * Constructor
+     * @param listJoueurs ArrayList de Navires
      */
     public Plateau(ArrayList<Navire> listJoueurs) {
         initRepaire();
@@ -64,6 +64,7 @@ public class Plateau extends Observable{
         //    this.listJoueurs.add(new Navire(e.getKey(), e.getValue()));
         //}
     }
+
     /**
      * initialisation de la liste predefinie des repaires
      */
@@ -264,7 +265,16 @@ public class Plateau extends Observable{
     }
     //TODO : Si veux une methode de pathfinding mais les chemin possible sont deja fait
 
+    //Getters Setters
     public ArrayList<Navire> getListJoueurs() {
         return listJoueurs;
+    }
+
+    //Fire Change in View
+    public void fireAddPlayer(Navire player){
+        IPlateauPlayerListener[] listenerList = (IPlateauPlayerListener[])listeners.getListeners(IPlateauPlayerListener.class);
+        for (IPlateauPlayerListener listener : listenerList) {
+            listener.positionChanged(new PlateauPlayerAddedEvent(this, get()));
+        }
     }
 }
