@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 /**
  * Created by Nicolas Sagon on 25/11/2014.
  */
-public class vuePlateau extends JFrame {
+public class VuePlateau extends JFrame {
     private JPanel mainPanel;
     private JMenuBar menuBar;
     private JMenu file;
@@ -23,8 +23,9 @@ public class vuePlateau extends JFrame {
     private JButton buttonAction2;
     private JLabel labelAction;
     private JButton buttonPassTour;
+    private int nbTour = 0;
 
-    public vuePlateau() {
+    public VuePlateau() {
 
         super("Les trésors de Java");
 
@@ -126,7 +127,28 @@ public class vuePlateau extends JFrame {
         buttonPassTour.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                bateauPanel.changeCouleur(BateauPanel.Couleur.Violet);
+                nbTour = (nbTour + 1) % 6;
+                switch (nbTour) {
+                    case 0:
+                        bateauPanel.changeCouleur(BateauPanel.Couleur.Bleu);
+                        break;
+                    case 1:
+                        bateauPanel.changeCouleur(BateauPanel.Couleur.Violet);
+                        break;
+                    case 2:
+                        bateauPanel.changeCouleur(BateauPanel.Couleur.Jaune);
+                        break;
+                    case 3:
+                        bateauPanel.changeCouleur(BateauPanel.Couleur.Orange);
+                        break;
+                    case 4:
+                        bateauPanel.changeCouleur(BateauPanel.Couleur.Rouge);
+                        break;
+                    case 5:
+                        bateauPanel.changeCouleur(BateauPanel.Couleur.Blanc);
+                        break;
+                }
+
             }
         });
 
@@ -148,6 +170,10 @@ public class vuePlateau extends JFrame {
 
         //add to JFrame
         this.add(mainPanel);
+
+        //Draw joueur :
+
+
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         Toolkit tk = Toolkit.getDefaultToolkit();
