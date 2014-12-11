@@ -1,4 +1,4 @@
-package com.tresors.event;
+package com.tresors.event.charge;
 
 import java.util.EventListener;
 
@@ -7,6 +7,6 @@ import java.util.EventListener;
  * Created by Paul on 11/12/2014.
  * @author Paul Ribierre
  */
-public interface IPositionChangedListener extends EventListener {
+public interface IChargePositionChangedListener extends EventListener {
     public void positionChanged(ChargePositionChangedEvent event);
 }
