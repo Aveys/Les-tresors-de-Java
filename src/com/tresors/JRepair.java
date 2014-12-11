@@ -14,8 +14,7 @@ public class JRepair {
         TreeMap<String,String> listJoueurs = new TreeMap<String,String>();
 
         Plateau model = new Plateau(listJoueurs);
-        RepairController controller = new RepairController(model);
-        controller.displayViews();
+
     }
 }
 
