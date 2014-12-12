@@ -1,7 +1,5 @@
 package com.tresors.vue;
 
-import com.tresors.model.ENavireColor;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -132,29 +130,29 @@ public class VuePlateau extends JFrame {
                 nbTour = (nbTour + 1) % 6;
                 switch (nbTour) {
                     case 0:
-                        bateauPanel.changeCouleur(ENavireColor.Bleu);
+                        bateauPanel.changeCouleur(BateauPanel.Couleur.Bleu);
                         break;
                     case 1:
-                        bateauPanel.changeCouleur(ENavireColor.Violet);
+                        bateauPanel.changeCouleur(BateauPanel.Couleur.Violet);
                         break;
                     case 2:
-                        bateauPanel.changeCouleur(ENavireColor.Jaune);
+                        bateauPanel.changeCouleur(BateauPanel.Couleur.Jaune);
                         break;
                     case 3:
-                        bateauPanel.changeCouleur(ENavireColor.Orange);
+                        bateauPanel.changeCouleur(BateauPanel.Couleur.Orange);
                         break;
                     case 4:
-                        bateauPanel.changeCouleur(ENavireColor.Rouge);
+                        bateauPanel.changeCouleur(BateauPanel.Couleur.Rouge);
                         break;
                     case 5:
-                        bateauPanel.changeCouleur(ENavireColor.Blanc);
+                        bateauPanel.changeCouleur(BateauPanel.Couleur.Blanc);
                         break;
                 }
 
             }
         });
 
-        bateauPanel = new BateauPanel(ENavireColor.Bleu);
+        bateauPanel = new BateauPanel(BateauPanel.Couleur.Bleu);
         GridBagConstraints constraintsBateauPanel = new GridBagConstraints();
         constraintsBateauPanel.fill = GridBagConstraints.BOTH;
         constraintsBateauPanel.weighty = 20;
