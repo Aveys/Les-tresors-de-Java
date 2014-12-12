@@ -5,7 +5,6 @@ import com.tresors.model.Navire;
 import com.tresors.model.Plateau;
 import com.tresors.vue.VueMenu;
 import com.tresors.vue.VuePlateau;
-import com.tresors.vue.VuePlateauAlternatif;
 
 import javax.swing.*;
 
@@ -38,6 +37,6 @@ public class ControllerMenu {
     }
 
     public void notifyCallBoardView(){
-        this.view = new VuePlateauAlternatif(new ControllerPlateau(model));
+       // this.view = new VuePlateauAlternatif(new ControllerPlateau(model));
     }
 }
