@@ -8,7 +8,7 @@ import java.awt.*;
 public class HexMech {
     public final static boolean orFLAT= true;
     public static boolean XYVertex=false;	//true: x,y are the co-ords of the first vertex.
-    //false: x,y are the co-ords of the top left rect. co-ord.
+    //false: x,y are the co-ords of the top left rect. co-ord.    ZDZ
 
     private static int BORDERS=100;	//default number of pixels for the border.
 

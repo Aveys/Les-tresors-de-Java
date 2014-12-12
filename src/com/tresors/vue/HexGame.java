@@ -8,7 +8,7 @@ import java.awt.*;
  */
 public class HexGame extends JPanel{
     final static int EMPTY = 0;
-    final static int BSIZE = 10; //board size.
+    final static int BSIZE = 10; //board size.Z
     final static int HEXSIZE = 200;	//hex size in pixels
     final static int BORDERS = 5;
     final static int SCRSIZE = HEXSIZE * (BSIZE + 1) + BORDERS*3; //screen size (vertical dimension).
