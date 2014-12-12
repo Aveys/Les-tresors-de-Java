@@ -1,14 +1,17 @@
 package com.tresors.vue;
 
+import com.tresors.controller.ControllerPlateau;
+import com.tresors.model.ENavireColor;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * Created by Nicolas Sagon on 25/11/2014.
+ * Created by Paul on 11/12/2014.
  */
-public class VuePlateau extends JFrame {
+public class VuePlateauAlternatif extends JPanel {
     private JPanel mainPanel;
     private JMenuBar menuBar;
     private JMenu file;
@@ -25,34 +28,9 @@ public class VuePlateau extends JFrame {
     private JButton buttonPassTour;
     private int nbTour = 0;
 
-    public VuePlateau() {
+    public VuePlateauAlternatif(ControllerPlateau controller) {
 
-        super("Les trésors de Java");
-
-        //Menu :
-
-        menuBar = new JMenuBar();
-        file = new JMenu("File");
-        menuItemFileSave = new JMenuItem("Sauvegarder");
-        menuItemFileLoad = new JMenuItem("Charger");
-        menuItemFileExit = new JMenuItem("Quitter");
-
-        file.add(menuItemFileSave);
-        file.add(menuItemFileLoad);
-        file.add(menuItemFileExit);
-
-        menuItemFileExit.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-            }
-        });
-
-        menuBar.add(file);
-        this.setJMenuBar(menuBar);
-
-        //Main panel
-        mainPanel.setLayout(new GridBagLayout());
+        this.setLayout(new GridBagLayout());
 
         //Panel score
         panelScore = new JPanel();
@@ -68,7 +46,7 @@ public class VuePlateau extends JFrame {
         constraintsPanelScore.gridy = 0;
         constraintsPanelScore.anchor = GridBagConstraints.PAGE_START;
 
-        mainPanel.add(panelScore, constraintsPanelScore);
+        this.add(panelScore, constraintsPanelScore);
 
         //Panel Plateau
         plateauPanel = new PlateauPanel();
@@ -81,7 +59,7 @@ public class VuePlateau extends JFrame {
         constraintsPanelPlateau.gridy = 1;
         constraintsPanelPlateau.anchor = GridBagConstraints.PAGE_START;
 
-        mainPanel.add(plateauPanel, constraintsPanelPlateau);
+        this.add(plateauPanel, constraintsPanelPlateau);
 
 
         //Panel Action
@@ -130,29 +108,29 @@ public class VuePlateau extends JFrame {
                 nbTour = (nbTour + 1) % 6;
                 switch (nbTour) {
                     case 0:
-                        bateauPanel.changeCouleur(BateauPanel.Couleur.Bleu);
+                        bateauPanel.changeCouleur(ENavireColor.Bleu);
                         break;
                     case 1:
-                        bateauPanel.changeCouleur(BateauPanel.Couleur.Violet);
+                        bateauPanel.changeCouleur(ENavireColor.Violet);
                         break;
                     case 2:
-                        bateauPanel.changeCouleur(BateauPanel.Couleur.Jaune);
+                        bateauPanel.changeCouleur(ENavireColor.Jaune);
                         break;
                     case 3:
-                        bateauPanel.changeCouleur(BateauPanel.Couleur.Orange);
+                        bateauPanel.changeCouleur(ENavireColor.Orange);
                         break;
                     case 4:
-                        bateauPanel.changeCouleur(BateauPanel.Couleur.Rouge);
+                        bateauPanel.changeCouleur(ENavireColor.Rouge);
                         break;
                     case 5:
-                        bateauPanel.changeCouleur(BateauPanel.Couleur.Blanc);
+                        bateauPanel.changeCouleur(ENavireColor.Blanc);
                         break;
                 }
 
             }
         });
 
-        bateauPanel = new BateauPanel(BateauPanel.Couleur.Bleu);
+        bateauPanel = new BateauPanel(ENavireColor.Bleu);
         GridBagConstraints constraintsBateauPanel = new GridBagConstraints();
         constraintsBateauPanel.fill = GridBagConstraints.BOTH;
         constraintsBateauPanel.weighty = 20;
@@ -162,68 +140,13 @@ public class VuePlateau extends JFrame {
         constraintsBateauPanel.insets = new Insets(120, 75, 0, 0);
         constraintsBateauPanel.anchor = GridBagConstraints.PAGE_START;
 
-        mainPanel.add(labelAction, constraintsLabelAction);
-        mainPanel.add(buttonAction1, constraintsButtonAction1);
-        mainPanel.add(buttonAction2, constraintsButtonAction2);
-        mainPanel.add(buttonPassTour, constraintsButtonPassTour);
-        mainPanel.add(bateauPanel, constraintsBateauPanel);
+        this.add(labelAction, constraintsLabelAction);
+        this.add(buttonAction1, constraintsButtonAction1);
+        this.add(buttonAction2, constraintsButtonAction2);
+        this.add(buttonPassTour, constraintsButtonPassTour);
+        this.add(bateauPanel, constraintsBateauPanel);
 
-        //add to JFrame
-        this.add(mainPanel);
-
-        //Draw joueur :
-
-
-
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        Toolkit tk = Toolkit.getDefaultToolkit();
-        setSize((int) tk.getScreenSize().getWidth(), (int) tk.getScreenSize().getHeight());
-        this.setVisible(true);
-
-    }
-
-    public JPanel getMainPanel() {
-        return mainPanel;
-    }
-
-    public void setMainPanel(JPanel mainPanel) {
-        this.mainPanel = mainPanel;
-    }
-
-    public void setMenuBar(JMenuBar menuBar) {
-        this.menuBar = menuBar;
-    }
-
-    public JMenu getFile() {
-        return file;
-    }
-
-    public void setFile(JMenu file) {
-        this.file = file;
-    }
-
-    public JMenuItem getMenuItemFileSave() {
-        return menuItemFileSave;
-    }
-
-    public void setMenuItemFileSave(JMenuItem menuItemFileSave) {
-        this.menuItemFileSave = menuItemFileSave;
-    }
-
-    public JMenuItem getMenuItemFileLoad() {
-        return menuItemFileLoad;
-    }
-
-    public void setMenuItemFileLoad(JMenuItem menuItemFileLoad) {
-        this.menuItemFileLoad = menuItemFileLoad;
-    }
-
-    public JMenuItem getMenuItemFileExit() {
-        return menuItemFileExit;
-    }
-
-    public void setMenuItemFileExit(JMenuItem menuItemFileExit) {
-        this.menuItemFileExit = menuItemFileExit;
+        this.repaint();
     }
 
     public JPanel getPanelScore() {

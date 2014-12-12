@@ -19,7 +19,7 @@ public class PlateauTest {
         list.put("Edward Teach","Noir");
         list.put("Rackam","Rouge");
         list.put("Davy Jones","Vert");
-        this.pl = new Plateau(list);
+        this.pl = new Plateau();
 
     }
 

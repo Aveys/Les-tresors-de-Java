@@ -20,9 +20,12 @@ public class HexToolbox {
      */
     public static ArrayList<Point> getVoisins(Point source){
         ArrayList<Point> res = new ArrayList<Point>();
-        int neighbors[][]={{+1,  0},{+1, -1},{ 0, -1},{-1,  0},{-1, +1},{ 0, +1}};
+        int neighbors[][]={{+1,  0},{+1, +1},{ 0, +1},{-1,  0},{-1, -1},{ 0, -1}};
         for (int[] calc : neighbors){
-            res.add(new Point(source.x+calc[0],source.y+calc[1]));
+            Point tempPoint =new Point(source.x+calc[0],source.y+calc[1]);
+            if ((tempPoint.x>=0 && tempPoint.x<9)&&(tempPoint.y>=0 && tempPoint.y<9)){
+                res.add(tempPoint);
+            }
         }
         return res;
     }
@@ -33,6 +36,7 @@ public class HexToolbox {
      * @param hex2 L'hexagone de destination
      * @return La distance absolue entre deux
      */
+    //TODO quesque la distance absolue? c'est pas le nombre de case minimum en tous cas. Passe pas test
     public static int distanceHex(Point hex1, Point hex2){
         return ((Math.abs(hex1.y-hex2.x)+ Math.abs(hex1.y-hex2.y))+Math.abs(hex1.x+hex1.y-hex2.x-hex2.y))/2;
     }

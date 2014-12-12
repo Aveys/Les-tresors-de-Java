@@ -1,5 +1,8 @@
 package com.tresors.model;
 
+import com.tresors.event.navire.*;
+
+import javax.swing.event.EventListenerList;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,60 +13,17 @@ import java.util.List;
  * Classe modele pour un joueur (Un Navire = Un joueur)
  */
 public class Navire {
-
+    //Attributes
     private String capitaine;
-    private String color;
+    private ENavireColor color;
     private int score;
     private Point coordonnees;
-    private List<Charge> emplacement;
+    private ArrayList<Charge> emplacement;
+
+    private final EventListenerList listeners = new EventListenerList();
     //TODO verifier que l'emplacement commence a 1 pour que ça correspond au de
 
-    public String getCapitaine() {
-        return capitaine;
-    }
-
-    public void setCapitaine(String capitaine) {
-        this.capitaine = capitaine;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
-    }
-
-    public int getScore() {
-        return score;
-    }
-
-    public void setScore(int score) {
-        if(score <0)
-            System.out.println("Le score ne peut pas être negatif (DEBUG : implementer une exception");
-        else
-            this.score = score;
-    }
-
-    public List<Charge> getListEmplacement() {
-        return emplacement;
-    }
-
-    public Point getCoordonnees() {
-        return coordonnees;
-    }
-
-    public void setCoordonnees(Point coordonnees) {
-        this.coordonnees = coordonnees;
-    }
-
-    public void setCoordonnees(int x,int y){
-        this.coordonnees=new Point(x,y);
-    }
-
-
-
-    public Navire(String capitaine, String color) {
+    public Navire(String capitaine, ENavireColor color) {
         this.capitaine = capitaine;
         this.color = color;
         this.score=0;
@@ -71,19 +31,7 @@ public class Navire {
         this.coordonnees=new Point(1,0);
     }
 
-    /**
-     * Donne le nombre de Pirate dans le navire
-     * @return le nombre de pirate dans le navire
-     */
-    public int getNbPirate(){
-        int nb=0;
-        for (Charge c : emplacement){
-            if(c instanceof Pirate)
-                nb++;
-        }
-        return nb;
-    }
-
+    //Methods
     /**
      * Ajoute un nombre de points à un score
      * @param score le nombre de points à ajouter
@@ -91,7 +39,6 @@ public class Navire {
     public void addScore(int score){
         this.score=+score;
     }
-
     /**
      * Detecte si le joueur à atteint le score de victoire
      * @return true si le joueur est vainqueur.
@@ -99,23 +46,35 @@ public class Navire {
     public boolean estVainqueur(){
         return score >=10;
     }
-
     /**
      * Ajoute une charge à un emplacement du bateau
-     * @param pos La position de l'emplacement
-     * @param type le type de charge (P pour pirate, C pour canon)
+     * @param charge Charge à ajouter au Navire
      */
-    public void ajouterCharge(int pos, char type){
-        switch (type){
-            case 'P':
-                emplacement.set(pos,new Pirate(pos));
-                break;
-            case 'C':
-                emplacement.set(pos,new Canon(pos));
-                break;
+    public void ajouterCharge(Charge charge){
+        if (charge  instanceof Pirate) {
+            emplacement.add(charge);
+            fireChargeAdded(charge);
+        }
+        else if (charge instanceof Canon){
+            emplacement.add(charge);
+            fireChargeAdded(charge);
         }
     }
-
+    /**
+     * Ajouter un Pirate à la fin de l'arraylist sans spécifier de position
+     */
+    public void ajouterPirate(Pirate pirate){
+        //ajoute un pirate à la fin de l'array list
+        this.emplacement.add(pirate);
+        fireChargeAdded(pirate);
+    }
+    /**
+     * Ajouter un Canon à la fin de l'arraylist sans spécifier de position
+     */
+    public void ajouterCanon(Canon canon){
+        this.emplacement.add(canon);
+        fireChargeAdded(canon);
+    }
     /**
      * ajouter un trésor sur l'emplacement d'un bateau
      * @param pos La position d'ajout du trésor
@@ -125,7 +84,6 @@ public class Navire {
         if(montant>0)
             emplacement.set(pos,new Tresor(montant,pos));
     }
-
     /**
      * Echange la position entre deux charges
      * @param pos1 la premiere position
@@ -137,7 +95,6 @@ public class Navire {
         emplacement.set(pos1,emplacement.get(pos2));
         emplacement.set(pos2,tmp);
     }
-
     /**
      * Determine si l'emplacement est vide ou contient un object
      * @param pos
@@ -146,7 +103,6 @@ public class Navire {
     private boolean isEmplacementEmpty(int pos){
         return emplacement.get(pos) == null;
     }
-
     /**
      * Retourne la charge à l'emplacement
      * @param pos position de l'emplacement
@@ -155,7 +111,6 @@ public class Navire {
     private Charge getEmplacement(int pos){
         return emplacement.get(pos);
     }
-
     /**
      * Vérification si le beateau a encore un pirate et un canon
      * @return true si le navire est bon, false sinon.
@@ -171,7 +126,6 @@ public class Navire {
         }
         return checkCanon&&checkPirate;
     }
-
     /**
      * Verifie si le bateau est pillable
      * @return true si le bateau ets pillable, false si il ne l'est pas
@@ -188,19 +142,19 @@ public class Navire {
             return false;
         return false;
     }
-
     /**
      * Supprime un emplacements du navire (il prend des dégats)
      * @param pos La position à détruire
      * @return true si l'emplacement est détruit, false si il etait vide
      */
-    private boolean supprimerEmplacement(int pos){
-        if(emplacement.get(pos)==null)
-            return false;
-        else {
-            emplacement.remove(pos);
-            return true;
-        }
+    private boolean supprimerChargeAt(int pos){
+    if(emplacement.get(pos)==null)
+        return false;
+    else {
+        emplacement.remove(pos);
+        fireChargeRemoved(this.getEmplacement(pos));
+       }
+       return true;
     }
 
     /**
@@ -213,5 +167,145 @@ public class Navire {
             list.put(i, emplacement.get(i));
         }
         return list;
+    }
+
+    // Listeners
+    public EventListenerList getListeners() {
+        return listeners;
+    }
+
+   //Getters Setters
+    public String getCapitaine() {
+        return capitaine;
+    }
+    public void setCapitaine(String capitaine) {
+        this.capitaine = capitaine;
+    }
+    public ENavireColor getColor() {
+        return color;
+    }
+    public void setColor(ENavireColor color) {
+        this.color = color;
+    }
+    public int getScore() {
+        return score;
+    }
+    public void setScore(int score) {
+        if(score <0)
+            System.out.println("Le score ne peut pas être negatif (DEBUG : implementer une exception");
+        else
+            this.score = score;
+    }
+    public List<Charge> getListEmplacement() {
+        return emplacement;
+    }
+    public Point getCoordonnees() {
+        return coordonnees;
+    }
+    public void setCoordonnees(Point coordonnees) {
+        this.coordonnees = coordonnees;
+    }
+    public void setCoordonnees(int x,int y){
+        this.coordonnees=new Point(x,y);
+    }
+    /**
+     * Donne le nombre de Pirate dans le navire
+     * @return le nombre de pirate dans le navire
+     */
+    public int getNbPirates(){
+        int nb=0;
+        for (Charge c : emplacement){
+            if(c instanceof Pirate)
+                nb++;
+        }
+        return nb;
+    }
+    /**
+     * Donne le nombre de canon dans le navire
+     * @return le nombre de canon dans le navire
+     */
+    public int getNbCanons(){
+        int nb=0;
+        for (Charge c : emplacement){
+            if(c instanceof Canon)
+                nb++;
+        }
+        return nb;
+    }
+
+    //Fire Change in View
+    /*public void fireNbCanonsChanged(int NbCanons, String type){
+        IRepairCanonListener[] listenerList = (IRepairCanonListener[])listeners.getListeners(IRepairCanonListener.class);
+        if (type=="ajout") {
+            for (IRepairCanonListener listener : listenerList) {
+                listener.canonsChanged(new RepairChangeNbCanonEvent(this, getNbCanons()));
+                listener.canonsIncreased(new RepairChangeNbCanonEvent(this, getNbCanons()));
+            }
+        }
+        else if (type=="suppression"){
+            for (IRepairCanonListener listener : listenerList) {
+                listener.canonsChanged(new RepairChangeNbCanonEvent(this, getNbCanons()));
+                listener.canonsDecreased(new RepairChangeNbCanonEvent(this, getNbCanons()));
+            }
+        }
+    }
+    public void fireNbPiratesChanged(int NbPirates, String type){
+        IRepairPirateListener[] listenerList = (IRepairPirateListener[])listeners.getListeners(IRepairPirateListener.class);
+        if (type=="ajout") {
+            for (IRepairPirateListener listener : listenerList) {
+                listener.piratesChanged(new RepairChangeNbPirateEvent(this, getNbPirates()));
+                listener.piratesIncreased(new RepairChangeNbPirateEvent(this, getNbPirates()));
+            }
+        }
+        else if (type=="suppression"){
+            for (IRepairPirateListener listener : listenerList) {
+                listener.piratesChanged(new RepairChangeNbPirateEvent(this, getNbPirates()));
+                listener.piratesDecreased(new RepairChangeNbPirateEvent(this, getNbPirates()));
+            }
+        }
+    }
+*/
+    public void fireEmplacementChanged(Point P){
+        INavirePositionListener[] listenerList = (INavirePositionListener[])listeners.getListeners(INavirePositionListener.class);
+        for (INavirePositionListener listener : listenerList) {
+            listener.positionChanged(new NavirePositionChangedEvent(this, getCoordonnees()));
+        }
+    }
+
+    public void fireNameChanged(String name){
+        INavireNameListener[] listenerList = (INavireNameListener[])listeners.getListeners(INavireNameListener.class);
+        for (INavireNameListener listener : listenerList) {
+            listener.nameChanged(new NavireNameChangedEvent(this, getCapitaine()));
+        }
+    }
+
+    public void fireColorChanged(String color){
+        INavireColorListener[] listenerList = (INavireColorListener[])listeners.getListeners(INavireColorListener.class);
+        for (INavireColorListener listener : listenerList) {
+            listener.colorChanged(new NavireColorChangedEvent(this, getColor()));
+        }
+    }
+
+    public void fireScoreChanged(String color){
+        INavireScoreListener[] listenerList = (INavireScoreListener[])listeners.getListeners(INavireScoreListener.class);
+        for (INavireScoreListener listener : listenerList) {
+            listener.scoreChanged(new NavireScoreChangedEvent(this, getScore()));
+        }
+    }
+
+    public void fireChargeAdded(Charge charge){
+        INavireChargeListener[] listenerList = (INavireChargeListener[])listeners.getListeners(INavireChargeListener.class);
+        for (INavireChargeListener listener : listenerList) {
+            //TODO gérer le traitement de l'ajout d'une charge
+            listener.chargeAdded(new NavireChargeAddedEvent(this, getEmplacement(charge.getPosition())));
+        }
+    }
+
+    public void fireChargeRemoved(Charge charge){
+        INavireChargeListener[] listenerList = (INavireChargeListener[])listeners.getListeners(INavireChargeListener.class);
+        for (INavireChargeListener listener : listenerList) {
+            //TODO gérer le traitement de l'ajout d'une charge
+            listener.chargeRemoved(new NavireChargeRemovedEvent(this, getEmplacement(charge.getPosition())));
+        }
     }
 }
