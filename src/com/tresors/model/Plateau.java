@@ -52,14 +52,15 @@ public class Plateau extends Observable{
                     this.plateau[i][j] = repaireTemp;
                     listDesRepaires.add(repaireTemp);
                 }
-
             }
         }
-        //WTF
-        //Attribution des navires pour chaque joueur
-        //for (Map.Entry<String,ENavireColor> e:listJoueurs.entrySet()) {
-        //    this.listJoueurs.add(new Navire(e.getKey(), e.getValue()));
-        //}
+        /*
+        WTF
+        Attribution des navires pour chaque joueur
+        for (Map.Entry<String,ENavireColor> e:listJoueurs.entrySet()) {
+        this.listJoueurs.add(new Navire(e.getKey(), e.getValue()));
+        }
+        */
     }
 
     /**

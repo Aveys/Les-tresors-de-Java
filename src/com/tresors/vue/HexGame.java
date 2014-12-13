@@ -15,12 +15,13 @@ public class HexGame extends JPanel{
     public void paintComponent(Graphics g)
     {
         Graphics2D g2 = (Graphics2D)g;
+        g2.setBackground(Color.darkGray);
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g.setFont(new Font("TimesRoman", Font.PLAIN, 20));
         super.paintComponent(g2);
         //draw grid
-        for (int i=0;i<BSIZE;i++) {
-            for (int j=0;j<5;j++) {
+        for (int i=0;i<9;i++) {
+            for (int j=0;j<BSIZE;j++) {
                 HexMech.drawHex(i,j,g2);
             }
         }
@@ -37,7 +38,7 @@ public class HexGame extends JPanel{
     }
     public static void main(String[] args){
         JFrame frame = new JFrame();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         Container content = frame.getContentPane();
         HexMech.setHeight(100);
         HexMech.setBorders(5);
