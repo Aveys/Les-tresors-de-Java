@@ -11,7 +11,7 @@ import javax.swing.*;
 /**
  * Created by Nicolas Sagon on 11/12/2014.
  */
-public class ControllerMenu {
+public class ControllerMenu extends Controller{
     /*The Repair View, initialized to NULL*/
     public JPanel view = null;
     /*The Repair Model, initialized to NULL*/
