@@ -62,14 +62,12 @@ public class HexMech {
     }
 
     public static void drawHex(int i, int j, Graphics2D g2) {
-        int x = i * (s+t);
-        int y = j * h + (i%2) * h/2;
+        int x = j * (h);
+        int y = i * h - (s*j);
         Polygon poly = hex(x,y);
-        g2.drawString(j+","+i,x+BORDERS+s,y+BORDERS+h/2);
-        //g2.setColor(hexgame.COLOURCELL);
-        //g2.fillPolygon(hexmech.hex(x,y));
-        //g2.fillPolygon(poly);
+        g2.setColor(Color.BLUE);
         g2.setColor(Color.ORANGE);
+        g2.drawString(i+","+j,x+BORDERS+s,y+BORDERS+h/2);
         g2.drawPolygon(poly);
     }
 }
