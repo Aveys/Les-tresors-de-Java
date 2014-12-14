@@ -15,6 +15,8 @@ public class LaunchVueMenu {
 
     public static void main(String[] args) {
 
+        try{UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");}
+        catch(Exception e){}
 
         Plateau plateau = new Plateau();
         ControllerMenu controllerMenu = new ControllerMenu(plateau);
