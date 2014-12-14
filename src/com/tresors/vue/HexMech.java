@@ -6,7 +6,6 @@ import java.awt.*;
  * Created by arthurveys on 09/12/14.
  */
 public class HexMech {
-    public final static boolean orFLAT= true;
     public static boolean XYVertex=false;	//true: x,y are the co-ords of the first vertex.
     //false: x,y are the co-ords of the top left rect. co-ord.    ZDZ
 
@@ -17,29 +16,27 @@ public class HexMech {
     private static int r=0;	// radius of inscribed circle (centre to middle of each side). r= h/2
     private static int h=0;	// height. Distance between centres of two adjacent hexes. Distance between two opposite sides in a hex.
 
-    public static void setXYasVertex(boolean b) {
-        XYVertex=b;
-    }
     public static void setBorders(int b){
         BORDERS=b;
     }
 
-    /** This functions takes the Side length in pixels and uses that as the basic dimension of the hex.
-     It calculates all other needed constants from this dimension.
+    /**
+     * Calcul des données necessaire au dessin des hexagons
+     * @param height la taille des hexagons
      */
-    public static void setSide(int side) {
-        s=side;
-        t =  (int) (s / 2);			//t = s sin(30) = (int) CalculateH(s);
-        r =  (int) (s * 0.8660254037844);	//r = s cos(30) = (int) CalculateR(s);
-        h=2*r;
-    }
     public static void setHeight(int height) {
-        h = height;			// h = basic dimension: height (distance between two adj centresr aka size)
+        h = height;			// h = basic dimension: height (distance between two adj center aka size)
         r = h/2;			// r = radius of inscribed circle
         s = (int) (h / 1.73205);	// s = (h/2)/cos(30)= (h/2) / (sqrt(3)/2) = h / sqrt(3)
         t = (int) (r / 1.73205);	// t = (h/2) tan30 = (h/2) 1/sqrt(3) = h / (2 sqrt(3)) = r / sqrt(3)
     }
 
+    /**
+     * Crée un hexagon (Collection de point d'un objet shape)
+     * @param x0 Coordonnées x du centre
+     * @param y0 Coordonnées y du centre
+     * @return un objet hexagon
+     */
     public static Polygon hex (int x0, int y0) {
 
         int y = y0 + BORDERS;
@@ -51,7 +48,6 @@ public class HexMech {
 
         int[] cx,cy;
 
-        //I think that this XYvertex stuff is taken care of in the int x line above. Why is it here twice?
         if (XYVertex)
             cx = new int[] {x,x+s,x+s+t,x+s,x,x-t};  //this is for the top left vertex being at x,y. Which means that some of the hex is cutoff.
         else
@@ -61,36 +57,34 @@ public class HexMech {
         return new Polygon(cx,cy,6);
     }
 
-    public static void drawHex(int i, int j, Graphics2D g2) {
-        int x = (int) (h + (j*(0.75*(s*2))));
-        int y = (i * h - ((h/2*j)));
-        Polygon poly = hex(x,y);
-        g2.setColor(Color.BLUE);
-        g2.setColor(Color.ORANGE);
-        g2.drawString(i+","+j,x+BORDERS+s,y+BORDERS+h/2);
-        g2.drawPolygon(poly);
-    }
+    /**
+     * Dessine un Hexagon avec une position i,j dans le tableau de stockage (coordonnées axiale).
+     * @param i La position i dans le tableau (ligne)
+     * @param j la position J dans le tableau (colonne)
+     * @param type Le type de la case (M,P,R)
+     * @param g2 L'objet graphique de dessin
+     */
     public static void drawHex(int i,int j,char type,Graphics2D g2){
-        int x = (int) (h + (j*(0.75*(s*2))));
-        int y = (i * h - ((h/2*j)));
-        Polygon poly = hex(x,y);
+        int y = (i * h - ((h/2*j))); //complexe (en gros : On prend la hauteur de la colonne 0 (la plus basse) et on soustrait la taille d'un hexagon * le nombre de colonnes
+        int x = (int) (h + (j*(0.75*(s*2))));// trés complexe (cf redblobgames)
+        Polygon poly = hex(x,y);//on dessine l'hexagon avec les coordonéees calculées
         switch(type){
             case 'M':
-                g2.setColor(Color.BLUE);
-                g2.drawPolygon(poly);
-                g2.fillPolygon(poly);
+                g2.setColor(Color.BLUE);//bleu pour la mer
+                g2.drawPolygon(poly);//on dessine l'hexagon
+                g2.fillPolygon(poly);//on le rempli
                 break;
             case 'P':
-                g2.setColor(Color.LIGHT_GRAY);
+                g2.setColor(Color.LIGHT_GRAY);// gris pour port
                 g2.drawPolygon(poly);
                 g2.fillPolygon(poly);
                 break;
             case 'R':
-                g2.setColor(Color.ORANGE);
+                g2.setColor(Color.ORANGE);//Orange (clair) pour le repaire
                 g2.drawPolygon(poly);
                 g2.fillPolygon(poly);
         }
-        g2.setColor(Color.WHITE);
-        g2.drawString(type + ": " + i + "," + j, x + BORDERS + s / 2, y + BORDERS + h / 2);
+        //g2.setColor(Color.WHITE);//Texte en blanc DEBUG
+        //g2.drawString(type + ": " + i + "," + j, x + BORDERS + s / 2, y + BORDERS + h / 2);// STRING DEBUG
     }
 }
