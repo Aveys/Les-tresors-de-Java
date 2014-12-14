@@ -46,6 +46,7 @@ public class HexGame extends JPanel{
     }
 
     // ceci est un main
+    // sans dec'!
     public static void main(String[] args){
 
         Plateau pl = new Plateau(); //j'ai besoin de la grille de plateau

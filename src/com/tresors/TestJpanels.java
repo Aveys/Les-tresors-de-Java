@@ -1,5 +1,7 @@
 package com.tresors;
 
+import com.tresors.model.Plateau;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,6 +23,7 @@ public class TestJpanels {
         try{UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");}
         catch(Exception e){}
 
+        Plateau model = new Plateau();
         final JFrame frame = new JFrame();
         final JPanel panel1 = new JPanel();
         final JPanel panel2 = new JPanel();
@@ -56,7 +59,6 @@ public class TestJpanels {
         panel2.add(button2);
 
         mainPanel.add(panel1);
-
 
         frame.add(mainPanel);
 

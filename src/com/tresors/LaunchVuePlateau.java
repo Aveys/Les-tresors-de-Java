@@ -1,6 +1,6 @@
 package com.tresors;
 
-import com.tresors.vue.VuePlateau;
+import com.tresors.controller.ControllerPrincipal;
 
 import javax.swing.*;
 
@@ -15,6 +15,7 @@ public class LaunchVuePlateau {
         }
         catch(Exception e){
         }
-        VuePlateau test = new VuePlateau();
+        ControllerPrincipal application = new ControllerPrincipal();
+        application.loadViewPlateau();
     }
 }
