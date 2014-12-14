@@ -62,12 +62,35 @@ public class HexMech {
     }
 
     public static void drawHex(int i, int j, Graphics2D g2) {
-        int x = j * (h);
-        int y = i * h - (s*j);
+        int x = (int) (h + (j*(0.75*(s*2))));
+        int y = (i * h - ((h/2*j)));
         Polygon poly = hex(x,y);
         g2.setColor(Color.BLUE);
         g2.setColor(Color.ORANGE);
         g2.drawString(i+","+j,x+BORDERS+s,y+BORDERS+h/2);
         g2.drawPolygon(poly);
+    }
+    public static void drawHex(int i,int j,char type,Graphics2D g2){
+        int x = (int) (h + (j*(0.75*(s*2))));
+        int y = (i * h - ((h/2*j)));
+        Polygon poly = hex(x,y);
+        g2.setColor(Color.black);
+        g2.drawString(type + ": " + i + "," + j, x + BORDERS + s / 2, y + BORDERS + h / 2);
+       switch(type){
+           case 'M':
+               g2.setColor(Color.BLUE);
+               g2.drawPolygon(poly);
+               g2.fillPolygon(poly);
+               break;
+           case 'P':
+               g2.setColor(Color.LIGHT_GRAY);
+               g2.drawPolygon(poly);
+               g2.fillPolygon(poly);
+               break;
+           case 'R':
+               g2.setColor(Color.ORANGE);
+               g2.drawPolygon(poly);
+               g2.fillPolygon(poly);
+       }
     }
 }

@@ -223,13 +223,13 @@ public class Plateau extends Observable{
      */
     public char getTypeCase(int x,int y){
         if (x<9 && y<9){
-        Case tmp=plateau[x][y];
-        if(tmp instanceof Mer)
-            return 'M';
-        else if(tmp instanceof Port)
-            return 'P';
-        else if (tmp instanceof Repaire)
-            return 'R';
+            Case tmp=plateau[x][y];
+            if(tmp instanceof Mer)
+                return 'M';
+            else if(tmp instanceof Port)
+                return 'P';
+            else if (tmp instanceof Repaire)
+                return 'R';
         }
 
         return '0';
@@ -261,11 +261,11 @@ public class Plateau extends Observable{
         }
         return true;
     }
-    //TODO : Si veux une methode de pathfinding mais les chemin possible sont deja fait
 
     //Getters Setters
     public ArrayList<Navire> getListJoueurs() {
         return listJoueurs;
     }
+    public Case[][] getPlateau(){return plateau;}
 
 }
