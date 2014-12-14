@@ -5,9 +5,7 @@ import com.tresors.controller.HexToolbox;
 import java.awt.*;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.Observable;
-import java.util.TreeMap;
 
 
 public class Plateau extends Observable{
@@ -25,8 +23,7 @@ public class Plateau extends Observable{
     ArrayList<Repaire> listDesRepaires = new ArrayList<Repaire>();//liste des repaires
 
     /**
-     * Constructor
-     * @param listJoueurs ArrayList de Navires
+     * Constructor by default
      */
     public Plateau() {
         initRepaire();
@@ -55,14 +52,15 @@ public class Plateau extends Observable{
                     this.plateau[i][j] = repaireTemp;
                     listDesRepaires.add(repaireTemp);
                 }
-
             }
         }
-        //WTF
-        //Attribution des navires pour chaque joueur
-        //for (Map.Entry<String,ENavireColor> e:listJoueurs.entrySet()) {
-        //    this.listJoueurs.add(new Navire(e.getKey(), e.getValue()));
-        //}
+        /*
+        WTF
+        Attribution des navires pour chaque joueur
+        for (Map.Entry<String,ENavireColor> e:listJoueurs.entrySet()) {
+        this.listJoueurs.add(new Navire(e.getKey(), e.getValue()));
+        }
+        */
     }
 
     /**
@@ -225,13 +223,13 @@ public class Plateau extends Observable{
      */
     public char getTypeCase(int x,int y){
         if (x<9 && y<9){
-        Case tmp=plateau[x][y];
-        if(tmp instanceof Mer)
-            return 'M';
-        else if(tmp instanceof Port)
-            return 'P';
-        else if (tmp instanceof Repaire)
-            return 'R';
+            Case tmp=plateau[x][y];
+            if(tmp instanceof Mer)
+                return 'M';
+            else if(tmp instanceof Port)
+                return 'P';
+            else if (tmp instanceof Repaire)
+                return 'R';
         }
 
         return '0';
@@ -263,11 +261,11 @@ public class Plateau extends Observable{
         }
         return true;
     }
-    //TODO : Si veux une methode de pathfinding mais les chemin possible sont deja fait
 
     //Getters Setters
     public ArrayList<Navire> getListJoueurs() {
         return listJoueurs;
     }
+    public Case[][] getPlateau(){return plateau;}
 
 }

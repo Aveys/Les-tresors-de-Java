@@ -1,6 +1,5 @@
 package com.tresors.controller;
 
-import com.tresors.model.Case;
 import org.junit.*;
 
 import java.awt.*;

@@ -34,6 +34,12 @@ public class VueMenu extends JPanel{
         nameJoueur.setPreferredSize(new Dimension(150, 30));
 
         commencerPartie = new JButton("Commencer la partie");
+        commencerPartie.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                getController().notifyCallBoardView();
+            }
+        });
 
         pageStart = new JPanel();
         pageStart.setLayout(new FlowLayout());
