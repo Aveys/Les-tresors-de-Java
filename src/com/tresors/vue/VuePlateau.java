@@ -1,5 +1,6 @@
 package com.tresors.vue;
 
+import com.tresors.HexGame;
 import com.tresors.controller.Controller;
 import com.tresors.model.ENavireColor;
 
@@ -15,7 +16,7 @@ public class VuePlateau extends JPanel {
     private JPanel mainPanel;
     private JPanel panelScore;
     private JLabel labelJoueur1;
-    private PlateauPanel plateauPanel;
+    private JPanel plateauPanel;
     private BateauPanel bateauPanel;
     private JButton buttonAction1;
     private JButton buttonAction2;
@@ -45,7 +46,7 @@ public class VuePlateau extends JPanel {
         mainPanel.add(panelScore, constraintsPanelScore);
 
         //Panel Plateau
-        plateauPanel = new PlateauPanel();
+        plateauPanel = new HexGame(getController().getModel().getPlateau());
         GridBagConstraints constraintsPanelPlateau = new GridBagConstraints();
         constraintsPanelPlateau.fill = GridBagConstraints.BOTH;
         constraintsPanelPlateau.weighty = 30;

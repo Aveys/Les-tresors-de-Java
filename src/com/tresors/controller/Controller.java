@@ -12,4 +12,5 @@ public abstract class Controller {
     public abstract void initController(Plateau model, FramePrincipal f, ControllerPrincipal controllerPrincipal);
     public abstract void notifyAddJoueur(String nameJoueur, ENavireColor couleurJoueur);
     public abstract void notifyCommencerPartie();
+    public abstract Plateau getModel();
 }

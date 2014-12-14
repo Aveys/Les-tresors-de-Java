@@ -18,6 +18,7 @@ public class ControllerPlateau extends Controller {
     public JPanel view = null;
     /*The Repair Model, initialized to NULL*/
     private Plateau model = null;
+
     private VuePlateau vuePlateau = null;
     private ControllerPrincipal controllerPrincipal;
     private FramePrincipal framePrincipal;
@@ -51,4 +52,10 @@ public class ControllerPlateau extends Controller {
         this.framePrincipal = f;
         this.controllerPrincipal = controllerPrincipal;
     }
+
+    @Override
+    public Plateau getModel() {
+        return model;
+    }
+
 }

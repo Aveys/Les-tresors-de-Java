@@ -23,10 +23,10 @@ public class ControllerPrincipal {
 
     public void loadViewPlateau(){
         this.model = new Plateau();
-        this.activeController = new ControllerMenu(model, frame, this);
+        this.activeController = new ControllerPlateau(model, frame, this);
     }
 
     public void notifyCommencerPartie(){
-        this.activeController = new ControllerHexGame(this.model, this.frame, this);
+        this.activeController = new ControllerPlateau(this.model, this.frame, this);
     }
 }

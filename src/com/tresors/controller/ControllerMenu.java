@@ -45,6 +45,11 @@ public class ControllerMenu extends Controller {
     }
 
     @Override
+    public Plateau getModel() {
+        return model;
+    }
+
+    @Override
     public void initController(Plateau model, FramePrincipal frame, ControllerPrincipal controller) {
         this.model = model;
         this.framePrincipal = frame;
