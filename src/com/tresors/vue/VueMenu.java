@@ -80,6 +80,13 @@ public class VueMenu extends JPanel{
             }
         });
 
+        commencerPartie.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                getController().notifyCommencerPartie();
+            }
+        });
+
     }
 
     public ControllerMenu getController() {

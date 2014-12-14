@@ -1,6 +1,8 @@
 package com.tresors;
 
+import com.tresors.controller.Controller;
 import com.tresors.controller.ControllerMenu;
+import com.tresors.controller.ControllerPrincipal;
 import com.tresors.model.Plateau;
 import com.tresors.vue.VueMenu;
 
@@ -18,7 +20,7 @@ public class LaunchVueMenu {
         try{UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");}
         catch(Exception e){}
 
-        Plateau plateau = new Plateau();
+        /*Plateau plateau = new Plateau();
         ControllerMenu controllerMenu = new ControllerMenu(plateau);
         JFrame test = new JFrame();
 
@@ -26,7 +28,10 @@ public class LaunchVueMenu {
         test.add(vueMenu);
         Toolkit tk = Toolkit.getDefaultToolkit();
         test.setSize((int) tk.getScreenSize().getWidth(), (int) tk.getScreenSize().getHeight());
-        test.setVisible(true);
+        test.setVisible(true);*/
+
+        ControllerPrincipal test = new ControllerPrincipal();
+        test.loadViewMenu();
 
 
     }
