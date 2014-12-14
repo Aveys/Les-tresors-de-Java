@@ -74,23 +74,23 @@ public class HexMech {
         int x = (int) (h + (j*(0.75*(s*2))));
         int y = (i * h - ((h/2*j)));
         Polygon poly = hex(x,y);
-        g2.setColor(Color.black);
+        switch(type){
+            case 'M':
+                g2.setColor(Color.BLUE);
+                g2.drawPolygon(poly);
+                g2.fillPolygon(poly);
+                break;
+            case 'P':
+                g2.setColor(Color.LIGHT_GRAY);
+                g2.drawPolygon(poly);
+                g2.fillPolygon(poly);
+                break;
+            case 'R':
+                g2.setColor(Color.ORANGE);
+                g2.drawPolygon(poly);
+                g2.fillPolygon(poly);
+        }
+        g2.setColor(Color.WHITE);
         g2.drawString(type + ": " + i + "," + j, x + BORDERS + s / 2, y + BORDERS + h / 2);
-       switch(type){
-           case 'M':
-               g2.setColor(Color.BLUE);
-               g2.drawPolygon(poly);
-               g2.fillPolygon(poly);
-               break;
-           case 'P':
-               g2.setColor(Color.LIGHT_GRAY);
-               g2.drawPolygon(poly);
-               g2.fillPolygon(poly);
-               break;
-           case 'R':
-               g2.setColor(Color.ORANGE);
-               g2.drawPolygon(poly);
-               g2.fillPolygon(poly);
-       }
     }
 }

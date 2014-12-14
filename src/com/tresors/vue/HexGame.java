@@ -10,7 +10,6 @@ import java.awt.*;
  * Created by arthurveys on 09/12/14.
  */
 public class HexGame extends JPanel{
-    final static int EMPTY = 0;
     final static int BSIZE = 10; //board size.Z
     final static int HEXSIZE = 400;	//hex size in pixels
     final static int BORDERS = 5;
