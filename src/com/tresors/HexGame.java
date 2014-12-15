@@ -46,9 +46,6 @@ public class HexGame extends JPanel{
                     HexMech.drawHex(i, j, Case.getTypeCase(tmp), g2);// Utilisation de la fonction de dessin de debug (texte) )
             }
         }
-
-        //inclure les Navires
-        drawCircle(g2, 10, 10, 5); // center (30,30) r=20
     }
 
     public void drawCircle(Graphics cg, int xCenter, int yCenter, int r) {

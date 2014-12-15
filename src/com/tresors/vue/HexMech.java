@@ -70,7 +70,7 @@ public class HexMech {
         int y = (i * h - ((h/2*j))); //complexe (en gros : On prend la hauteur de la colonne 0 (la plus basse) et on soustrait la taille d'un hexagon * le nombre de colonnes
         int x = (int) (h + (j*(0.75*(s*2))));// trés complexe (cf redblobgames)
         Polygon poly = hex(x,y);//on dessine l'hexagon avec les coordonéees calculées
-        g2.setColor(Color.BLACK);
+        g2.setColor(Color.DARK_GRAY);
         g2.setStroke(new BasicStroke(1.5f));
         g2.drawPolygon(poly);
         switch(type){
