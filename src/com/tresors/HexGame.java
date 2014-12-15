@@ -20,9 +20,11 @@ public class HexGame extends JPanel{
     /**
      * Crée un panel de'hexagons
      * @param plateau Le tableau de Case
+     * @param hexSize La taille des hexagons
      */
-    public HexGame(Case[][] plateau) {
+    public HexGame(Case[][] plateau,int hexSize) {
         this.plateau=plateau;
+        HexMech.setHeight(hexSize);
     }
 
     /**
