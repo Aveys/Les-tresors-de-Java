@@ -9,7 +9,7 @@ public class HexMech {
     public static boolean XYVertex=false;	//true: x,y are the co-ords of the first vertex.
     //false: x,y are the co-ords of the top left rect. co-ord.    ZDZ
 
-    private static int BORDERS=20;	//default number of pixels for the border.
+    private static int BORDERS=40;	//default number of pixels for the border.
 
     private static int s=0;	// length of one side
     private static int t=0;	// short side of 30o triangle outside of each hex
@@ -68,6 +68,8 @@ public class HexMech {
         int y = (i * h - ((h/2*j))); //complexe (en gros : On prend la hauteur de la colonne 0 (la plus basse) et on soustrait la taille d'un hexagon * le nombre de colonnes
         int x = (int) (h + (j*(0.75*(s*2))));// trés complexe (cf redblobgames)
         Polygon poly = hex(x,y);//on dessine l'hexagon avec les coordonéees calculées
+       // g2.setColor(Color.BLACK);
+       // g2.drawPolygon(poly);
         switch(type){
             case 'M':
                 g2.setColor(Color.BLUE);//bleu pour la mer
