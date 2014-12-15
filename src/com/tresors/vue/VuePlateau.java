@@ -46,12 +46,13 @@ public class VuePlateau extends JPanel {
         mainPanel.add(panelScore, constraintsPanelScore);
 
         //Panel Plateau
-        plateauPanel = new HexGame(getController().getModel().getPlateau());
+        plateauPanel = new HexGame(getController().getModel().getPlateau(), 100);
         GridBagConstraints constraintsPanelPlateau = new GridBagConstraints();
         constraintsPanelPlateau.fill = GridBagConstraints.BOTH;
         constraintsPanelPlateau.weighty = 30;
         constraintsPanelPlateau.weightx = 1;
         constraintsPanelPlateau.ipadx = 920;
+        constraintsPanelPlateau.ipady = 620;
         constraintsPanelPlateau.gridx = 0;
         constraintsPanelPlateau.gridy = 1;
         constraintsPanelPlateau.anchor = GridBagConstraints.PAGE_START;

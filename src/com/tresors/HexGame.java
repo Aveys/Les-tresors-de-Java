@@ -66,7 +66,7 @@ public class HexGame extends JPanel{
         HexMech.setHeight(100);
         HexMech.setBorders(5);
 
-        content.add(new HexGame(pl.getPlateau()));//On ajoute le panel d'hexagons
+        content.add(new HexGame(pl.getPlateau(),100));//On ajoute le panel d'hexagons
         frame.setSize((int)(SCRSIZE/1.23), SCRSIZE);// taille de la frame (A revoir)
         frame.setResizable(true);
         frame.setLocationRelativeTo( null );

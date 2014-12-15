@@ -9,7 +9,7 @@ public class HexMech {
     public static boolean XYVertex=false;	//true: x,y are the co-ords of the first vertex.
     //false: x,y are the co-ords of the top left rect. co-ord.    ZDZ
 
-    private static int BORDERS=100;	//default number of pixels for the border.
+    private static int BORDERS=20;	//default number of pixels for the border.
 
     private static int s=0;	// length of one side
     private static int t=0;	// short side of 30o triangle outside of each hex
@@ -40,7 +40,7 @@ public class HexMech {
     public static Polygon hex (int x0, int y0) {
 
         int y = y0 + BORDERS;
-        int x = x0 + BORDERS;
+        int x = x0 - BORDERS;
         if (s == 0  || h == 0) {
             System.out.println("ERROR: size of hex has not been set");
             return new Polygon();
