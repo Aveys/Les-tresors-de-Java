@@ -1,13 +1,8 @@
 package com.tresors;
 
-import com.tresors.controller.Controller;
-import com.tresors.controller.ControllerMenu;
 import com.tresors.controller.ControllerPrincipal;
-import com.tresors.model.Plateau;
-import com.tresors.vue.VueMenu;
 
 import javax.swing.*;
-import java.awt.*;
 
 /**
  * Created by Paul on 25/11/2014.
@@ -32,8 +27,8 @@ public class LaunchVueMenu {
         test.setSize((int) tk.getScreenSize().getWidth(), (int) tk.getScreenSize().getHeight());
         test.setVisible(true);*/
 
-        ControllerPrincipal test = new ControllerPrincipal();
-        test.loadViewMenu();
+        ControllerPrincipal application = new ControllerPrincipal();
+        application.loadViewMenu();
 
 
     }

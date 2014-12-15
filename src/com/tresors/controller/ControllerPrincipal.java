@@ -2,9 +2,6 @@ package com.tresors.controller;
 
 import com.tresors.model.Plateau;
 import com.tresors.vue.FramePrincipal;
-import com.tresors.vue.HexMech;
-
-import javax.swing.*;
 
 /**
  * Controller Principal qui appelle les autres controllers et est étendus par les autres controllers
@@ -13,24 +10,23 @@ import javax.swing.*;
 public class ControllerPrincipal {
     private Controller activeController;
     private FramePrincipal frame;
-    private ControllerMenu controllerMenu;
-    private ControllerHexGame controllerHexGame;
-    private Plateau p;
+    private Plateau model;
 
     public ControllerPrincipal(){
-
         frame = new FramePrincipal();
     }
 
     public void loadViewMenu(){
+        this.model = new Plateau();
+        this.activeController = new ControllerMenu(model, frame, this);
+    }
 
-        this.p = new Plateau();
-        controllerMenu = new ControllerMenu(p, frame, this);
+    public void loadViewPlateau(){
+        this.model = new Plateau();
+        this.activeController = new ControllerPlateau(model, frame, this);
     }
 
     public void notifyCommencerPartie(){
-
-        controllerHexGame = new ControllerHexGame(this.p, this.frame, this);
-
+        this.activeController = new ControllerPlateau(this.model, this.frame, this);
     }
 }

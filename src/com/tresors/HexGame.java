@@ -1,7 +1,8 @@
-package com.tresors.vue;
+package com.tresors;
 
 import com.tresors.model.Case;
 import com.tresors.model.Plateau;
+import com.tresors.vue.HexMech;
 
 import javax.swing.*;
 import java.awt.*;
@@ -40,12 +41,20 @@ public class HexGame extends JPanel{
             for (int j=0;j<9;j++) {
                 Case tmp = plateau[i][j];// on récupére la case du plateau
                 if(tmp !=null)//Si elle est null, on ne la dessine pas
-                    HexMech.drawHex(i,j,Case.getTypeCase(tmp),g2);// Utilisation de la fonction de dessin de debug (texte) )
+                    HexMech.drawHex(i, j, Case.getTypeCase(tmp), g2);// Utilisation de la fonction de dessin de debug (texte) )
             }
         }
+
+        //inclure les Navires
+        drawCircle(g2, 10, 10, 5); // center (30,30) r=20
     }
 
+    public void drawCircle(Graphics cg, int xCenter, int yCenter, int r) {
+        cg.fillOval(xCenter-r, yCenter-r, 2*r, 2*r);
+    }//end drawCircle
+
     // ceci est un main
+    // sans dec'!
     public static void main(String[] args){
 
         Plateau pl = new Plateau(); //j'ai besoin de la grille de plateau

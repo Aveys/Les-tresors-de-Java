@@ -1,5 +1,6 @@
 package com.tresors.vue;
 
+import com.tresors.controller.Controller;
 import com.tresors.controller.ControllerMenu;
 import com.tresors.model.ENavireColor;
 
@@ -21,11 +22,11 @@ public class VueMenu extends JPanel{
     JPanel listJoueur;
     JPanel pageEnd;
     JButton commencerPartie;
-    ControllerMenu controller;
+    private Controller controller = null;
 
-    public VueMenu(ControllerMenu controller) {
+    public VueMenu(Controller controllerMenu) {
 
-        this.controller = controller;
+        this.controller = controllerMenu;
         this.setLayout(new BorderLayout());
         labelNbjoueur = new JLabel(nbJoueur + " joueur");
         buttonAddJoueur = new JButton("Ajouter un joueur");
@@ -34,12 +35,6 @@ public class VueMenu extends JPanel{
         nameJoueur.setPreferredSize(new Dimension(150, 30));
 
         commencerPartie = new JButton("Commencer la partie");
-        commencerPartie.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                getController().notifyCallBoardView();
-            }
-        });
 
         pageStart = new JPanel();
         pageStart.setLayout(new FlowLayout());
@@ -66,15 +61,14 @@ public class VueMenu extends JPanel{
                 ENavireColor couleurJoueur = getCouleur();
                 JLabel labelJoueurAdd = new JLabel(nameJoueur + ", Couleur : " + couleurJoueur.getStringCouleur());
                 setNbJoueur(getNbJoueur() + 1);
-                if (nbJoueur > 1){
+                if (nbJoueur > 1) {
                     getLabelNbjoueur().setText(getNbJoueur() + " joueurs");
-                }
-                else {
+                } else {
                     getLabelNbjoueur().setText(getNbJoueur() + " joueur");
                 }
                 addJoueur(labelJoueurAdd);
                 getController().notifyAddJoueur(nameJoueur, couleurJoueur);
-                if(getNbJoueur() == 6) {
+                if (getNbJoueur() == 6) {
                     getButtonAddJoueur().setEnabled(false);
                 }
             }
@@ -89,7 +83,7 @@ public class VueMenu extends JPanel{
 
     }
 
-    public ControllerMenu getController() {
+    public final Controller getController() {
         return controller;
     }
 
