@@ -51,7 +51,7 @@ public class VuePlateau extends JPanel {
         constraintsPanelPlateau.fill = GridBagConstraints.BOTH;
         constraintsPanelPlateau.weighty = 30;
         constraintsPanelPlateau.weightx = 1;
-        constraintsPanelPlateau.ipadx = 920;
+        constraintsPanelPlateau.ipadx = 1220;
         constraintsPanelPlateau.ipady = 620;
         constraintsPanelPlateau.gridx = 0;
         constraintsPanelPlateau.gridy = 1;
