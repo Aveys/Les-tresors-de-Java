@@ -87,4 +87,11 @@ public class HexMech {
         //g2.setColor(Color.WHITE);//Texte en blanc DEBUG
         //g2.drawString(type + ": " + i + "," + j, x + BORDERS + s / 2, y + BORDERS + h / 2);// STRING DEBUG
     }
+    public static void drawHex(int i,int j,Graphics2D g2,Color color){
+        int y = (i * h - ((h/2*j))); //complexe (en gros : On prend la hauteur de la colonne 0 (la plus basse) et on soustrait la taille d'un hexagon * le nombre de colonnes
+        int x = (int) (h + (j*(0.75*(s*2))));// trés complexe (cf redblobgames)
+        Polygon poly = hex(x,y);
+        g2.setColor(color);
+        g2.drawPolygon(poly);
+    }
 }
