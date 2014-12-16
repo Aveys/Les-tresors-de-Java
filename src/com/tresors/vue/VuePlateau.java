@@ -20,6 +20,7 @@ public class VuePlateau extends JPanel {
     private BateauPanel bateauPanel;
     private JButton buttonAction1;
     private JButton buttonAction2;
+    private JButton buttonAction3;
     private JLabel labelAction;
     private JButton buttonPassTour;
     private int nbTour = 0;
@@ -90,6 +91,16 @@ public class VuePlateau extends JPanel {
         constraintsButtonAction2.insets = new Insets(60, 0, 0, 0);
         constraintsButtonAction2.anchor = GridBagConstraints.PAGE_START;
 
+        buttonAction3 = new JButton("Se deplacer");
+        GridBagConstraints constraintsButtonAction3= new GridBagConstraints();
+        constraintsButtonAction3.fill = GridBagConstraints.HORIZONTAL;
+        constraintsButtonAction3.weighty = 20;
+        constraintsButtonAction3.weightx = 0.3;
+        constraintsButtonAction3.gridx = 1;
+        constraintsButtonAction3.gridy = 1;
+        constraintsButtonAction3.insets = new Insets(90, 0, 0, 0);
+        constraintsButtonAction3.anchor = GridBagConstraints.PAGE_START;
+
         buttonPassTour = new JButton("Passer le tour");
         GridBagConstraints constraintsButtonPassTour = new GridBagConstraints();
         constraintsButtonPassTour.fill = GridBagConstraints.HORIZONTAL;
@@ -97,7 +108,7 @@ public class VuePlateau extends JPanel {
         constraintsButtonPassTour.weightx = 0.3;
         constraintsButtonPassTour.gridx = 1;
         constraintsButtonPassTour.gridy = 1;
-        constraintsButtonPassTour.insets = new Insets(90, 0, 0, 0);
+        constraintsButtonPassTour.insets = new Insets(120, 0, 0, 0);
         constraintsButtonPassTour.anchor = GridBagConstraints.PAGE_START;
 
         buttonPassTour.addActionListener(new ActionListener() {
@@ -141,6 +152,7 @@ public class VuePlateau extends JPanel {
         mainPanel.add(labelAction, constraintsLabelAction);
         mainPanel.add(buttonAction1, constraintsButtonAction1);
         mainPanel.add(buttonAction2, constraintsButtonAction2);
+        mainPanel.add(buttonAction3, constraintsButtonAction3);
         mainPanel.add(buttonPassTour, constraintsButtonPassTour);
         mainPanel.add(bateauPanel, constraintsBateauPanel);
 
