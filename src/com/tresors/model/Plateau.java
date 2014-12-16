@@ -141,15 +141,11 @@ public class Plateau extends Observable{
 
 
     public Set<Point> deplacementPossible(Point p, int nbDePirate){
-
-
         if(nbDePirate>0){
             Set<Point> listPoint=new HashSet<Point>();
             Set<Point> listTemp= new HashSet<Point>();
             listTemp.add(p);
             for (int i = 0; i <nbDePirate ; i++) {
-
-
 
                 for (Point pt : listTemp) {
                     listPoint.addAll(HexToolbox.getVoisins(pt));
@@ -167,7 +163,39 @@ public class Plateau extends Observable{
                 listTemp.clear();
                 listTemp.addAll(listPoint);
 
+            }
+            listPoint.remove(p);
+            return listPoint;
 
+        }
+        else
+            return null;
+    }
+
+    public Set<Point> deplacementPossible(Navire n){
+        Point p = new Point(n.getCoordonnees());
+        int nbDePirate= n.getNbPirates();
+        if(nbDePirate>0){
+            Set<Point> listPoint=new HashSet<Point>();
+            Set<Point> listTemp= new HashSet<Point>();
+            listTemp.add(p);
+            for (int i = 0; i <nbDePirate ; i++) {
+
+                for (Point pt : listTemp) {
+                    listPoint.addAll(HexToolbox.getVoisins(pt));
+                }
+
+                listTemp.addAll(listPoint);
+
+                for (Point pt: listTemp){
+                    if(!HexToolbox.estNavigable(this.plateau,pt)){
+                        listPoint.remove(pt);
+
+                    }
+                }
+
+                listTemp.clear();
+                listTemp.addAll(listPoint);
 
             }
             listPoint.remove(p);
