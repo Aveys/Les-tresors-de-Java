@@ -31,7 +31,7 @@ public class Plateau extends Observable{
         initRepaire();
         int grilleRef[][] = {
                 {1,1,1,1,1,1,1,1,1},  //1
-                {2,2,5,1,1,1,1,1,1},  //2//erreur
+                {2,2,1,1,1,1,1,1,1},  //2
                 {3,3,3,3,4,1,1,1,1},  //3
                 {3,3,3,3,3,3,4,1,1},  //4
                 {4,1,3,3,3,3,3,3,1},  //5
@@ -46,9 +46,9 @@ public class Plateau extends Observable{
                 if( grilleRef[i][j] == 1)
                     this.plateau[i][j] = null;
                 if( grilleRef[i][j] == 2)
-                    this.plateau[i][j] = new Port();
+                    this.plateau[i][j] = new Port(i,j);
                 if( grilleRef[i][j] == 3)
-                    this.plateau[i][j] = new Mer();
+                    this.plateau[i][j] = new Mer(i,j);
                 if( grilleRef[i][j] == 4){
                     Repaire repaireTemp = this.repaireAleatoire();
                     this.plateau[i][j] = repaireTemp;
@@ -179,20 +179,25 @@ public class Plateau extends Observable{
     }
 
     public Case getCase(Point p){
+
         for (Case lign[] : this.plateau){
             for (Case tmpCase : lign){
-                if(tmpCase.getCoord() == p)
-                    return tmpCase;
+                if(tmpCase!=null) {
+                if(tmpCase.getCoord() == p)return tmpCase;
+                }
             }
         }
         return null;
     }
 
     public Case getCase(int x, int y){
+
         for (Case lign[] : this.plateau){
                 for (Case tmpCase : lign){
-                    if(tmpCase.getCoord().y == y && tmpCase.getCoord().x == x )
-                        return tmpCase;
+                    if(tmpCase!=null) {
+                        if (tmpCase.getCoord().y == y && tmpCase.getCoord().x == x)
+                            return tmpCase;
+                    }
                 }
         }
         return null;
