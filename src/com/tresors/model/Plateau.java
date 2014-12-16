@@ -5,7 +5,9 @@ import com.tresors.controller.HexToolbox;
 import java.awt.*;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Observable;
+import java.util.Set;
 
 
 public class Plateau extends Observable{
@@ -29,7 +31,7 @@ public class Plateau extends Observable{
         initRepaire();
         int grilleRef[][] = {
                 {1,1,1,1,1,1,1,1,1},  //1
-                {2,2,5,1,1,1,1,1,1},  //2
+                {2,2,5,1,1,1,1,1,1},  //2//erreur
                 {3,3,3,3,4,1,1,1,1},  //3
                 {3,3,3,3,3,3,4,1,1},  //4
                 {4,1,3,3,3,3,3,3,1},  //5
@@ -106,11 +108,11 @@ public class Plateau extends Observable{
 //TODO rennomer la fonction car je n'ai pas eu d'idee de nom
     /**
      * methode de deplacement retournent la liste des cases autorise au joueur
-     * @param positionInitiale position du joueur lors de l'appel initial
-     * @param nmbDePirate nombre de deplacement autorise pour ce joueur
+     * @param  position du joueur lors de l'appel initial
+     * @param  nombre de deplacement autorise pour ce joueur
      * @return la liste des cases autoriser (a colorier en verts)
      */
-    public ArrayList<Case> caseAuthorized(ArrayList<Case> positionInitiale, int nmbDePirate){
+   /* public ArrayList<Case> caseAuthorized(ArrayList<Case> positionInitiale, int nmbDePirate){
         if(nmbDePirate!=0){
             //pas fini la recursion
             ArrayList<Case> listeCase = positionInitiale;
@@ -135,6 +137,46 @@ public class Plateau extends Observable{
         else
             return positionInitiale;
     }
+*/
+
+
+    public Set<Point> deplacementPossible(Point p, int nbDePirate){
+
+
+        if(nbDePirate>0){
+            Set<Point> listPoint=new HashSet<Point>();
+            Set<Point> listTemp= new HashSet<Point>();
+            listTemp.add(p);
+            for (int i = 0; i <nbDePirate ; i++) {
+
+
+
+                for (Point pt : listTemp) {
+                    listPoint.addAll(HexToolbox.getVoisins(pt));
+                }
+
+                listTemp.addAll(listPoint);
+
+                for (Point pt: listTemp){
+                    if(!HexToolbox.estNavigable(this.plateau,pt)){
+                        listPoint.remove(pt);
+
+                    }
+                 }
+
+                listTemp.clear();
+                listTemp.addAll(listPoint);
+
+
+
+            }
+            listPoint.remove(p);
+            return listPoint;
+
+        }
+        else
+            return null;
+    }
 
     public Case getCase(Point p){
         for (Case lign[] : this.plateau){
@@ -148,10 +190,10 @@ public class Plateau extends Observable{
 
     public Case getCase(int x, int y){
         for (Case lign[] : this.plateau){
-            for (Case tmpCase : lign){
-                if(tmpCase.getCoord().y == y && tmpCase.getCoord().x == x )
-                    return tmpCase;
-            }
+                for (Case tmpCase : lign){
+                    if(tmpCase.getCoord().y == y && tmpCase.getCoord().x == x )
+                        return tmpCase;
+                }
         }
         return null;
     }
@@ -267,5 +309,7 @@ public class Plateau extends Observable{
         return listJoueurs;
     }
     public Case[][] getPlateau(){return plateau;}
+
+
 
 }

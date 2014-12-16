@@ -51,7 +51,6 @@ public class HexToolbox {
     public static boolean estNavigable(Case[][] plateau, Point p) {
         Case c = plateau[p.x][p.y];
         return !(c instanceof Repaire) && c != null;
-
     }
 
 }
