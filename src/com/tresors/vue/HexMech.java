@@ -21,6 +21,9 @@ public class HexMech {
     public static void setBorders(int b){
         BORDERS=b;
     }
+    public static int getSide(){return s;}
+    public static int getRadius(){return r;}
+    public static int getHeight(){return h;}
 
     /**
      * Calcul des données necessaire au dessin des hexagons
@@ -45,7 +48,7 @@ public class HexMech {
         int x = x0 - BORDERS;
         if (s == 0  || h == 0) {
             System.out.println("ERROR: size of hex has not been set");
-            return new Polygon();
+            throw new ExceptionInInitializerError();
         }
 
         int[] cx,cy;
