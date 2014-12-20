@@ -45,6 +45,11 @@ public class ControllerMenu extends Controller {
     }
 
     @Override
+    public int getCurrentPlayer() {
+        return 0;
+    }
+
+    @Override
     public Plateau getModel() {
         return model;
     }

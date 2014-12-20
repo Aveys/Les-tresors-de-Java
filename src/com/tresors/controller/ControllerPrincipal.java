@@ -22,7 +22,6 @@ public class ControllerPrincipal {
     }
 
     public void loadViewPlateau(){
-        this.model = new Plateau();
         this.activeController = new ControllerPlateau(model, frame, this);
     }
 

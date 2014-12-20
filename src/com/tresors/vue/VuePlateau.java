@@ -35,7 +35,7 @@ public class VuePlateau extends JPanel {
 
         panelScore.setLayout(new FlowLayout());
         panelScore.setBackground(Color.cyan);
-        labelJoueur1 = new JLabel("Joueur 1 : TEST1");
+        labelJoueur1 = new JLabel(controllerPlateau.getModel().getListJoueurs().get(controllerPlateau.getCurrentPlayer()).toString());
         panelScore.add(labelJoueur1);
 
         GridBagConstraints constraintsPanelScore = new GridBagConstraints();

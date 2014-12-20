@@ -27,6 +27,8 @@ public class ControllerPlateau extends Controller {
     public ControllerPlateau(Plateau model, FramePrincipal f, ControllerPrincipal controllerPrincipal) {
         initController(model,f,controllerPrincipal);
         view = new VuePlateau(this);
+        currentPlayerStage = false;
+        currentPlayer = 1;
         framePrincipal.changeView(view);
         addListenersToModel();
     }
@@ -65,6 +67,22 @@ public class ControllerPlateau extends Controller {
 
     public void notifyCommencerPartie(){
         this.controllerPrincipal.notifyCommencerPartie();
+    }
+
+    public int getCurrentPlayer() {
+        return currentPlayer;
+    }
+
+    public void setCurrentPlayer(int currentPlayer) {
+        this.currentPlayer = currentPlayer;
+    }
+
+    public boolean isCurrentPlayerStage() {
+        return currentPlayerStage;
+    }
+
+    public void setCurrentPlayerStage(boolean currentPlayerStage) {
+        this.currentPlayerStage = currentPlayerStage;
     }
 
     @Override
