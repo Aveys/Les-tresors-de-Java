@@ -29,10 +29,12 @@ public class VuePlateau extends JPanel {
     public VuePlateau(Controller controllerPlateau) {
 
         this.controller = controllerPlateau;
-
+        mainPanel.setBackground(Color.green);
         //Panel score
         panelScore = new JPanel();
+
         panelScore.setLayout(new FlowLayout());
+        panelScore.setBackground(Color.cyan);
         labelJoueur1 = new JLabel("Joueur 1 : TEST1");
         panelScore.add(labelJoueur1);
 
@@ -52,12 +54,13 @@ public class VuePlateau extends JPanel {
         constraintsPanelPlateau.fill = GridBagConstraints.BOTH;
         constraintsPanelPlateau.weighty = 30;
         constraintsPanelPlateau.weightx = 1;
-        constraintsPanelPlateau.ipadx = 1220;
+        constraintsPanelPlateau.ipadx = 920;
         constraintsPanelPlateau.ipady = 620;
         constraintsPanelPlateau.gridx = 0;
         constraintsPanelPlateau.gridy = 1;
         constraintsPanelPlateau.anchor = GridBagConstraints.PAGE_START;
-
+        plateauPanel.setBackground(Color.red);
+        plateauPanel.setSize(500,800);
         mainPanel.add(plateauPanel, constraintsPanelPlateau);
 
 
@@ -114,7 +117,7 @@ public class VuePlateau extends JPanel {
         buttonPassTour.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                nbTour = (nbTour + 1) % 6;
+                nbTour = (nbTour + 1) % getController().getModel().getListJoueurs().size();
                 switch (nbTour) {
                     case 0:
                         bateauPanel.changeCouleur(ENavireColor.Bleu);
@@ -135,7 +138,6 @@ public class VuePlateau extends JPanel {
                         bateauPanel.changeCouleur(ENavireColor.Blanc);
                         break;
                 }
-
             }
         });
 
@@ -144,7 +146,7 @@ public class VuePlateau extends JPanel {
         constraintsBateauPanel.fill = GridBagConstraints.BOTH;
         constraintsBateauPanel.weighty = 20;
         constraintsBateauPanel.weightx = 2;
-        constraintsBateauPanel.gridx = 1;
+        constraintsBateauPanel.gridx = 2;
         constraintsBateauPanel.gridy = 1;
         constraintsBateauPanel.insets = new Insets(120, 75, 0, 0);
         constraintsBateauPanel.anchor = GridBagConstraints.PAGE_START;

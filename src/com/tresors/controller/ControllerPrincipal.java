@@ -4,7 +4,7 @@ import com.tresors.model.Plateau;
 import com.tresors.vue.FramePrincipal;
 
 /**
- * Controller Principal qui appelle les autres controllers et est étendus par les autres controllers
+ * Controller Principal qui appelle les autres controllers
  * Created by Paul on 13/12/2014.
  */
 public class ControllerPrincipal {
