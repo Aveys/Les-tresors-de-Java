@@ -14,4 +14,6 @@ public abstract class Controller {
     public abstract void notifyCommencerPartie();
     public abstract int getCurrentPlayer();
     public abstract Plateau getModel();
+    public abstract void nextStage();
+    public abstract int getCurrentPlayerStage();
 }

@@ -23,7 +23,6 @@ public class VuePlateau extends JPanel {
     private JButton buttonAction3;
     private JLabel labelAction;
     private JButton buttonPassTour;
-    private int nbTour = 0;
     private Controller controller = null;
 
     public VuePlateau(Controller controllerPlateau) {
@@ -35,7 +34,7 @@ public class VuePlateau extends JPanel {
 
         panelScore.setLayout(new FlowLayout());
         panelScore.setBackground(Color.cyan);
-        labelJoueur1 = new JLabel(controllerPlateau.getModel().getListJoueurs().get(controllerPlateau.getCurrentPlayer()).toString());
+        labelJoueur1 = new JLabel(controller.getModel().getListJoueurs().get(controllerPlateau.getCurrentPlayer()).getCapitaine());
         panelScore.add(labelJoueur1);
 
         GridBagConstraints constraintsPanelScore = new GridBagConstraints();
@@ -65,7 +64,7 @@ public class VuePlateau extends JPanel {
 
 
         //Panel Action
-        labelAction = new JLabel("1");
+        labelAction = new JLabel("Etape 1");
         GridBagConstraints constraintsLabelAction = new GridBagConstraints();
         constraintsLabelAction.weighty = 20;
         constraintsLabelAction.weightx = 0.3;
@@ -117,8 +116,10 @@ public class VuePlateau extends JPanel {
         buttonPassTour.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                nbTour = (nbTour + 1) % getController().getModel().getListJoueurs().size();
-                switch (nbTour) {
+                getController().nextStage();
+                updateCurrentPlayerName();
+                updateStageLabel();
+                switch (getController().getCurrentPlayer()) {
                     case 0:
                         bateauPanel.changeCouleur(ENavireColor.Bleu);
                         break;
@@ -166,6 +167,18 @@ public class VuePlateau extends JPanel {
         setSize((int) tk.getScreenSize().getWidth(), (int) tk.getScreenSize().getHeight());
         this.setVisible(true);
 
+    }
+
+    private void updateStageLabel() {
+        labelAction.setText("Etape " + Integer.valueOf(controller.getCurrentPlayerStage()).toString());
+    }
+
+    private void updateCurrentPlayerName() {
+        labelJoueur1.setText(controller.getModel().getListJoueurs().get(controller.getCurrentPlayer()).getCapitaine());
+    }
+
+    private int getIndexCurrentPlayer() {
+        return getController().getCurrentPlayer();
     }
 
     public final Controller getController(){

@@ -52,4 +52,14 @@ public class ControllerHexGame extends Controller {
     public Plateau getModel() {
         return model;
     }
+
+    @Override
+    public void nextStage() {
+
+    }
+
+    @Override
+    public int getCurrentPlayerStage() {
+        return 0;
+    }
 }

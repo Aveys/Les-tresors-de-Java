@@ -45,6 +45,7 @@ public class FramePrincipal extends JFrame {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         Toolkit tk = Toolkit.getDefaultToolkit();
         this.setSize((int) tk.getScreenSize().getWidth(), (int) tk.getScreenSize().getHeight());
+
         this.setVisible(true);
 
     }

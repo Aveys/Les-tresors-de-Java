@@ -39,6 +39,7 @@ public class VueMenu extends JPanel{
         pageStart = new JPanel();
         pageStart.setLayout(new FlowLayout());
 
+
         pageStart.add(labelNbjoueur);
         pageStart.add(nameJoueur);
         pageStart.add(buttonAddJoueur);

@@ -55,6 +55,16 @@ public class ControllerMenu extends Controller {
     }
 
     @Override
+    public void nextStage() {
+
+    }
+
+    @Override
+    public int getCurrentPlayerStage() {
+        return 0;
+    }
+
+    @Override
     public void initController(Plateau model, FramePrincipal frame, ControllerPrincipal controller) {
         this.model = model;
         this.framePrincipal = frame;
