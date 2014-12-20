@@ -39,7 +39,7 @@ public class ControllerHexGame extends Controller {
 
     }
     @Override
-    public void notifyCommencerPartie() {
+    public void doStartGame() {
 
     }
 

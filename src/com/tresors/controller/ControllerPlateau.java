@@ -9,6 +9,11 @@ import com.tresors.vue.VuePlateau;
 import javax.swing.*;
 
 /**
+ * Controller de la vue Plateau
+ *  'show' affiche une vue
+ *  'notify' effectue une modification du model
+ *  'do' lance une action demandée par la vue et gérée par le controller directement
+ *  'fire' lance une modification de la vue depuis la modification du model
  * Created by arthurveys on 21/11/14.
  * Projet java ${PROJECT}
  */
@@ -65,8 +70,8 @@ public class ControllerPlateau extends Controller {
         }
     }
 
-    public void notifyCommencerPartie(){
-        this.controllerPrincipal.notifyCommencerPartie();
+    public void doStartGame(){
+        this.controllerPrincipal.doStartGame();
     }
 
     public int getCurrentPlayer() {

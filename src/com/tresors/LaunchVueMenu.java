@@ -17,20 +17,7 @@ public class LaunchVueMenu {
         }
         catch(Exception e){}
 
-        /*Plateau plateau = new Plateau();
-        ControllerMenu controllerMenu = new ControllerMenu(plateau);
-        JFrame test = new JFrame();
-
-        VueMenu vueMenu =  new VueMenu(controllerMenu);
-        test.add(vueMenu);
-        Toolkit tk = Toolkit.getDefaultToolkit();
-        test.setSize((int) tk.getScreenSize().getWidth(), (int) tk.getScreenSize().getHeight());
-        test.setVisible(true);*/
-
         ControllerPrincipal application = new ControllerPrincipal();
-        application.loadViewMenu();
-
-
+        application.showViewMenu();
     }
-
 }
