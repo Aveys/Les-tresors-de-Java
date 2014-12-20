@@ -21,7 +21,7 @@ public class BateauPanel extends JPanel {
     public BateauPanel(ENavireColor c) {
 
         super();
-        setSize(220, 428);
+        //setSize(220, 428); Test de mise en place dans la vue générale
         File ficImg = new File(c.getUrlImage());
         try {
             bgImage = ImageIO.read(ficImg);
