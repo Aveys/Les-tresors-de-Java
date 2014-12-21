@@ -20,4 +20,5 @@ public abstract class Controller {
     public abstract Plateau getModel();
     public abstract void nextStage();
     public abstract int getCurrentPlayerStage();
+    public abstract void notifyPlayerMoved(int x,int y);
 }

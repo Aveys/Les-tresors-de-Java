@@ -80,6 +80,12 @@ public class VuePlateau extends JPanel {
 
         moveButton = new JButton("Se deplacer");
         gbc.insets.top = 90;
+        moveButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //getController().notifyPlayerMoved(x,y);
+            }
+        });
         mainPanel.add(moveButton, gbc);
 
         buttonPassTour = new JButton("Passer le tour");

@@ -7,6 +7,7 @@ import com.tresors.vue.FramePrincipal;
 import com.tresors.vue.VuePlateau;
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * Controller de la vue Plateau
@@ -84,6 +85,11 @@ public class ControllerPlateau extends Controller {
 
     public int getCurrentPlayerStage() {
         return currentPlayerStage;
+    }
+
+    @Override
+    public void notifyPlayerMoved(int x, int y) {
+        model.getListJoueurs().get(currentPlayer).fireEmplacementChanged(new Point(x,y));
     }
 
     public void setCurrentPlayerStage(int currentPlayerStage) {
