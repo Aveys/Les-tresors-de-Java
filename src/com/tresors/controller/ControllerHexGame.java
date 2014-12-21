@@ -62,4 +62,9 @@ public class ControllerHexGame extends Controller {
     public int getCurrentPlayerStage() {
         return 0;
     }
+
+    @Override
+    public void notifyPlayerMoved(int x, int y) {
+
+    }
 }

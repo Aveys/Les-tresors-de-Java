@@ -71,6 +71,11 @@ public class ControllerMenu extends Controller {
     }
 
     @Override
+    public void notifyPlayerMoved(int x, int y) {
+
+    }
+
+    @Override
     public void initController(Plateau model, FramePrincipal frame, ControllerPrincipal controller) {
         this.model = model;
         this.framePrincipal = frame;

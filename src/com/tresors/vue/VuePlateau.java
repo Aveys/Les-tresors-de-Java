@@ -8,6 +8,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 /**
  * Created by Nicolas Sagon on 25/11/2014.
@@ -15,7 +17,6 @@ import java.awt.event.ActionListener;
 public class VuePlateau extends JPanel {
     private JPanel mainPanel;
     private JPanel panelScore;
-    private JPanel actionPanel;
     private JLabel labelJoueur1;
     private JPanel plateauPanel;
     private BateauPanel bateauPanel;
@@ -54,6 +55,32 @@ public class VuePlateau extends JPanel {
         gbc.ipadx = 900;
         gbc.ipady = 600;
         gbc.anchor = GridBagConstraints.LINE_START;
+        plateauPanel.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                //plateauPanel.getHex(e.getX(),e.getY());    Récupération de l'hexagone cliqué et convertir en Case
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
         mainPanel.add(plateauPanel, gbc);
 
 
