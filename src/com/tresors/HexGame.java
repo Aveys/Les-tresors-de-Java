@@ -46,6 +46,7 @@ public class HexGame extends JPanel{
                     HexMech.drawHex(i, j, Case.getTypeCase(tmp), g2);// Utilisation de la fonction de dessin de debug (texte) )
             }
         }
+        for(Navire n : plateau)
     }
 
     public void drawCircle(Graphics cg, int xCenter, int yCenter, int r) {
@@ -54,6 +55,7 @@ public class HexGame extends JPanel{
 
     // ceci est un main
     // sans dec'!
+    // :D
     public static void main(String[] args){
 
         Plateau pl = new Plateau(); //j'ai besoin de la grille de plateau
