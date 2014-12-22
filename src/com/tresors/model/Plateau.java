@@ -36,7 +36,7 @@ public class Plateau extends Observable{
                 {3,3,3,3,3,3,4,1,1},  //4
                 {4,1,3,3,3,3,3,3,1},  //5
                 {1,1,4,3,4,3,4,3,4},  //6
-                {1,1,1,3,3,3,3,3,3},  //7
+                {1,1,1,1,3,3,3,3,3},  //7
                 {1,1,1,1,1,4,3,3,4},  //8
                 {1,1,1,1,1,1,1,4,1}}; //9
         // Génération de la Carte
@@ -176,6 +176,7 @@ public class Plateau extends Observable{
         Point p = new Point(n.getCoordonnees());
         int nbDePirate= n.getNbPirates();
         if(nbDePirate>0){
+
             Set<Point> listPoint=new HashSet<Point>();
             Set<Point> listTemp= new HashSet<Point>();
             listTemp.add(p);
