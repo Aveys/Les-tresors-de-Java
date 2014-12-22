@@ -10,12 +10,18 @@ import com.tresors.vue.VuePlateau;
 import javax.swing.*;
 
 /**
+ * Controller du Menu
+ * Methods:
+ *  'show' affiche une vue
+ *  'notify' effectue une modification du model
+ *  'do' lance une action demandée par la vue et gérée par le controller directement
+ *  'fire' lance une modification de la vue depuis la modification du model
+ *
  * Created by Nicolas Sagon on 11/12/2014.
  */
 public class ControllerMenu extends Controller {
-    /*The Repair View, initialized to NULL*/
+
     public JPanel view = null;
-    /*The Repair Model, initialized to NULL*/
     private Plateau model = null;
     private VuePlateau vuePlateau = null;
     private ControllerPrincipal controllerPrincipal;
@@ -40,13 +46,33 @@ public class ControllerMenu extends Controller {
         model.getListJoueurs().add(new Navire(nameJoueur,couleurJoueur));
     }
 
-    public void notifyCommencerPartie(){
-        this.controllerPrincipal.notifyCommencerPartie();
+    public void doStartGame(){
+        this.controllerPrincipal.doStartGame();
+    }
+
+    @Override
+    public int getCurrentPlayer() {
+        return 0;
     }
 
     @Override
     public Plateau getModel() {
         return model;
+    }
+
+    @Override
+    public void nextStage() {
+
+    }
+
+    @Override
+    public int getCurrentPlayerStage() {
+        return 0;
+    }
+
+    @Override
+    public void notifyPlayerMoved(int x, int y) {
+
     }
 
     @Override

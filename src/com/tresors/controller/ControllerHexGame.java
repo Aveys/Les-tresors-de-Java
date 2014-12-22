@@ -39,12 +39,32 @@ public class ControllerHexGame extends Controller {
 
     }
     @Override
-    public void notifyCommencerPartie() {
+    public void doStartGame() {
 
+    }
+
+    @Override
+    public int getCurrentPlayer() {
+        return 0;
     }
 
     @Override
     public Plateau getModel() {
         return model;
+    }
+
+    @Override
+    public void nextStage() {
+
+    }
+
+    @Override
+    public int getCurrentPlayerStage() {
+        return 0;
+    }
+
+    @Override
+    public void notifyPlayerMoved(int x, int y) {
+
     }
 }

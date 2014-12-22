@@ -8,6 +8,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 /**
  * Created by Nicolas Sagon on 25/11/2014.
@@ -18,93 +20,111 @@ public class VuePlateau extends JPanel {
     private JLabel labelJoueur1;
     private JPanel plateauPanel;
     private BateauPanel bateauPanel;
-    private JButton buttonAction1;
-    private JButton buttonAction2;
+    private JButton attackButton;
+    private JButton repairButton;
+    private JButton moveButton;
     private JLabel labelAction;
     private JButton buttonPassTour;
-    private int nbTour = 0;
     private Controller controller = null;
 
     public VuePlateau(Controller controllerPlateau) {
 
         this.controller = controllerPlateau;
+        mainPanel = new JPanel();
+        mainPanel.setLayout(new GridBagLayout());
 
         //Panel score
         panelScore = new JPanel();
-        panelScore.setLayout(new FlowLayout());
-        labelJoueur1 = new JLabel("Joueur 1 : TEST1");
+        labelJoueur1 = new JLabel("C'est le tour de : " + controller.getModel().getListJoueurs().get(controllerPlateau.getCurrentPlayer()).getCapitaine());
         panelScore.add(labelJoueur1);
 
-        GridBagConstraints constraintsPanelScore = new GridBagConstraints();
-        constraintsPanelScore.fill = GridBagConstraints.HORIZONTAL;
-        constraintsPanelScore.weighty = 1;
-        constraintsPanelScore.weightx = 1;
-        constraintsPanelScore.gridx = 0;
-        constraintsPanelScore.gridy = 0;
-        constraintsPanelScore.anchor = GridBagConstraints.PAGE_START;
+        GridBagConstraints gbc = new GridBagConstraints();
 
-        mainPanel.add(panelScore, constraintsPanelScore);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.anchor = GridBagConstraints.PAGE_START;
+
+        mainPanel.add(panelScore, gbc);
 
         //Panel Plateau
         plateauPanel = new HexGame(getController().getModel().getPlateau(), 100);
-        GridBagConstraints constraintsPanelPlateau = new GridBagConstraints();
-        constraintsPanelPlateau.fill = GridBagConstraints.BOTH;
-        constraintsPanelPlateau.weighty = 30;
-        constraintsPanelPlateau.weightx = 1;
-        constraintsPanelPlateau.ipadx = 1220;
-        constraintsPanelPlateau.ipady = 620;
-        constraintsPanelPlateau.gridx = 0;
-        constraintsPanelPlateau.gridy = 1;
-        constraintsPanelPlateau.anchor = GridBagConstraints.PAGE_START;
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.ipadx = 900;
+        gbc.ipady = 600;
+        gbc.anchor = GridBagConstraints.LINE_START;
+        plateauPanel.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                //plateauPanel.getHex(e.getX(),e.getY());    Récupération de l'hexagone cliqué et convertir en Case
+            }
 
-        mainPanel.add(plateauPanel, constraintsPanelPlateau);
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
+        mainPanel.add(plateauPanel, gbc);
 
 
         //Panel Action
-        labelAction = new JLabel("1");
-        GridBagConstraints constraintsLabelAction = new GridBagConstraints();
-        constraintsLabelAction.weighty = 20;
-        constraintsLabelAction.weightx = 0.3;
-        constraintsLabelAction.gridx = 1;
-        constraintsLabelAction.gridy = 1;
-        constraintsLabelAction.insets = new Insets(0, 0, 0, 0);
-        constraintsLabelAction.anchor = GridBagConstraints.PAGE_START;
+        labelAction = new JLabel("Etape 1");
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        gbc.ipadx = 124;
+        gbc.ipady = 5;
+        gbc.insets = new Insets(0, 10, 0, 10);
+        gbc.gridwidth = GridBagConstraints.CENTER;
+        gbc.anchor = GridBagConstraints.PAGE_START;
+        mainPanel.add(labelAction, gbc);
 
-        buttonAction1 = new JButton("Attaquer");
-        GridBagConstraints constraintsButtonAction1 = new GridBagConstraints();
-        constraintsButtonAction1.fill = GridBagConstraints.HORIZONTAL;
-        constraintsButtonAction1.weighty = 20;
-        constraintsButtonAction1.weightx = 0.3;
-        constraintsButtonAction1.gridx = 1;
-        constraintsButtonAction1.gridy = 1;
-        constraintsButtonAction1.insets = new Insets(30, 0, 0, 0);
-        constraintsButtonAction1.anchor = GridBagConstraints.PAGE_START;
+        attackButton = new JButton("Attaquer");
+        gbc.insets.top = 30;
+        mainPanel.add(attackButton, gbc);
 
-        buttonAction2 = new JButton("Réparer");
-        GridBagConstraints constraintsButtonAction2 = new GridBagConstraints();
-        constraintsButtonAction2.fill = GridBagConstraints.HORIZONTAL;
-        constraintsButtonAction2.weighty = 20;
-        constraintsButtonAction2.weightx = 0.3;
-        constraintsButtonAction2.gridx = 1;
-        constraintsButtonAction2.gridy = 1;
-        constraintsButtonAction2.insets = new Insets(60, 0, 0, 0);
-        constraintsButtonAction2.anchor = GridBagConstraints.PAGE_START;
+        repairButton = new JButton("Réparer");
+        gbc.insets.top = 60;
+        repairButton.setEnabled(false);
+        mainPanel.add(repairButton, gbc);
+
+        moveButton = new JButton("Se deplacer");
+        gbc.insets.top = 90;
+        moveButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //getController().notifyPlayerMoved(x,y);
+            }
+        });
+        mainPanel.add(moveButton, gbc);
 
         buttonPassTour = new JButton("Passer le tour");
-        GridBagConstraints constraintsButtonPassTour = new GridBagConstraints();
-        constraintsButtonPassTour.fill = GridBagConstraints.HORIZONTAL;
-        constraintsButtonPassTour.weighty = 20;
-        constraintsButtonPassTour.weightx = 0.3;
-        constraintsButtonPassTour.gridx = 1;
-        constraintsButtonPassTour.gridy = 1;
-        constraintsButtonPassTour.insets = new Insets(90, 0, 0, 0);
-        constraintsButtonPassTour.anchor = GridBagConstraints.PAGE_START;
-
+        gbc.insets.top = 120;
         buttonPassTour.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                nbTour = (nbTour + 1) % 6;
-                switch (nbTour) {
+                getController().nextStage();
+                updateCurrentPlayerName();
+                updateStageLabel();
+                updateAllowedActions();
+                switch (getController().getCurrentPlayer()) {
                     case 0:
                         bateauPanel.changeCouleur(ENavireColor.Bleu);
                         break;
@@ -124,63 +144,44 @@ public class VuePlateau extends JPanel {
                         bateauPanel.changeCouleur(ENavireColor.Blanc);
                         break;
                 }
-
             }
         });
+        mainPanel.add(buttonPassTour, gbc);
 
         bateauPanel = new BateauPanel(ENavireColor.Bleu);
-        GridBagConstraints constraintsBateauPanel = new GridBagConstraints();
-        constraintsBateauPanel.fill = GridBagConstraints.BOTH;
-        constraintsBateauPanel.weighty = 20;
-        constraintsBateauPanel.weightx = 2;
-        constraintsBateauPanel.gridx = 1;
-        constraintsBateauPanel.gridy = 1;
-        constraintsBateauPanel.insets = new Insets(120, 75, 0, 0);
-        constraintsBateauPanel.anchor = GridBagConstraints.PAGE_START;
-
-        mainPanel.add(labelAction, constraintsLabelAction);
-        mainPanel.add(buttonAction1, constraintsButtonAction1);
-        mainPanel.add(buttonAction2, constraintsButtonAction2);
-        mainPanel.add(buttonPassTour, constraintsButtonPassTour);
-        mainPanel.add(bateauPanel, constraintsBateauPanel);
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.insets.top = 160;
+        mainPanel.add(bateauPanel, gbc);
 
         //add to JFrame
         this.add(mainPanel);
+    }
 
-        //Draw joueur :
-        Toolkit tk = Toolkit.getDefaultToolkit();
-        setSize((int) tk.getScreenSize().getWidth(), (int) tk.getScreenSize().getHeight());
-        this.setVisible(true);
+    private void updateStageLabel() {
+        labelAction.setText("Etape " + Integer.valueOf(controller.getCurrentPlayerStage()).toString());
+    }
 
+    private void updateCurrentPlayerName() {
+        labelJoueur1.setText("C'est le tour de : " + controller.getModel().getListJoueurs().get(controller.getCurrentPlayer()).getCapitaine());
+    }
+
+    public void updateAllowedActions(){
+        if (getController().getCurrentPlayerStage() == 1){
+            repairButton.setEnabled(false);
+            moveButton.setEnabled(true);
+        }
+        else if (getController().getCurrentPlayerStage() == 2){
+            repairButton.setEnabled(true);
+            moveButton.setEnabled(false);
+        }
+    }
+
+    private int getIndexCurrentPlayer() {
+        return getController().getCurrentPlayer();
     }
 
     public final Controller getController(){
         return controller;
     }
 
-    {
-// GUI initializer generated by IntelliJ IDEA GUI Designer
-// >>> IMPORTANT!! <<<
-// DO NOT EDIT OR ADD ANY CODE HERE!
-        $$$setupUI$$$();
-    }
-
-    /**
-     * Method generated by IntelliJ IDEA GUI Designer
-     * >>> IMPORTANT!! <<<
-     * DO NOT edit this method OR call it in your code!
-     *
-     * @noinspection ALL
-     */
-    private void $$$setupUI$$$() {
-        mainPanel = new JPanel();
-        mainPanel.setLayout(new GridBagLayout());
-    }
-
-    /**
-     * @noinspection ALL
-     */
-    public JComponent $$$getRootComponent$$$() {
-        return mainPanel;
-    }
 }

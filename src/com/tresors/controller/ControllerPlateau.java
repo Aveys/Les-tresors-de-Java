@@ -1,6 +1,5 @@
 package com.tresors.controller;
 
-
 import com.tresors.model.ENavireColor;
 import com.tresors.model.Navire;
 import com.tresors.model.Plateau;
@@ -8,8 +7,14 @@ import com.tresors.vue.FramePrincipal;
 import com.tresors.vue.VuePlateau;
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
+ * Controller de la vue Plateau
+ *  'show' affiche une vue
+ *  'notify' effectue une modification du model
+ *  'do' lance une action demandée par la vue et gérée par le controller directement
+ *  'fire' lance une modification de la vue depuis la modification du model
  * Created by arthurveys on 21/11/14.
  * Projet java ${PROJECT}
  */
@@ -22,10 +27,14 @@ public class ControllerPlateau extends Controller {
     private VuePlateau vuePlateau = null;
     private ControllerPrincipal controllerPrincipal;
     private FramePrincipal framePrincipal;
+    private int currentPlayer;//valeur de l'index du joueur actuel commence à 1 et pas 0
+    private int currentPlayerStage; //Variable indiquant à quel etape en est le joueur. Conditionne les actions possibles, etape 1 on peux attaquer ou se déplacer, etape 2 on peut attaquer ou réparer
 
     public ControllerPlateau(Plateau model, FramePrincipal f, ControllerPrincipal controllerPrincipal) {
         initController(model,f,controllerPrincipal);
         view = new VuePlateau(this);
+        currentPlayerStage = 1;
+        currentPlayer = 0;
         framePrincipal.changeView(view);
         addListenersToModel();
     }
@@ -38,12 +47,53 @@ public class ControllerPlateau extends Controller {
         //model.addRepairPirateListener(view);
     }
 
+    //Notifications de modification sur le model
     public void notifyAddJoueur(String nameJoueur, ENavireColor couleurJoueur){
         model.getListJoueurs().add(new Navire(nameJoueur,couleurJoueur));
     }
 
-    public void notifyCommencerPartie(){
-        this.controllerPrincipal.notifyCommencerPartie();
+    public void nextPlayer(){
+        this.currentPlayer++;
+        this.currentPlayer = (this.currentPlayer % (getModel().getListJoueurs().size()));
+    }
+
+    /**
+     * Methode qui permet de passer au stage suivant et appelle le prochain player si on est déja au  stage 2
+     */
+    @Override
+    public void nextStage(){
+        if (this.currentPlayerStage == 2){//Si on est au stage 2
+            this.currentPlayerStage = 1;//on reset la valeur à stage1
+            nextPlayer();//on change de joueur
+        }
+       else if (this.currentPlayerStage == 1){//Si on est au stage 1
+            this.currentPlayerStage = 2;//on passe au stage 2
+        }
+    }
+
+    public void doStartGame(){
+        this.controllerPrincipal.doStartGame();
+    }
+
+    public int getCurrentPlayer() {
+        return currentPlayer;
+    }
+
+    public void setCurrentPlayer(int currentPlayer) {
+        this.currentPlayer = currentPlayer;
+    }
+
+    public int getCurrentPlayerStage() {
+        return currentPlayerStage;
+    }
+
+    @Override
+    public void notifyPlayerMoved(int x, int y) {
+        model.getListJoueurs().get(currentPlayer).fireEmplacementChanged(new Point(x,y));
+    }
+
+    public void setCurrentPlayerStage(int currentPlayerStage) {
+        this.currentPlayerStage = currentPlayerStage;
     }
 
     @Override

@@ -39,6 +39,7 @@ public class VueMenu extends JPanel{
         pageStart = new JPanel();
         pageStart.setLayout(new FlowLayout());
 
+
         pageStart.add(labelNbjoueur);
         pageStart.add(nameJoueur);
         pageStart.add(buttonAddJoueur);
@@ -77,7 +78,7 @@ public class VueMenu extends JPanel{
         commencerPartie.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                getController().notifyCommencerPartie();
+                getController().doStartGame();
             }
         });
 

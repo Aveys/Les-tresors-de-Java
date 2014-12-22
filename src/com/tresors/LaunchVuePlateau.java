@@ -16,6 +16,6 @@ public class LaunchVuePlateau {
         catch(Exception e){
         }
         ControllerPrincipal application = new ControllerPrincipal();
-        application.loadViewPlateau();
+        application.showViewPlateau();
     }
 }
