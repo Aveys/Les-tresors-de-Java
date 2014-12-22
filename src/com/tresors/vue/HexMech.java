@@ -121,12 +121,12 @@ public class HexMech {
      It takes into account the size of borders.
      It also works with XYVertex being True or False.
      *****************************************************************************/
-    public static Point pxtoHex(int mx, int my) {
+    public static Point pxtoHex(int my, int mx) { //inversion des coordonnées pour répondre à notre grille
         Point p = new Point(-1,-1);
 
 //correction for BORDERS and XYVertex
-        mx -= BORDERS;
-        my += BORDERS;
+        mx += BORDERS;
+        my -= BORDERS;
         if (XYVertex) mx += t;
 
         int x = (int) (mx / (s+t)); //this gives a quick value for x. It works only on odd cols and doesn't handle the triangle sections. It assumes that the hexagon is a rectangle with width s+t (=1.5*s).
