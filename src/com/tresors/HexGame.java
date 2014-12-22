@@ -1,11 +1,14 @@
 package com.tresors;
 
 import com.tresors.model.Case;
+import com.tresors.model.Navire;
 import com.tresors.model.Plateau;
 import com.tresors.vue.HexMech;
+import com.tresors.vue.NavireComponent;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 /**
  * Created by arthurveys on 09/12/14.
@@ -16,14 +19,18 @@ public class HexGame extends JPanel{
     final static int BORDERS = 5;
     final static int SCRSIZE = HEXSIZE * (BSIZE + 1) + BORDERS*3; //screen size (vertical dimension).
     private final Case[][] plateau;
+    private final ArrayList<Navire> navires;
+    public ArrayList<NavireComponent> GraphicsNavires;
 
     /**
      * Crée un panel de'hexagons
      * @param plateau Le tableau de Case
      * @param hexSize La taille des hexagons
+     * @param listJoueurs
      */
-    public HexGame(Case[][] plateau,int hexSize) {
+    public HexGame(Case[][] plateau, int hexSize, ArrayList<Navire> listJoueurs) {
         this.plateau=plateau;
+        this.navires=listJoueurs;
         HexMech.setHeight(hexSize);
     }
 
@@ -46,7 +53,9 @@ public class HexGame extends JPanel{
                     HexMech.drawHex(i, j, Case.getTypeCase(tmp), g2);// Utilisation de la fonction de dessin de debug (texte) )
             }
         }
-        for(Navire n : plateau)
+        for(Navire n : navires){
+            this.GraphicsNavires.add(new NavireComponent(n));
+        }
     }
 
     public void drawCircle(Graphics cg, int xCenter, int yCenter, int r) {
@@ -65,7 +74,7 @@ public class HexGame extends JPanel{
         HexMech.setHeight(100);
         HexMech.setBorders(5);
 
-        content.add(new HexGame(pl.getPlateau(),100));//On ajoute le panel d'hexagons
+        //content.add(new HexGame(pl.getPlateau(),100 ));//On ajoute le panel d'hexagons (ne fonctionne plus depuis l'ajout du dessin des navires
         frame.setSize((int)(SCRSIZE/1.23), SCRSIZE);// taille de la frame (A revoir)
         frame.setResizable(true);
         frame.setLocationRelativeTo( null );

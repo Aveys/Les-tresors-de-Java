@@ -1,5 +1,7 @@
 package com.tresors.vue;
 
+import com.tresors.model.Navire;
+
 import java.awt.*;
 
 /**
@@ -19,6 +21,12 @@ public class NavireComponent extends Component{
         this.i = i;
         this.j = j;
         this.couleur = couleur;
+    }
+
+    public NavireComponent(Navire n) {
+        this.i = (int) n.getCoordonnees().getY();
+        this.y = (int) n.getCoordonnees().getX();
+        this.couleur = n.getColor().getCouleur();
     }
 
     public void deplacerNavire(int i,int j){

@@ -48,7 +48,7 @@ public class VuePlateau extends JPanel {
         mainPanel.add(panelScore, gbc);
 
         //Panel Plateau
-        plateauPanel = new HexGame(getController().getModel().getPlateau(), 100);
+        plateauPanel = new HexGame(getController().getModel().getPlateau(), 100, model.getListJoueurs());
         gbc.fill = GridBagConstraints.BOTH;
         gbc.gridx = 0;
         gbc.gridy = 1;
