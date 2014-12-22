@@ -18,7 +18,7 @@ public class VuePlateau extends JPanel {
     private JPanel mainPanel;
     private JPanel panelScore;
     private JLabel labelJoueur1;
-    private JPanel plateauPanel;
+    private HexGame plateauPanel;
     private BateauPanel bateauPanel;
     private JButton attackButton;
     private JButton repairButton;
@@ -58,7 +58,7 @@ public class VuePlateau extends JPanel {
         plateauPanel.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                //plateauPanel.getHex(e.getX(),e.getY());    Récupération de l'hexagone cliqué et convertir en Case
+                getClickedCase(e.getX(),e.getY());
             }
 
             @Override
@@ -184,4 +184,7 @@ public class VuePlateau extends JPanel {
         return controller;
     }
 
+    public void getClickedCase(int x, int y){
+        System.out.println(HexMech.pxtoHex(x, y).toString());   // Récupération de l'hexagone cliqué et convertir en Case
+    }
 }
