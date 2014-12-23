@@ -23,7 +23,7 @@ public class ControllerHexGame extends Controller {
         initController(model, frame, controller);
         HexMech.setHeight(100);
         HexMech.setBorders(5);
-        view = new HexGame(model.getPlateau(),100);
+        view = new HexGame(model.getPlateau(),100,model.getListJoueurs());//TODO : j'en suis là
         framePrincipal.changeView(view);
     }
 
