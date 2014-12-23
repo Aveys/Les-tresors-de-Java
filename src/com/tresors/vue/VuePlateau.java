@@ -1,6 +1,5 @@
 package com.tresors.vue;
 
-import com.tresors.HexGame;
 import com.tresors.controller.Controller;
 import com.tresors.model.ENavireColor;
 

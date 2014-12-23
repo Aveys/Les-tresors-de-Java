@@ -3,7 +3,7 @@ package com.tresors.controller;
 import com.tresors.model.ENavireColor;
 import com.tresors.model.Plateau;
 import com.tresors.vue.FramePrincipal;
-import com.tresors.HexGame;
+import com.tresors.vue.HexGame;
 import com.tresors.vue.HexMech;
 
 import javax.swing.*;

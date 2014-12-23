@@ -1,9 +1,7 @@
-package com.tresors;
+package com.tresors.vue;
 
 import com.tresors.model.Case;
 import com.tresors.model.Navire;
-import com.tresors.vue.HexMech;
-import com.tresors.vue.NavireComponent;
 
 import javax.swing.*;
 import java.awt.*;
