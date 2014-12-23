@@ -9,8 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * Classe Navire
- * Classe modele pour un joueur (Un Navire = Un joueur)
+ * Classe navire
+ * Classe modele pour un joueur (Un navire = Un joueur)
  */
 public class Navire {
     //Attributes
@@ -48,7 +48,7 @@ public class Navire {
     }
     /**
      * Ajoute une charge à un emplacement du bateau
-     * @param charge Charge à ajouter au Navire
+     * @param charge charge à ajouter au navire
      */
     public void ajouterCharge(Charge charge){
         if (charge  instanceof Pirate) {
@@ -158,8 +158,8 @@ public class Navire {
     }
 
     /**
-     * Retourne le contenu du Navire (Position,Charge)
-     * @return le contenu du Navire (Position,Charge)
+     * Retourne le contenu du navire (Position,charge)
+     * @return le contenu du navire (Position,charge)
      */
     public HashMap<Integer,Charge> getContenuNavire() {
         HashMap<Integer, Charge> list = new HashMap<Integer, Charge>();

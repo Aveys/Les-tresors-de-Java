@@ -21,7 +21,7 @@ public class TestDeplacement {
         Plateau pl = new Plateau();
         Set<Point> s = new HashSet<Point>();
         s = pl.deplacementPossible(new Point(4, 3), 2);
-        // les cases navigables a partir  de mon Navire.
+        // les cases navigables a partir  de mon navire.
         for(Point p : s) System.out.println(p+" "+Case.getTypeCase(pl.getPlateau()[p.x][p.y]));
         Case[][] css= pl.getPlateau();
 //les cases non navigable

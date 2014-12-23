@@ -5,7 +5,7 @@ import com.tresors.model.Navire;
 import java.awt.*;
 
 /**
- * Composant d'affichage Navire
+ * Composant d'affichage navire
  * Created by arthurveys on 19/12/14.
  */
 public class NavireComponent extends Component{
