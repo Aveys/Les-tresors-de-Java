@@ -1,4 +1,4 @@
-package com.tresors.event.Navire;
+package com.tresors.event.navire;
 
 import javax.swing.event.ChangeEvent;
 import java.awt.*;
