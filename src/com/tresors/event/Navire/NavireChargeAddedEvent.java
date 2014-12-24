@@ -19,6 +19,7 @@ public class NavireChargeAddedEvent extends ChangeEvent {
     public NavireChargeAddedEvent(Object source, Charge chargeAdded) {
         super(source);
         this.chargeAdded = chargeAdded;
+        System.out.println(chargeAdded);
     }
 
     public Charge getChargeAdded() {

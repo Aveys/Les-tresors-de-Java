@@ -8,20 +8,20 @@ import javax.swing.event.ChangeEvent;
  * Created by Paul on 11/12/2014.
  */
 public class NavireChargeRemovedEvent extends ChangeEvent{
-    private Charge chargeRemoved;
+    private int posChargeRemoved;
     /**
      * Constructs a ChangeEvent object.
      *
      * @param source the Object that is the source of the event
      *               (typically <code>this</code>)
      */
-    public NavireChargeRemovedEvent(Object source, Charge chargeRemoved) {
+    public NavireChargeRemovedEvent(Object source, int posChargeRemoved) {
         super(source);
-        this.chargeRemoved = chargeRemoved;
+        this.posChargeRemoved = posChargeRemoved;
     }
 
-    public Charge getChargeRemoved() {
-        return chargeRemoved;
+    public int getPosChargeRemoved() {
+        return posChargeRemoved;
     }
 
 }
