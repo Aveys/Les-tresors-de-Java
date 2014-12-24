@@ -1,6 +1,8 @@
 package com.tresors.vue;
 
+import com.tresors.controller.Controller;
 import com.tresors.model.ENavireColor;
+import com.tresors.model.Navire;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,9 +17,11 @@ public class VueAttaquer extends JPanel{
     private BateauPanel bateau1;
     private BateauPanel bateau2;
     private JButton buttonAttaquer;
+    private Controller controller = null;
 
-    public VueAttaquer() {
+    public VueAttaquer(Controller controllerPlateau) {
         super();
+        this.controller=controllerPlateau;
         bateau1 = new BateauPanel(ENavireColor.Blanc);
         bateau2 = new BateauPanel(ENavireColor.Bleu);
         buttonAttaquer = new JButton("Attaquer");
@@ -36,11 +40,14 @@ public class VueAttaquer extends JPanel{
 
         buttonAttaquer.addActionListener(new ActionListener() {
 
+
             @Override
             public void actionPerformed(ActionEvent e) {
+                Navire n =controller.getModel().getListJoueurs().get(controller.getCurrentPlayer());
+                int nbCanons=n.getNbCanons();
                 int de1 = (int) (1 + (Math.random() * (6 - 1)));
                 JOptionPane.showMessageDialog(getPanel().getParent(),
-                        "Résultat du dé :   " + nbRandom);
+                        "Résultat du dé :   " + de1);
             }
         });
     }

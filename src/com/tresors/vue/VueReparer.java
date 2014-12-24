@@ -163,10 +163,11 @@ public class VueReparer extends JPanel implements INavireChargeListener{
         if(event.getChargeAdded() instanceof Pirate)
         {
           bateauPanel.addPirate(event.getChargeAdded().getPosition());
-
         }
         else
-        {bateauPanel.addCanon(event.getChargeAdded().getPosition());}
+        {
+            bateauPanel.addCanon(event.getChargeAdded().getPosition());
+        }
 
     }
 
