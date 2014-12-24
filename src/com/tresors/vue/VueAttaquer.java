@@ -4,6 +4,8 @@ import com.tresors.model.ENavireColor;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * Created by Nicolas Sagon on 21/12/2014.
@@ -31,6 +33,20 @@ public class VueAttaquer extends JPanel{
         gbc.gridy = 1;
         gbc.insets.left = 224;
         this.add(buttonAttaquer, gbc);
+
+        buttonAttaquer.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int de1 = (int) (1 + (Math.random() * (6 - 1)));
+                JOptionPane.showMessageDialog(getPanel().getParent(),
+                        "Résultat du dé :   " + nbRandom);
+            }
+        });
+    }
+
+    public JPanel getPanel(){
+        return this;
     }
 
 
