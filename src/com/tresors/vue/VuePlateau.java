@@ -1,8 +1,7 @@
 package com.tresors.vue;
 
-import com.tresors.HexGame;
 import com.tresors.controller.Controller;
-import com.tresors.model.ENavireColor;
+
 
 import javax.swing.*;
 import java.awt.*;
@@ -26,6 +25,7 @@ public class VuePlateau extends JPanel {
     private JLabel labelAction;
     private JButton buttonPassTour;
     private Controller controller = null;
+
 
     public VuePlateau(Controller controllerPlateau) {
 
@@ -103,6 +103,14 @@ public class VuePlateau extends JPanel {
         repairButton = new JButton("Réparer");
         gbc.insets.top = 60;
         repairButton.setEnabled(false);
+        repairButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                getController().doStartRepair();
+
+            }
+        });
         mainPanel.add(repairButton, gbc);
 
         moveButton = new JButton("Se deplacer");
@@ -124,7 +132,10 @@ public class VuePlateau extends JPanel {
                 updateCurrentPlayerName();
                 updateStageLabel();
                 updateAllowedActions();
-                switch (getController().getCurrentPlayer()) {
+
+                bateauPanel.changeCouleur(getController().getModel().getListJoueurs().get(getController().getCurrentPlayer()).getColor());
+
+               /* switch (getController().getCurrentPlayer()) {
                     case 0:
                         bateauPanel.changeCouleur(ENavireColor.Bleu);
                         break;
@@ -143,12 +154,12 @@ public class VuePlateau extends JPanel {
                     case 5:
                         bateauPanel.changeCouleur(ENavireColor.Blanc);
                         break;
-                }
+                }*/
             }
         });
         mainPanel.add(buttonPassTour, gbc);
 
-        bateauPanel = new BateauPanel(ENavireColor.Bleu);
+        bateauPanel = new BateauPanel(this.getController().getModel().getListJoueurs().get(this.getController().getCurrentPlayer()));
         gbc.fill = GridBagConstraints.BOTH;
         gbc.insets.top = 160;
         mainPanel.add(bateauPanel, gbc);

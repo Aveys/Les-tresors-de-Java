@@ -56,6 +56,8 @@ public class Plateau extends Observable{
                 }
             }
         }
+
+
         /*
         WTF
         Attribution des navires pour chaque joueur
@@ -105,39 +107,6 @@ public class Plateau extends Observable{
         return repaireTemp;
     }
 
-//TODO rennomer la fonction car je n'ai pas eu d'idee de nom
-    /**
-     * methode de deplacement retournent la liste des cases autorise au joueur
-     * @param  position du joueur lors de l'appel initial
-     * @param  nombre de deplacement autorise pour ce joueur
-     * @return la liste des cases autoriser (a colorier en verts)
-     */
-   /* public ArrayList<Case> caseAuthorized(ArrayList<Case> positionInitiale, int nmbDePirate){
-        if(nmbDePirate!=0){
-            //pas fini la recursion
-            ArrayList<Case> listeCase = positionInitiale;
-            // pour toute les dernieres case quelle sont les cases a coté ou on a le droits d'aller
-            for (Case tmpCase : positionInitiale){
-                ArrayList<Point> listeCaseTemp;
-                listeCaseTemp = HexToolbox.getVoisins(tmpCase.getCoord());
-                //est-ce que ces voisins sont des cases navigable
-                for (Point point : listeCaseTemp){
-                    if(HexToolbox.estNavigable(this.plateau,point)){
-                        listeCaseTemp.remove(point);
-                    }
-                }
-                //  cases correspondant a la liste des points et les ajoute au navigable
-                for (Point point : listeCaseTemp){
-                    listeCase.add(getCase(point));
-                }
-            }
-            return caseAuthorized(listeCase, nmbDePirate-1);
-
-        }
-        else
-            return positionInitiale;
-    }
-*/
 
 
     public Set<Point> deplacementPossible(Point p, int nbDePirate){

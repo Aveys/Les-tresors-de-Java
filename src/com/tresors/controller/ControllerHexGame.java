@@ -3,7 +3,7 @@ package com.tresors.controller;
 import com.tresors.model.ENavireColor;
 import com.tresors.model.Plateau;
 import com.tresors.vue.FramePrincipal;
-import com.tresors.HexGame;
+import com.tresors.vue.HexGame;
 import com.tresors.vue.HexMech;
 
 import javax.swing.*;
@@ -63,8 +63,45 @@ public class ControllerHexGame extends Controller {
         return 0;
     }
 
+
+
     @Override
     public void notifyPlayerMoved(int x, int y) {
+
+    }
+
+    @Override
+    public void doStartRepair() {
+
+    }
+
+    @Override
+    public void ajouterPirateRepair() {
+
+    }
+
+    @Override
+    public void ajouterCanonRepair() {
+
+    }
+
+    @Override
+    public void supprimerCanonRepair() {
+
+    }
+
+    @Override
+    public void supprimerPirateRepair() {
+
+    }
+
+    @Override
+    public void setView(JPanel view) {
+
+    }
+
+    @Override
+    public void doStartPlateau() {
 
     }
 }

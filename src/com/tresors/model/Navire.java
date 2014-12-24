@@ -2,6 +2,7 @@ package com.tresors.model;
 
 import com.tresors.event.navire.*;
 
+
 import javax.swing.event.EventListenerList;
 import java.awt.*;
 import java.util.ArrayList;
@@ -66,6 +67,7 @@ public class Navire {
     public void ajouterPirate(Pirate pirate){
         //ajoute un pirate à la fin de l'array list
         this.emplacement.add(pirate);
+
         fireChargeAdded(pirate);
     }
     /**
@@ -151,8 +153,9 @@ public class Navire {
     if(emplacement.get(pos)==null)
         return false;
     else {
+        int position= emplacement.get(pos).getPosition();
         emplacement.remove(pos);
-        fireChargeRemoved(this.getEmplacement(pos));
+        fireChargeRemoved(position);
        }
        return true;
     }
@@ -167,6 +170,64 @@ public class Navire {
             list.put(i, emplacement.get(i));
         }
         return list;
+    }
+    public String  getTypeCharge(int i) {
+            //System.out.println(emplacement.get(j).getPosition() +"=="+i);
+            for(Charge c: emplacement)
+            {
+
+                if (c.getPosition() == i) {
+                    if (c instanceof Pirate)
+                        return "Pirate";
+                    if (c instanceof Canon)
+                        return "Canon";
+                }
+
+            }
+        return "null";
+    }
+
+
+    public ArrayList<Integer> getPositionLibre() {
+        ArrayList<Integer> positionLibre= new ArrayList<Integer>();
+
+        for (int i = 0; i <6 ; i++) {positionLibre.add(i);}
+
+        for(Charge c: emplacement)
+        {
+
+            positionLibre.remove(positionLibre.indexOf(c.getPosition()));
+        }
+
+
+        return positionLibre;
+    }
+
+    public void supprimerPirate() {
+        for (int i = 0; i <6 ; i++) {
+                if (emplacement.get(i) instanceof Pirate) {
+                    {
+                        int pos= emplacement.get(i).getPosition();
+                        emplacement.remove(i);
+                        fireChargeRemoved(pos);
+                        break;
+                    }
+
+                }
+            }
+
+    }
+
+    public void supprimerCanon() {
+        for (int i = 0; i <6 ; i++) {
+            if (emplacement.get(i) instanceof Canon) {
+                int pos= emplacement.get(i).getPosition();
+                emplacement.remove(i);
+                fireChargeRemoved(pos);
+                break;
+            }
+        }
+
     }
 
     // Listeners
@@ -248,8 +309,8 @@ public class Navire {
                 listener.canonsDecreased(new RepairChangeNbCanonEvent(this, getNbCanons()));
             }
         }
-    }
-    public void fireNbPiratesChanged(int NbPirates, String type){
+    }*/
+   /* public void fireNbPiratesChanged(int NbPirates, String type){
         IRepairPirateListener[] listenerList = (IRepairPirateListener[])listeners.getListeners(IRepairPirateListener.class);
         if (type=="ajout") {
             for (IRepairPirateListener listener : listenerList) {
@@ -294,18 +355,31 @@ public class Navire {
     }
 
     public void fireChargeAdded(Charge charge){
+
         INavireChargeListener[] listenerList = (INavireChargeListener[])listeners.getListeners(INavireChargeListener.class);
+
         for (INavireChargeListener listener : listenerList) {
             //TODO gérer le traitement de l'ajout d'une charge
-            listener.chargeAdded(new NavireChargeAddedEvent(this, getEmplacement(charge.getPosition())));
+            System.out.print(charge.getPosition());
+            listener.chargeAdded(new NavireChargeAddedEvent(this, charge));
         }
     }
 
-    public void fireChargeRemoved(Charge charge){
+    public void fireChargeRemoved(int position){
         INavireChargeListener[] listenerList = (INavireChargeListener[])listeners.getListeners(INavireChargeListener.class);
         for (INavireChargeListener listener : listenerList) {
             //TODO gérer le traitement de l'ajout d'une charge
-            listener.chargeRemoved(new NavireChargeRemovedEvent(this, getEmplacement(charge.getPosition())));
+            listener.chargeRemoved(new NavireChargeRemovedEvent(this, position));
         }
     }
+
+
+    public void addRepairChargeListener(INavireChargeListener listener){
+
+        listeners.add(INavireChargeListener.class, listener);
+    }
+    public void removeRepairChargeListener(INavireChargeListener l){
+        listeners.remove(INavireChargeListener.class, l);
+    }
+
 }
