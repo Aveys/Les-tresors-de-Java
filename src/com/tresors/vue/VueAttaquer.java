@@ -19,9 +19,9 @@ public class VueAttaquer extends JPanel{
     private JButton buttonAttaquer;
     private Controller controller = null;
 
-    public VueAttaquer(Controller controllerPlateau) {
+    public VueAttaquer(Controller controllerAttaquer) {
         super();
-        this.controller=controllerPlateau;
+        this.controller=controllerAttaquer;
         bateau1 = new BateauPanel(ENavireColor.Blanc);
         bateau2 = new BateauPanel(ENavireColor.Bleu);
         buttonAttaquer = new JButton("Attaquer");

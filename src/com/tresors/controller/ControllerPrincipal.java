@@ -36,7 +36,7 @@ public class ControllerPrincipal {
     }
     public void doStartRepair(){
 
-    this.activeController = new ControllerPlateau(this.model, this.frame, this,"reparer");
+    this.activeController = new ControllerReparer(this.model, this.frame, this);
 
     }
 
@@ -47,6 +47,10 @@ public class ControllerPrincipal {
     }
 
     public void doStartPlateau() {
-            this.activeController = new ControllerPlateau(this.model, this.frame, this,"plateau");
+            this.activeController = new ControllerPlateau(this.model, this.frame,this);
     }
+    public void doStartAttaquer() {
+        this.activeController = new ControllerAttaquer(this.model, this.frame,this);
+    }
+
 }

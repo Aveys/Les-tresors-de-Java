@@ -38,9 +38,9 @@ public class VueReparer extends JPanel implements INavireChargeListener{
     private JButton quitter;
 
 
-    public VueReparer(Controller controllerPlateau) {
+    public VueReparer(Controller controllerReparer) {
 
-        this.controller = controllerPlateau;
+        this.controller = controllerReparer;
         mainPanel = new JPanel();
         mainPanel.setLayout(new GridBagLayout());
 

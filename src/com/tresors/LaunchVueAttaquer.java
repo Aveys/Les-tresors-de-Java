@@ -13,12 +13,12 @@ public class LaunchVueAttaquer {
     public static void main(String args[]){
 
         JFrame test = new JFrame();
-        JPanel panelAttaque = new VueAttaquer();
+        /*JPanel panelAttaque = new VueAttaquer();
         test.add(panelAttaque);
         test.setVisible(true);
         test.setExtendedState(JFrame.MAXIMIZED_BOTH);
         test.setMinimumSize(new Dimension(800, 600));
-        test.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        test.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);*/
 
     }
 

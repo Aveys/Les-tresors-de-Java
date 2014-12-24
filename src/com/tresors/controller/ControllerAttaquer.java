@@ -1,10 +1,9 @@
 package com.tresors.controller;
 
-
-
 import com.tresors.event.navire.INavireChargeListener;
 import com.tresors.model.*;
 import com.tresors.vue.FramePrincipal;
+import com.tresors.vue.VueAttaquer;
 import com.tresors.vue.VuePlateau;
 import com.tresors.vue.VueReparer;
 
@@ -13,10 +12,10 @@ import java.awt.*;
 import java.util.ArrayList;
 
 /**
- * Created by arthurveys on 21/11/14.
- * Projet java ${PROJECT}
+ * Created by gael on 24/12/2014.
  */
-public class ControllerPlateau extends Controller {
+public class ControllerAttaquer extends Controller  {
+
 
     /*The Repair View, initialized to NULL*/
     public JPanel view = null;
@@ -31,40 +30,27 @@ public class ControllerPlateau extends Controller {
 
 
     //dostartgame
-    public ControllerPlateau(Plateau model, FramePrincipal f, ControllerPrincipal controllerPrincipal) {
+    public ControllerAttaquer(Plateau model, FramePrincipal f, ControllerPrincipal controllerPrincipal) {
         initController(model,f,controllerPrincipal);
 
 
         //test reparer ajout des pirates / canons
         currentPlayer = 0;
-
-        Navire n =this.getModel().getListJoueurs().get(currentPlayer);
-        n.ajouterPirate(new Pirate(1));
-        n.ajouterPirate(new Pirate(2));
-        n.ajouterPirate(new Pirate(5));
-
-        n.ajouterCanon(new Canon(4));
-        n.ajouterCanon(new Canon(0));
-
         //fin de test
-
-
-        view = new VuePlateau(this);
+        view = new VueAttaquer(this);
         currentPlayerStage = 1;
-
         framePrincipal.changeView(view);
         addListenersToModel();
     }
 
-  //les autres
-
+    //les autres
 
     /**
      * A Method that adds listeners to the model
      */
     private void addListenersToModel() {
 
-
+        model.getListJoueurs().get(currentPlayer).addRepairChargeListener((INavireChargeListener) this.view);
     }
 
 
@@ -88,7 +74,7 @@ public class ControllerPlateau extends Controller {
             this.currentPlayerStage = 1;//on reset la valeur à stage1
             nextPlayer();//on change de joueur
         }
-       else if (this.currentPlayerStage == 1){//Si on est au stage 1
+        else if (this.currentPlayerStage == 1){//Si on est au stage 1
             this.currentPlayerStage = 2;//on passe au stage 2
         }
     }
@@ -116,30 +102,62 @@ public class ControllerPlateau extends Controller {
 
     @Override
     public void doStartRepair() {
-        this.controllerPrincipal.doStartRepair();
     }
 
     @Override
     public void ajouterPirateRepair() {
+        Navire n =this.getModel().getListJoueurs().get(currentPlayer);
+        ArrayList<Integer> positionLibre= n.getPositionLibre();
+        if(positionLibre.size()>0)
+            n.ajouterPirate(new Pirate(positionLibre.get(0)));
+        else {
+            System.out.println("action imposible");
+        }
     }
 
     @Override
     public void ajouterCanonRepair() {
+        Navire n =this.getModel().getListJoueurs().get(currentPlayer);
+        ArrayList<Integer> positionLibre= n.getPositionLibre();
+        if(positionLibre.size()>0)
+            n.ajouterCanon(new Canon(positionLibre.get(0)));
+        else {
+            System.out.println("action imposible");
+        }
+
+
     }
 
     @Override
     public void supprimerCanonRepair() {
+        Navire n =this.getModel().getListJoueurs().get(currentPlayer);
+        ArrayList<Integer> positionLibre= n.getPositionLibre();
+        if(n.getNbCanons()>0)
+            n.supprimerCanon();
+        else {
+            System.out.println("action imposible");
+        }
+
     }
 
     @Override
     public void supprimerPirateRepair() {
+        Navire n =this.getModel().getListJoueurs().get(currentPlayer);
+
+        if(n.getNbPirates()>0)
+            n.supprimerPirate();
+        else {
+            System.out.println("action imposible");
+        }
     }
 
 
     @Override
     public void doStartPlateau() {
-    }
+        this.controllerPrincipal.doStartPlateau();
+        currentPlayerStage=3;
 
+    }
 
     public void setCurrentPlayerStage(int currentPlayerStage) {
         this.currentPlayerStage = currentPlayerStage;
@@ -162,8 +180,6 @@ public class ControllerPlateau extends Controller {
 
     @Override
     public void doStartAttaquer() {
-        this.controllerPrincipal.doStartAttaquer();
 
     }
-
 }

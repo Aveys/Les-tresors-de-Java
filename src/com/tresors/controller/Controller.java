@@ -31,4 +31,6 @@ public abstract class Controller {
     public abstract void supprimerCanonRepair();
     public abstract void supprimerPirateRepair();
     public abstract void setView(JPanel view);
+
+    public abstract void doStartAttaquer();
 }

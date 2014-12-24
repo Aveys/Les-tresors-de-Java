@@ -101,6 +101,11 @@ public class ControllerHexGame extends Controller {
     }
 
     @Override
+    public void doStartAttaquer() {
+
+    }
+
+    @Override
     public void doStartPlateau() {
 
     }
