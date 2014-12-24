@@ -45,9 +45,12 @@ public class VueAttaquer extends JPanel{
             public void actionPerformed(ActionEvent e) {
                 Navire n =controller.getModel().getListJoueurs().get(controller.getCurrentPlayer());
                 int nbCanons=n.getNbCanons();
-                int de1 = (int) (1 + (Math.random() * (6 - 1)));
+                int[] tabDe = new int[nbCanons];
+                for(int i = 0; i < nbCanons; i++){
+                    tabDe[i] = (int) (1 + (Math.random() * (6 - 1)));
+                }
                 JOptionPane.showMessageDialog(getPanel().getParent(),
-                        "Résultat du dé :   " + de1);
+                        "Résultat du dé :   " + tabDe);
             }
         });
     }
