@@ -3,6 +3,9 @@ package com.tresors.controller;
 import com.tresors.model.Plateau;
 import com.tresors.vue.FramePrincipal;
 
+
+import javax.swing.*;
+
 /**
  * Controller Principal qui appelle les autres controllers
  *  'show' affiche une vue
@@ -16,6 +19,7 @@ public class ControllerPrincipal {
     private Controller activeController;
     private FramePrincipal frame;
     private Plateau model;
+    private JPanel view;
 
     public ControllerPrincipal(){
         frame = new FramePrincipal();
@@ -27,10 +31,22 @@ public class ControllerPrincipal {
     }
 
     public void showViewPlateau(){
+
         this.activeController = new ControllerPlateau(model, frame, this);
+    }
+    public void doStartRepair(){
+
+    this.activeController = new ControllerPlateau(this.model, this.frame, this,"reparer");
+
     }
 
     public void doStartGame(){
+
+
         this.activeController = new ControllerPlateau(this.model, this.frame, this);
+    }
+
+    public void doStartPlateau() {
+            this.activeController = new ControllerPlateau(this.model, this.frame, this,"plateau");
     }
 }

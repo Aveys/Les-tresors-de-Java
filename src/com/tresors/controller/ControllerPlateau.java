@@ -1,24 +1,23 @@
 package com.tresors.controller;
 
-import com.tresors.model.ENavireColor;
-import com.tresors.model.Navire;
-import com.tresors.model.Plateau;
+
+
+import com.tresors.event.navire.INavireChargeListener;
+import com.tresors.model.*;
 import com.tresors.vue.FramePrincipal;
 import com.tresors.vue.VuePlateau;
+import com.tresors.vue.VueReparer;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 /**
- * Controller de la vue Plateau
- *  'show' affiche une vue
- *  'notify' effectue une modification du model
- *  'do' lance une action demandée par la vue et gérée par le controller directement
- *  'fire' lance une modification de la vue depuis la modification du model
  * Created by arthurveys on 21/11/14.
  * Projet java ${PROJECT}
  */
 public class ControllerPlateau extends Controller {
+
     /*The Repair View, initialized to NULL*/
     public JPanel view = null;
     /*The Repair Model, initialized to NULL*/
@@ -30,21 +29,67 @@ public class ControllerPlateau extends Controller {
     private int currentPlayer;//valeur de l'index du joueur actuel commence à 1 et pas 0
     private int currentPlayerStage; //Variable indiquant à quel etape en est le joueur. Conditionne les actions possibles, etape 1 on peux attaquer ou se déplacer, etape 2 on peut attaquer ou réparer
 
+
+    //dostartgame
     public ControllerPlateau(Plateau model, FramePrincipal f, ControllerPrincipal controllerPrincipal) {
         initController(model,f,controllerPrincipal);
+
+
+        //test reparer ajout des pirates / canons
+        currentPlayer = 0;
+
+        Navire n =this.getModel().getListJoueurs().get(currentPlayer);
+        n.ajouterPirate(new Pirate(1));
+        n.ajouterPirate(new Pirate(2));
+        n.ajouterPirate(new Pirate(5));
+
+        n.ajouterCanon(new Canon(4));
+        n.ajouterCanon(new Canon(0));
+
+        //fin de test
+
+
         view = new VuePlateau(this);
         currentPlayerStage = 1;
-        currentPlayer = 0;
+
         framePrincipal.changeView(view);
         addListenersToModel();
+    }
+
+  //les autres
+    public ControllerPlateau(Plateau model, FramePrincipal f, ControllerPrincipal controllerPrincipal, String typeView) {
+        initController(model,f,controllerPrincipal);
+
+
+        //test reparer ajout des pirates / canons
+        currentPlayer = 0;
+
+
+        if(typeView=="reparer") {
+            this.view = new VueReparer(this);
+        }
+        if(typeView=="plateau") {
+            this.view = new VuePlateau(this);
+        }
+        currentPlayerStage = 1;
+
+        framePrincipal.changeView(view);
+        if(typeView=="reparer")
+        addRepairListenerToModel();
+
     }
 
     /**
      * A Method that adds listeners to the model
      */
     private void addListenersToModel() {
-        //model.addRepairCanonListener(view);
-        //model.addRepairPirateListener(view);
+
+
+    }
+
+    public void addRepairListenerToModel()
+    {
+        model.getListJoueurs().get(currentPlayer).addRepairChargeListener((INavireChargeListener) this.view);
     }
 
     //Notifications de modification sur le model
@@ -89,7 +134,69 @@ public class ControllerPlateau extends Controller {
 
     @Override
     public void notifyPlayerMoved(int x, int y) {
-        model.getListJoueurs().get(currentPlayer).fireEmplacementChanged(new Point(x,y));
+        model.getListJoueurs().get(currentPlayer).fireEmplacementChanged(new Point(x, y));
+    }
+
+    @Override
+    public void doStartRepair() {
+
+        this.controllerPrincipal.doStartRepair();
+
+    }
+
+    @Override
+    public void ajouterPirateRepair() {
+        Navire n =this.getModel().getListJoueurs().get(currentPlayer);
+        ArrayList<Integer> positionLibre= n.getPositionLibre();
+        if(positionLibre.size()>0)
+        n.ajouterPirate(new Pirate(positionLibre.get(0)));
+        else {
+        System.out.println("action imposible");
+        }
+    }
+
+    @Override
+    public void ajouterCanonRepair() {
+        Navire n =this.getModel().getListJoueurs().get(currentPlayer);
+        ArrayList<Integer> positionLibre= n.getPositionLibre();
+        if(positionLibre.size()>0)
+            n.ajouterCanon(new Canon(positionLibre.get(0)));
+        else {
+            System.out.println("action imposible");
+        }
+
+
+    }
+
+    @Override
+    public void supprimerCanonRepair() {
+        Navire n =this.getModel().getListJoueurs().get(currentPlayer);
+        ArrayList<Integer> positionLibre= n.getPositionLibre();
+        if(n.getNbCanons()>0)
+        n.supprimerCanon();
+        else {
+            System.out.println("action imposible");
+        }
+
+    }
+
+    @Override
+    public void supprimerPirateRepair() {
+        Navire n =this.getModel().getListJoueurs().get(currentPlayer);
+
+        if(n.getNbPirates()>0)
+            n.supprimerPirate();
+        else {
+            System.out.println("action imposible");
+        }
+    }
+
+
+    @Override
+    public void doStartPlateau() {
+        this.controllerPrincipal.doStartPlateau();
+        currentPlayerStage=3;
+
     }
 
     public void setCurrentPlayerStage(int currentPlayerStage) {
@@ -106,6 +213,9 @@ public class ControllerPlateau extends Controller {
     @Override
     public Plateau getModel() {
         return model;
+    }
+    public void setView(JPanel view) {
+        this.view = view;
     }
 
 }

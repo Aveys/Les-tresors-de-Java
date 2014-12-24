@@ -4,6 +4,8 @@ import com.tresors.model.ENavireColor;
 import com.tresors.model.Plateau;
 import com.tresors.vue.FramePrincipal;
 
+import javax.swing.*;
+
 /**
  * Controller Principal qui appelle les autres controllers et est étendus par les autres controllers
  *  'show' affiche une vue
@@ -21,4 +23,12 @@ public abstract class Controller {
     public abstract void nextStage();
     public abstract int getCurrentPlayerStage();
     public abstract void notifyPlayerMoved(int x,int y);
+    public abstract void doStartRepair();
+    public abstract void doStartPlateau();
+
+    public abstract void ajouterPirateRepair();
+    public abstract void ajouterCanonRepair();
+    public abstract void supprimerCanonRepair();
+    public abstract void supprimerPirateRepair();
+    public abstract void setView(JPanel view);
 }

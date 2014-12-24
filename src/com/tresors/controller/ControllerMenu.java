@@ -43,7 +43,7 @@ public class ControllerMenu extends Controller {
     }
 
     public void notifyAddJoueur(String nameJoueur, ENavireColor couleurJoueur){
-        model.getListJoueurs().add(new Navire(nameJoueur,couleurJoueur));
+        model.getListJoueurs().add(new Navire(nameJoueur, couleurJoueur));
     }
 
     public void doStartGame(){
@@ -72,6 +72,41 @@ public class ControllerMenu extends Controller {
 
     @Override
     public void notifyPlayerMoved(int x, int y) {
+
+    }
+
+    @Override
+    public void doStartRepair() {
+
+    }
+
+    @Override
+    public void ajouterPirateRepair() {
+
+    }
+
+    @Override
+    public void ajouterCanonRepair() {
+
+    }
+
+    @Override
+    public void supprimerCanonRepair() {
+
+    }
+
+    @Override
+    public void supprimerPirateRepair() {
+
+    }
+
+    @Override
+    public void setView(JPanel view) {
+
+    }
+
+    @Override
+    public void doStartPlateau() {
 
     }
 
