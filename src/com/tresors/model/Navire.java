@@ -1,6 +1,6 @@
 package com.tresors.model;
 
-import com.tresors.event.Navire.*;
+import com.tresors.event.navire.*;
 
 import javax.swing.event.EventListenerList;
 import java.awt.*;
@@ -326,22 +326,22 @@ public class Navire {
     }
 */
     public void fireEmplacementChanged(Point P){
-        INavirePositionListener[] listenerList = (com.tresors.event.Navire.INavirePositionListener[])listeners.getListeners(com.tresors.event.Navire.INavirePositionListener.class);
-        for (com.tresors.event.Navire.INavirePositionListener listener : listenerList) {
-            listener.positionChanged(new com.tresors.event.Navire.NavirePositionChangedEvent(this, getCoordonnees()));
+        INavirePositionListener[] listenerList = (com.tresors.event.navire.INavirePositionListener[])listeners.getListeners(com.tresors.event.navire.INavirePositionListener.class);
+        for (com.tresors.event.navire.INavirePositionListener listener : listenerList) {
+            listener.positionChanged(new com.tresors.event.navire.NavirePositionChangedEvent(this, getCoordonnees()));
         }
     }
 
     public void fireNameChanged(String name){
-        com.tresors.event.Navire.INavireNameListener[] listenerList = (com.tresors.event.Navire.INavireNameListener[])listeners.getListeners(com.tresors.event.Navire.INavireNameListener.class);
-        for (com.tresors.event.Navire.INavireNameListener listener : listenerList) {
-            listener.nameChanged(new com.tresors.event.Navire.NavireNameChangedEvent(this, getCapitaine()));
+        com.tresors.event.navire.INavireNameListener[] listenerList = (com.tresors.event.navire.INavireNameListener[])listeners.getListeners(com.tresors.event.navire.INavireNameListener.class);
+        for (com.tresors.event.navire.INavireNameListener listener : listenerList) {
+            listener.nameChanged(new com.tresors.event.navire.NavireNameChangedEvent(this, getCapitaine()));
         }
     }
 
     public void fireColorChanged(String color){
-        com.tresors.event.Navire.INavireColorListener[] listenerList = (com.tresors.event.Navire.INavireColorListener[])listeners.getListeners(com.tresors.event.Navire.INavireColorListener.class);
-        for (com.tresors.event.Navire.INavireColorListener listener : listenerList) {
+        com.tresors.event.navire.INavireColorListener[] listenerList = (com.tresors.event.navire.INavireColorListener[])listeners.getListeners(com.tresors.event.navire.INavireColorListener.class);
+        for (com.tresors.event.navire.INavireColorListener listener : listenerList) {
             listener.colorChanged(new NavireColorChangedEvent(this, getColor()));
         }
     }
@@ -368,7 +368,7 @@ public class Navire {
         INavireChargeListener[] listenerList = (INavireChargeListener[])listeners.getListeners(INavireChargeListener.class);
         for (INavireChargeListener listener : listenerList) {
             //TODO gérer le traitement de l'ajout d'une charge
-            //listener.chargeRemoved(new NavireChargeRemovedEvent(this, position));
+            listener.chargeRemoved(new NavireChargeRemovedEvent(this, position));
         }
     }
 

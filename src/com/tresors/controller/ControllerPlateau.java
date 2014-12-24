@@ -2,7 +2,7 @@ package com.tresors.controller;
 
 
 
-import com.tresors.event.Navire.INavireChargeListener;
+import com.tresors.event.navire.INavireChargeListener;
 import com.tresors.model.*;
 import com.tresors.vue.FramePrincipal;
 import com.tresors.vue.VuePlateau;
