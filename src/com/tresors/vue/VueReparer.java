@@ -6,9 +6,9 @@ package com.tresors.vue;
 
 
 import com.tresors.controller.Controller;
-import com.tresors.event.navire.INavireChargeListener;
-import com.tresors.event.navire.NavireChargeAddedEvent;
-import com.tresors.event.navire.NavireChargeRemovedEvent;
+import com.tresors.event.Navire.INavireChargeListener;
+import com.tresors.event.Navire.NavireChargeAddedEvent;
+import com.tresors.event.Navire.NavireChargeRemovedEvent;
 
 
 import javax.swing.*;
@@ -174,7 +174,7 @@ public class VueReparer extends JPanel implements INavireChargeListener{
 
     @Override
     public void chargeRemoved(NavireChargeRemovedEvent event) {
-     bateauPanel.removeCharge(event.getPosChargeRemoved());
+//     bateauPanel.removeCharge(event.getPosChargeRemoved());
 
     }
 }

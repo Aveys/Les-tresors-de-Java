@@ -2,6 +2,7 @@ package com.tresors;
 
 import com.tresors.vue.VueAttaquer;
 
+import javax.swing.*;
 import java.awt.*;
 
 /**
@@ -11,10 +12,13 @@ public class LaunchVueAttaquer {
 
     public static void main(String args[]){
 
-        Frame test = new Frame();
-        test.add(new VueAttaquer());
+        JFrame test = new JFrame();
+        JPanel panelAttaque = new VueAttaquer();
+        test.add(panelAttaque);
         test.setVisible(true);
-        test.pack();
+        test.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        test.setMinimumSize(new Dimension(800, 600));
+        test.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
     }
 

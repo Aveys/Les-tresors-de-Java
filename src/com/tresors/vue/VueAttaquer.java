@@ -12,25 +12,25 @@ public class VueAttaquer extends JPanel{
 
     private BateauPanel bateau1;
     private BateauPanel bateau2;
+    private JButton buttonAttaquer;
 
     public VueAttaquer() {
-
+        super();
         bateau1 = new BateauPanel(ENavireColor.Blanc);
         bateau2 = new BateauPanel(ENavireColor.Bleu);
-
-        this.setLayout(new BorderLayout());
-
-        JPanel contentBateau = new JPanel();
-        contentBateau.setLayout(new FlowLayout());
-
-        contentBateau.add(bateau1);
-        contentBateau.add(bateau2);
-
-        this.add(contentBateau, BorderLayout.CENTER);
-
-        this.setVisible(true);
-        this.repaint();
-
+        buttonAttaquer = new JButton("Attaquer");
+        this.setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.anchor = GridBagConstraints.CENTER;
+        bateau1.setPreferredSize(new Dimension(224,448));
+        bateau2.setPreferredSize(new Dimension(224,448));
+        this.add(bateau1, gbc);
+        this.add(bateau2, gbc);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridy = 1;
+        gbc.insets.left = 224;
+        this.add(buttonAttaquer, gbc);
     }
 
 
