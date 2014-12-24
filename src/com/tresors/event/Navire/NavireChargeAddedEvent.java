@@ -1,4 +1,4 @@
-package com.tresors.event.Navire;
+package com.tresors.event.navire;
 
 import com.tresors.model.Charge;
 
@@ -10,6 +10,7 @@ import javax.swing.event.ChangeEvent;
 public class NavireChargeAddedEvent extends ChangeEvent {
     private Charge chargeAdded;
     /**
+     * FUCK
      * Constructs a ChangeEvent object.
      *
      * @param source the Object that is the source of the event
