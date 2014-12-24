@@ -1,5 +1,6 @@
 package com.tresors.controller;
 
+import com.tresors.model.Navire;
 import com.tresors.model.Plateau;
 import com.tresors.vue.FramePrincipal;
 
@@ -50,7 +51,9 @@ public class ControllerPrincipal {
             this.activeController = new ControllerPlateau(this.model, this.frame,this);
     }
     public void doStartAttaquer() {
-        this.activeController = new ControllerAttaquer(this.model, this.frame,this);
+        //test
+        Navire n = activeController.getNavireSelectedAttack();
+        this.activeController = new ControllerAttaquer(this.model, this.frame,this, n);
     }
 
 }

@@ -27,16 +27,18 @@ public class ControllerAttaquer extends Controller  {
     private FramePrincipal framePrincipal;
     private int currentPlayer;//valeur de l'index du joueur actuel commence à 1 et pas 0
     private int currentPlayerStage; //Variable indiquant à quel etape en est le joueur. Conditionne les actions possibles, etape 1 on peux attaquer ou se déplacer, etape 2 on peut attaquer ou réparer
-
+    private Navire navireSelectedAttack;
+    private Navire navireJoueurActuel;
 
     //dostartgame
-    public ControllerAttaquer(Plateau model, FramePrincipal f, ControllerPrincipal controllerPrincipal) {
+    public ControllerAttaquer(Plateau model, FramePrincipal f, ControllerPrincipal controllerPrincipal,Navire attackedNavire) {
         initController(model,f,controllerPrincipal);
 
 
-        //test reparer ajout des pirates / canons
+
         currentPlayer = 0;
-        //fin de test
+        navireSelectedAttack=attackedNavire;
+        navireJoueurActuel=model.getListJoueurs().get(currentPlayer);
         view = new VueAttaquer(this);
         currentPlayerStage = 1;
         framePrincipal.changeView(view);
@@ -176,6 +178,11 @@ public class ControllerAttaquer extends Controller  {
     }
     public void setView(JPanel view) {
         this.view = view;
+    }
+
+    @Override
+    public Navire getNavireSelectedAttack() {
+        return navireSelectedAttack;
     }
 
     @Override

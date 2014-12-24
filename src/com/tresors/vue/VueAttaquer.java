@@ -20,10 +20,11 @@ public class VueAttaquer extends JPanel{
     private Controller controller = null;
 
     public VueAttaquer(Controller controllerAttaquer) {
+
         super();
         this.controller=controllerAttaquer;
-        bateau1 = new BateauPanel(ENavireColor.Blanc);
-        bateau2 = new BateauPanel(ENavireColor.Bleu);
+        bateau1 = new BateauPanel(controller.getModel().getListJoueurs().get(controller.getCurrentPlayer()));
+        bateau2 = new BateauPanel(controller.getNavireSelectedAttack());
         buttonAttaquer = new JButton("Attaquer");
         this.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();

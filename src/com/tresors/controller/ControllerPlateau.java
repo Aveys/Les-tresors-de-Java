@@ -28,7 +28,7 @@ public class ControllerPlateau extends Controller {
     private FramePrincipal framePrincipal;
     private int currentPlayer;//valeur de l'index du joueur actuel commence à 1 et pas 0
     private int currentPlayerStage; //Variable indiquant à quel etape en est le joueur. Conditionne les actions possibles, etape 1 on peux attaquer ou se déplacer, etape 2 on peut attaquer ou réparer
-
+    private Navire NavireSelectedAttack;
 
     //dostartgame
     public ControllerPlateau(Plateau model, FramePrincipal f, ControllerPrincipal controllerPrincipal) {
@@ -36,19 +36,43 @@ public class ControllerPlateau extends Controller {
 
 
         //test reparer ajout des pirates / canons
+        ////
+        ////
         currentPlayer = 0;
 
         Navire n =this.getModel().getListJoueurs().get(currentPlayer);
-        n.ajouterPirate(new Pirate(1));
-        n.ajouterPirate(new Pirate(2));
-        n.ajouterPirate(new Pirate(5));
+        if(n.getNbCanons()+n.getNbPirates()<=0) {
+            n.ajouterPirate(new Pirate(1));
+            n.ajouterPirate(new Pirate(2));
+            n.ajouterPirate(new Pirate(5));
 
-        n.ajouterCanon(new Canon(4));
-        n.ajouterCanon(new Canon(0));
+            n.ajouterCanon(new Canon(4));
+            n.ajouterCanon(new Canon(0));
+        }
+        ///
+        ///
+        //fin de test
+        //test Attaquer ajout des pirates / canons
+        ////
+        ////
+        if(this.getModel().getListJoueurs().size()>=2) {
+            currentPlayer = 1;
 
+            n = this.getModel().getListJoueurs().get(currentPlayer);
+            if (n.getNbCanons() + n.getNbPirates() <= 0) {
+                n.ajouterPirate(new Pirate(1));
+                n.ajouterCanon(new Canon(2));
+                n.ajouterPirate(new Pirate(5));
+                n.ajouterCanon(new Canon(3));
+                n.ajouterCanon(new Canon(4));
+                n.ajouterCanon(new Canon(0));
+            }
+        }
+        ///
+        ///
         //fin de test
 
-
+        currentPlayer = 0;
         view = new VuePlateau(this);
         currentPlayerStage = 1;
 
@@ -162,8 +186,17 @@ public class ControllerPlateau extends Controller {
 
     @Override
     public void doStartAttaquer() {
-        this.controllerPrincipal.doStartAttaquer();
+        //todo selection du navire à attaquer
 
+        if(model.getListJoueurs().size()>=2) {
+            NavireSelectedAttack=model.getListJoueurs().get(1);
+            this.controllerPrincipal.doStartAttaquer();
+        }
+        else{System.out.print("pas assez de joueur");}
+    }
+
+    public Navire getNavireSelectedAttack() {
+        return NavireSelectedAttack;
     }
 
 }

@@ -1,6 +1,7 @@
 package com.tresors.controller;
 
 import com.tresors.model.ENavireColor;
+import com.tresors.model.Navire;
 import com.tresors.model.Plateau;
 import com.tresors.vue.FramePrincipal;
 import com.tresors.vue.HexGame;
@@ -98,6 +99,11 @@ public class ControllerHexGame extends Controller {
     @Override
     public void setView(JPanel view) {
 
+    }
+
+    @Override
+    public Navire getNavireSelectedAttack() {
+        return null;
     }
 
     @Override
