@@ -1,10 +1,7 @@
-package com.tresors;
+package com.tresors.vue;
 
 import com.tresors.model.Case;
 import com.tresors.model.Navire;
-import com.tresors.model.Plateau;
-import com.tresors.vue.HexMech;
-import com.tresors.vue.NavireComponent;
 
 import javax.swing.*;
 import java.awt.*;
@@ -59,24 +56,4 @@ public class HexGame extends JPanel{
     public void drawCircle(Graphics cg, int xCenter, int yCenter, int r) {
         cg.fillOval(xCenter-r, yCenter-r, 2*r, 2*r);
     }//end drawCircle
-
-    // ceci est un main
-    // sans dec'!
-    // :D
-    public static void main(String[] args){
-
-        Plateau pl = new Plateau(); //j'ai besoin de la grille de plateau
-        JFrame frame = new JFrame();// Frame pour tester
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        Container content = frame.getContentPane();
-        HexMech.setHeight(100);
-        HexMech.setBorders(5);
-
-        //content.add(new HexGame(pl.getPlateau(),100 ));//On ajoute le panel d'hexagons (ne fonctionne plus depuis l'ajout du dessin des navires
-        frame.setSize((int)(SCRSIZE/1.23), SCRSIZE);// taille de la frame (A revoir)
-        frame.setResizable(true);
-        frame.setLocationRelativeTo( null );
-        frame.setVisible(true);
-    }
-
 }
