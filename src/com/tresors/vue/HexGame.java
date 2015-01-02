@@ -88,9 +88,18 @@ public class HexGame extends JPanel{
      * Renvoi la case selon le systéme de coordonnées voulues par Paul
      * @param i la ligne voulue
      * @param j la colonne voulue
-     * @return la case
+     * @return la bonne case selon Paul
      */
     public Case GetCasePaulCoordinate(int i, int j){
-
+        if (j==2 || j==3)
+            return plateau[i][j-1];
+        else if (j==4||j==5)
+            return plateau[i][j-2];
+        else if (j==6||j==7)
+            return plateau[i][j-3];
+        else if (j==8)
+            return plateau[i][j-4];
+        else
+            return plateau[i][j];
     }
 }
