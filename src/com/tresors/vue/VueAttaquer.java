@@ -45,13 +45,18 @@ public class VueAttaquer extends JPanel{
             @Override
             public void actionPerformed(ActionEvent e) {
                 Navire n =controller.getModel().getListJoueurs().get(controller.getCurrentPlayer());
+                String tabDeResult = "";
                 int nbCanons=n.getNbCanons();
                 int[] tabDe = new int[nbCanons];
                 for(int i = 0; i < nbCanons; i++){
                     tabDe[i] = (int) (1 + (Math.random() * (6 - 1)));
+                    tabDeResult += tabDe[i] + ", ";
                 }
+
+                tabDeResult = tabDeResult.substring(0, tabDeResult.lastIndexOf(',') - 1);
+
                 JOptionPane.showMessageDialog(getPanel().getParent(),
-                        "Résultat du dé :   " + tabDe);
+                        "Résultat des dés :   " + tabDeResult);
             }
         });
     }
