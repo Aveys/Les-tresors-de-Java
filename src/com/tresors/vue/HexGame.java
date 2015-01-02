@@ -56,4 +56,15 @@ public class HexGame extends JPanel{
     public void drawCircle(Graphics cg, int xCenter, int yCenter, int r) {
         cg.fillOval(xCenter-r, yCenter-r, 2*r, 2*r);
     }//end drawCircle
+
+    /**
+     * Hommage à notre chef de projet
+     * Renvoi la case selon le systéme de coordonnées voulues par Paul
+     * @param i la ligne voulue
+     * @param j la colonne voulue
+     * @return la case
+     */
+    public Case GetCasePaulCoordinate(int i, int j){
+
+    }
 }
