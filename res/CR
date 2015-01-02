@@ -9,3 +9,14 @@ Attaquer : on clique sur un bateau sur la vue plateau que l'on veux attaquer, en
             On pourra afficher un label avec les actions effectuées.
 
 Affichage des Navires : Création d'un component qui affiche les navires sur le panel Hexgame.
+
+02/01/15
+Grille et déplacement : Arthur et Gael
+- Mise en conformité des coordonées de la grille et test des fonctions de deplacement (hexToPixel et pixeltoHex)
+- Deplacement
+
+Affichage des navire : Nicolas et Paul
+- Affichage d'un JPanel cliquable par navire
+- Attaque
+
+Présentation : tt le monde a partir de dimanche 20h
