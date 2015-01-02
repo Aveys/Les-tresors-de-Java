@@ -1,6 +1,7 @@
 package com.tresors.controller;
 
 import com.tresors.model.ENavireColor;
+import com.tresors.model.Navire;
 import com.tresors.model.Plateau;
 import com.tresors.vue.FramePrincipal;
 
@@ -31,4 +32,6 @@ public abstract class Controller {
     public abstract void supprimerCanonRepair();
     public abstract void supprimerPirateRepair();
     public abstract void setView(JPanel view);
+    public abstract Navire getNavireSelectedAttack();
+    public abstract void doStartAttaquer();
 }

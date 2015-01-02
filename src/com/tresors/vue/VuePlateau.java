@@ -100,6 +100,17 @@ public class VuePlateau extends JPanel {
         gbc.insets.top = 30;
         mainPanel.add(attackButton, gbc);
 
+
+        attackButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                getController().doStartAttaquer();
+
+            }
+        });
+
+
         repairButton = new JButton("Réparer");
         gbc.insets.top = 60;
         repairButton.setEnabled(false);

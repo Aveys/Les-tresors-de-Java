@@ -106,6 +106,16 @@ public class ControllerMenu extends Controller {
     }
 
     @Override
+    public Navire getNavireSelectedAttack() {
+        return null;
+    }
+
+    @Override
+    public void doStartAttaquer() {
+
+    }
+
+    @Override
     public void doStartPlateau() {
 
     }
