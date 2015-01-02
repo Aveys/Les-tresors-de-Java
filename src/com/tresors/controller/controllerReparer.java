@@ -180,6 +180,11 @@ public class ControllerReparer extends Controller {
     }
 
     @Override
+    public Navire getNavireSelectedAttack() {
+        return null;
+    }
+
+    @Override
     public void doStartAttaquer() {
 
     }

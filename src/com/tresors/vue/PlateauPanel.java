@@ -1,5 +1,7 @@
 package com.tresors.vue;
 
+import com.tresors.model.ENavireColor;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -23,6 +25,9 @@ public class PlateauPanel extends JPanel{
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+
+        this.repaint();
 
     }
 

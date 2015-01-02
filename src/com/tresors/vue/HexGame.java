@@ -1,9 +1,12 @@
 package com.tresors.vue;
 
+import com.tresors.controller.HexToolbox;
 import com.tresors.model.Case;
+import com.tresors.model.ENavireColor;
 import com.tresors.model.Navire;
 
 import javax.swing.*;
+import javax.swing.plaf.basic.BasicTableUI;
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -18,6 +21,8 @@ public class HexGame extends JPanel{
     private final Case[][] plateau;
     private final ArrayList<Navire> navires;
     public ArrayList<NavireComponent> GraphicsNavires;
+    private ArrayList<BateauAffichagePanel> listBateau;
+
 
     /**
      * Crée un panel de'hexagons
@@ -29,6 +34,27 @@ public class HexGame extends JPanel{
         this.plateau=plateau;
         this.navires=listJoueurs;
         HexMech.setHeight(hexSize);
+
+        listBateau = new ArrayList<BateauAffichagePanel>();
+
+        for(Navire n : listJoueurs)
+        {
+            BateauAffichagePanel tmp = new BateauAffichagePanel(n.getColor());
+            tmp.setLocation(hexToPixel(n.getCoordonnees()));
+        }
+
+        for(BateauAffichagePanel b : listBateau){
+            this.add(b);
+        }
+
+        //Pour tester : commanter les deux for et ajouter les bateau comme ceci :
+
+        /*
+            BateauAffichagePanel test1 = new BateauAffichagePanel(ENavirColor.blanc);
+            test1.setLocation(150,150);
+            this.add(test1);
+         */
+
     }
 
     /**
