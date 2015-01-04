@@ -129,7 +129,7 @@ public class VuePlateau extends JPanel {
         moveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //getController().notifyPlayerMoved(x,y);
+                 getController().setDeplacementAutoriseTrue();
             }
         });
         mainPanel.add(moveButton, gbc);
@@ -207,9 +207,11 @@ public class VuePlateau extends JPanel {
     }
 
     public void getClickedCase(int x, int y){
-        System.out.println("Pixel cliqué : "+x+","+y);
+        /*System.out.println("Pixel cliqué : "+x+","+y);
         Point tmp = HexMech.pxtoHex(x, y);
         System.out.println(tmp.toString());   // Récupération de l'hexagone cliqué et convertir en Case
-        HexMech.hexToPx(tmp);
+        HexMech.hexToPx(tmp);*/
+        if(getController().isDeplacementAutorise()) getController().notifyPlayerMoved(x, y);
+
     }
 }

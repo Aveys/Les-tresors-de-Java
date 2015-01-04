@@ -40,7 +40,7 @@ public class HexGame extends JPanel{
         for(Navire n : listJoueurs)
         {
             BateauAffichagePanel tmp = new BateauAffichagePanel(n.getColor());
-            //tmp.setLocation(hexToPixel(n.getCoordonnees()));
+         //   tmp.setLocation(hexToPixel(n.getCoordonnees()));
         }
 
         for(BateauAffichagePanel b : listBateau){
@@ -83,6 +83,23 @@ public class HexGame extends JPanel{
         cg.fillOval(xCenter-r, yCenter-r, 2*r, 2*r);
     }//end drawCircle
 
-
-
+    /**
+     * Hommage à notre chef de projet
+     * Renvoi la case selon le systéme de coordonnées voulues par Paul
+     * @param i la ligne voulue
+     * @param j la colonne voulue
+     * @return la bonne case selon Paul
+     */
+    public Case GetCasePaulCoordinate(int i, int j){
+        if (j==2 || j==3)
+            return plateau[i][j-1];
+        else if (j==4||j==5)
+            return plateau[i][j-2];
+        else if (j==6||j==7)
+            return plateau[i][j-3];
+        else if (j==8)
+            return plateau[i][j-4];
+        else
+            return plateau[i][j];
+    }
 }
