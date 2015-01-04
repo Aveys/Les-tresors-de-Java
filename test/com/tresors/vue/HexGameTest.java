@@ -1,6 +1,8 @@
 package com.tresors.vue;
 
+import com.sun.xml.internal.ws.policy.AssertionSet;
 import com.tresors.model.Plateau;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -25,6 +27,6 @@ public class HexGameTest {
 
     @Test
     public void testGetCasePaulCoordinate() throws Exception {
-
+        Assert.assertTrue(true);
     }
 }
