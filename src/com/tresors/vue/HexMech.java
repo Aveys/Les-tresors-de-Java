@@ -189,8 +189,8 @@ public class HexMech {
      * @return le point de coordonnées en pixel
      */
     public static Point hexToPx(int i,int j){
-        int x = (int) (r * 3/2 * j);
-        int y = (int) ((r * Math.sqrt(3) * (i + 0.5 * (j&1))));
+        int y = (i * h - ((h/2*j))); //complexe (en gros : On prend la hauteur de la colonne 0 (la plus basse) et on soustrait la taille d'un hexagon * le nombre de colonnes
+        int x = (int) (h + (j*(0.75*(s*2))));
         System.out.println("[DEBUG] Coordonnées de l'hexagon en "+i+","+j+":"+x+","+y);
         return new Point(x,y);
     }
