@@ -35,9 +35,8 @@ public class ControllerReparer extends Controller {
         initController(model,f,controllerPrincipal);
 
 
-        //test reparer ajout des pirates / canons
+
         currentPlayer = 0;
-        //fin de test
         view = new VueReparer(this);
         currentPlayerStage = 1;
         framePrincipal.changeView(view);
