@@ -40,16 +40,14 @@ public class HexGame extends JPanel{
         int offsetY = 0;
         int nbBateau = 0;
 
-        for(Navire n : listJoueurs)
-        {
-            BateauAffichagePanel tmp = new BateauAffichagePanel(n.getColor(), true);
+        for(int i = 0; i < this.navires.size(); i++){
+            BateauAffichagePanel tmp = new BateauAffichagePanel(this.navires.get(i).getColor(), true);
             Point pointTmp = HexMech.hexToPx(1,0);
             pointTmp.translate(offsetX, offsetY - 20);
             tmp.changePosition(pointTmp);
             listBateau.add(tmp);
             offsetX += 15;
-            nbBateau ++;
-            if (nbBateau % 3 == 0){
+            if (i % 3 == 0){
                 offsetX = 0;
                 offsetY += 15;
             }
