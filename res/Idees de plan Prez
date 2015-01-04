@@ -1,0 +1,28 @@
+Idées de plan pour la présentation de l'application .
+
+La conception
+- on fait plein de dossiers
+- et ils servent a rien au final ils sont tous faux.
+
+Un choix technique
+ - choix du sujet complexe
+ - affichage graphique peu adapté à java et mise en place de la grille extremement complexe.
+ => si on avait su on aurait pris la boulangerie. et ou un expert en algo pour le dessin de la grille, ou une solution technique différente pour la grille.
+
+Une architecture découplée
+ - Archi MVC 100% réalisée avec un controller pour chaque vue, et des evenements totalement indépendants
+ - grosse surcharge de code, une appli qui meriterai deja a ce niveau l'uilisation d'un framework.
+
+Une organisation rendue difficile
+ - On utilisera la prochaine fois une meilleure moyen de communication
+ - projet qui aurait mieux répondu à une approche agile.
+ - faire des itération régulères simples et programmées de manière fixe.
+
+
+
+
+ * le travail réalisé,
+
+ * les choix techniques et d'architecture de la solution proposée
+
+ * les avantages et les limites du produit
