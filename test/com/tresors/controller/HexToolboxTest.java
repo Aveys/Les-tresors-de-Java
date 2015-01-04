@@ -1,13 +1,11 @@
 package com.tresors.controller;
 
-import org.junit.*;
+import org.junit.Test;
 
 import java.awt.*;
 import java.util.ArrayList;
 
-import static com.tresors.controller.HexToolbox.distanceHex;
 import static com.tresors.controller.HexToolbox.getVoisins;
-import static org.junit.Assert.*;
 import static org.junit.Assert.fail;
 
 /**

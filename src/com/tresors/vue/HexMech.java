@@ -1,7 +1,5 @@
 package com.tresors.vue;
 
-import com.tresors.model.Case;
-
 import java.awt.*;
 
 /**

@@ -9,16 +9,12 @@ import com.tresors.controller.Controller;
 import com.tresors.event.navire.INavireChargeListener;
 import com.tresors.event.navire.NavireChargeAddedEvent;
 import com.tresors.event.navire.NavireChargeRemovedEvent;
-
+import com.tresors.model.Pirate;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-
-
-import com.tresors.model.Pirate;
 
 
 /**

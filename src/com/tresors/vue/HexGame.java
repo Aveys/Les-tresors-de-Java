@@ -1,12 +1,9 @@
 package com.tresors.vue;
 
-import com.tresors.controller.HexToolbox;
 import com.tresors.model.Case;
-import com.tresors.model.ENavireColor;
 import com.tresors.model.Navire;
 
 import javax.swing.*;
-import javax.swing.plaf.basic.BasicTableUI;
 import java.awt.*;
 import java.util.ArrayList;
 

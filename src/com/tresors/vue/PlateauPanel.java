@@ -1,7 +1,5 @@
 package com.tresors.vue;
 
-import com.tresors.model.ENavireColor;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;

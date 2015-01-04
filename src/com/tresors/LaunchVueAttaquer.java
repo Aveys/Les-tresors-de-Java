@@ -1,9 +1,6 @@
 package com.tresors;
 
-import com.tresors.vue.VueAttaquer;
-
 import javax.swing.*;
-import java.awt.*;
 
 /**
  * Created by Nicolas Sagon on 21/12/2014.

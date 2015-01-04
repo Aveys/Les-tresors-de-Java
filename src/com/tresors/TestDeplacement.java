@@ -1,12 +1,9 @@
 package com.tresors;
 
-import com.tresors.controller.HexToolbox;
 import com.tresors.model.Case;
 import com.tresors.model.Plateau;
-import com.tresors.model.Repaire;
 
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 

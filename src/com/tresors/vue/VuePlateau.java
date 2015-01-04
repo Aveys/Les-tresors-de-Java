@@ -2,7 +2,6 @@ package com.tresors.vue;
 
 import com.tresors.controller.Controller;
 
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;

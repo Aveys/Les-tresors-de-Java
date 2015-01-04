@@ -4,7 +4,6 @@ import com.tresors.model.Navire;
 import com.tresors.model.Plateau;
 import com.tresors.vue.FramePrincipal;
 
-
 import javax.swing.*;
 
 /**

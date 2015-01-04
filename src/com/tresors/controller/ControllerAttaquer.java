@@ -6,7 +6,6 @@ import com.tresors.vue.FramePrincipal;
 import com.tresors.vue.VueAttaquer;
 import com.tresors.vue.VuePlateau;
 
-
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
