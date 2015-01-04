@@ -74,6 +74,10 @@ public class HexMech {
     public static void drawHex(int i,int j,char type,Graphics2D g2){
         int y = (i * h - ((h/2*j))); //complexe (en gros : On prend la hauteur de la colonne 0 (la plus basse) et on soustrait la taille d'un hexagon * le nombre de colonnes
         int x = (int) (h + (j*(0.75*(s*2))));// trés complexe (cf redblobgames)
+        //DEBUG CENTRE HEXAGONS
+        g2.setColor(Color.WHITE);
+        g2.fillOval(x,y,10,10);
+        //FIN DEBUG
         Polygon poly = hex(x,y);//on dessine l'hexagon avec les coordonéees calculées
         g2.setColor(Color.DARK_GRAY);
         g2.setStroke(new BasicStroke(1.5f));
@@ -189,6 +193,7 @@ public class HexMech {
      * @return le point de coordonnées en pixel
      */
     public static Point hexToPx(int i,int j){
+        i=i+1;
         int y = (i * h - ((h/2*j))); //complexe (en gros : On prend la hauteur de la colonne 0 (la plus basse) et on soustrait la taille d'un hexagon * le nombre de colonnes
         int x = (int) (h + (j*(0.75*(s*2))));
         System.out.println("[DEBUG] Coordonnées de l'hexagon en "+i+","+j+":"+x+","+y);
