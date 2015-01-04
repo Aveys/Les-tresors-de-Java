@@ -41,9 +41,7 @@ public class ControllerPrincipal {
     }
 
     public void doStartGame(){
-
-
-        this.activeController = new ControllerPlateau(this.model, this.frame, this);
+        this.activeController = new ControllerInitNavire(this.model, this.frame,this);
     }
 
     public void doStartPlateau() {

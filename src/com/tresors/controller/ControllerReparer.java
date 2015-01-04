@@ -21,13 +21,13 @@ public class ControllerReparer extends Controller {
     /*The Repair View, initialized to NULL*/
     public JPanel view = null;
     /*The Repair Model, initialized to NULL*/
-    private Plateau model = null;
+    protected Plateau model = null;
 
-    private VuePlateau vuePlateau = null;
-    private ControllerPrincipal controllerPrincipal;
-    private FramePrincipal framePrincipal;
-    private int currentPlayer;//valeur de l'index du joueur actuel commence à 1 et pas 0
-    private int currentPlayerStage; //Variable indiquant à quel etape en est le joueur. Conditionne les actions possibles, etape 1 on peux attaquer ou se déplacer, etape 2 on peut attaquer ou réparer
+    protected VuePlateau vuePlateau = null;
+    protected ControllerPrincipal controllerPrincipal;
+    protected FramePrincipal framePrincipal;
+    protected int currentPlayer;//valeur de l'index du joueur actuel commence à 1 et pas 0
+    protected int currentPlayerStage; //Variable indiquant à quel etape en est le joueur. Conditionne les actions possibles, etape 1 on peux attaquer ou se déplacer, etape 2 on peut attaquer ou réparer
 
 
     //dostartgame
@@ -48,7 +48,7 @@ public class ControllerReparer extends Controller {
     /**
      * A Method that adds listeners to the model
      */
-    private void addListenersToModel() {
+    protected void addListenersToModel() {
 
         model.getListJoueurs().get(currentPlayer).addRepairChargeListener((INavireChargeListener) this.view);
     }
