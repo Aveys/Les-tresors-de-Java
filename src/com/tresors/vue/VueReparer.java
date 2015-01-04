@@ -169,7 +169,7 @@ public class VueReparer extends JPanel implements INavireChargeListener{
 
     @Override
     public void chargeRemoved(NavireChargeRemovedEvent event) {
-      bateauPanel.removeCharge(event.getPosChargeRemoved());
 
+      bateauPanel.removeCharge(event.getPosChargeRemoved());
     }
 }

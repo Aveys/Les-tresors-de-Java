@@ -17,7 +17,7 @@ public class HexGame extends JPanel{
     final static int BORDERS = 5;
     final static int SCRSIZE = HEXSIZE * (BSIZE + 1) + BORDERS*3; //screen size (vertical dimension).
     private final Case[][] plateau;
-    private final ArrayList<Navire> navires;
+    private ArrayList<Navire> navires;
     public ArrayList<NavireComponent> GraphicsNavires;
     private ArrayList<BateauAffichagePanel> listBateau;
 
@@ -129,4 +129,9 @@ public class HexGame extends JPanel{
         else
             return plateau[i][j];
     }
+
+        public void changePosition(ArrayList<Navire> listJoueurs) {
+            this.navires=listJoueurs;
+            this.repaint();}
+
 }

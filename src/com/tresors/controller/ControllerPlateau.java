@@ -1,6 +1,7 @@
 package com.tresors.controller;
 
 
+import com.tresors.event.navire.INavirePositionListener;
 import com.tresors.model.*;
 import com.tresors.vue.FramePrincipal;
 import com.tresors.vue.HexMech;
@@ -87,8 +88,7 @@ public class ControllerPlateau extends Controller {
      * A Method that adds listeners to the model
      */
     private void addListenersToModel() {
-
-
+        model.getListJoueurs().get(currentPlayer).addNavirePositionListener((INavirePositionListener)this.view);
     }
 
 
@@ -145,18 +145,12 @@ public class ControllerPlateau extends Controller {
 
             deplacementsTransformes.add(HexMech.getNormalCoordinate(pt));
         }
-        System.out.println(n.getCoordonnees());
         if(deplacementsTransformes.contains(p))
         {
             n.setCoordonnees(p);
             nextStage();
         }
-        System.out.println(n.getCoordonnees());
-        System.out.println(p);
-        System.out.println(deplacements);
 
-        //todo fire next stage + affichage bateau!!!
-        model.getListJoueurs().get(currentPlayer).fireEmplacementChanged(new Point(x, y));
     }
 
     @Override

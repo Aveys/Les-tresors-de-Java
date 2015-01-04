@@ -1,6 +1,8 @@
 package com.tresors.vue;
 
 import com.tresors.controller.Controller;
+import com.tresors.event.navire.INavirePositionListener;
+import com.tresors.event.navire.NavirePositionChangedEvent;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,7 +14,7 @@ import java.awt.event.MouseListener;
 /**
  * Created by Nicolas Sagon on 25/11/2014.
  */
-public class VuePlateau extends JPanel {
+public class VuePlateau extends JPanel implements INavirePositionListener {
     private JPanel mainPanel;
     private JPanel panelScore;
     private JLabel labelJoueur1;
@@ -206,11 +208,16 @@ public class VuePlateau extends JPanel {
     }
 
     public void getClickedCase(int x, int y){
-        System.out.println("Pixel cliqué : "+x+","+y);
+        /*System.out.println("Pixel cliqué : "+x+","+y);
         Point tmp = HexMech.pxtoHex(x, y);
         System.out.println(tmp.toString());   // Récupération de l'hexagone cliqué et convertir en Case
-        HexMech.hexToPx(tmp);
-        //if(getController().isDeplacementAutorise()) getController().notifyPlayerMoved(x, y);
+        HexMech.hexToPx(tmp);*/
+        if(getController().isDeplacementAutorise()) getController().notifyPlayerMoved(x, y);
 
+    }
+
+    @Override
+    public void positionChanged(NavirePositionChangedEvent event) {
+        plateauPanel.changePosition(controller.getModel().getListJoueurs());
     }
 }

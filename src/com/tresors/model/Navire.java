@@ -269,6 +269,7 @@ public class Navire {
     }
     public void setCoordonnees(Point coordonnees) {
         this.coordonnees = coordonnees;
+        fireEmplacementChanged(this.coordonnees);
     }
     public void setCoordonnees(int x,int y){
         this.coordonnees=new Point(x,y);
@@ -385,5 +386,14 @@ public class Navire {
     public void removeRepairChargeListener(INavireChargeListener l){
         listeners.remove(INavireChargeListener.class, l);
     }
+    public void addNavirePositionListener(INavirePositionListener listener){
+
+        listeners.add(INavirePositionListener.class, listener);
+    }
+    public void removeNavirePositionListener(INavirePositionListener l){
+        listeners.remove(INavirePositionListener.class, l);
+    }
+
+
 
 }

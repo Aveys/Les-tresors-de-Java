@@ -128,7 +128,6 @@ public class HexMech {
 
     public static Point pxtoHex(int mx, int my) {
         Point p = new Point(-1,-1);
-
         //correction for BORDERS and XYVertex
         System.out.println(mx);
         mx-=BORDERS+21;
