@@ -1,5 +1,7 @@
 package com.tresors.vue;
 
+import com.tresors.model.Case;
+
 import java.awt.*;
 
 /**
@@ -178,5 +180,65 @@ public class HexMech {
         p.x=y;
         p.y=x;
         return p;
+    }
+
+    /**
+     * donne la position en pixel d'un hexagon dans la grille
+     * @param i la ligne de l'hexagon
+     * @param j la colonne de l'hexagon
+     * @return le point de coordonnées en pixel
+     */
+    public static Point hexToPx(int i,int j){
+        int x = (int) (r * 3/2 * j);
+        int y = (int) ((r * Math.sqrt(3) * (i + 0.5 * (j&1))));
+        System.out.println("[DEBUG] Coordonnées de l'hexagon en "+i+","+j+":"+x+","+y);
+        return new Point(x,y);
+    }
+    public static Point hexToPx(Point p) {
+        return hexToPx(p.x,p.y);
+    }
+    /**
+     * Hommage à notre chef de projet
+     * Renvoi la case selon le systéme de coordonnées voulues par Paul
+     * @param i la ligne voulue
+     * @param j la colonne voulue
+     * @return la bonne case selon Paul
+     */
+    public Point getPaulCoordinate(int i, int j){
+        if (j==2 || j==3)
+            return new Point(i,j-1);
+        else if (j==4||j==5)
+            return new Point(i,j-2);
+        else if (j==6||j==7)
+            return new Point(i,j-3);
+        else if (j==8)
+            return new Point(i,j-4);
+        else
+            return new Point(i,j);
+    }
+    public Point getPaulCoordinate(Point p){
+        return getPaulCoordinate(p.x,p.y);
+    }
+
+    /**
+     * renvoi les coodonnées comme stocké dans le tableau à partir des coordonnées voulues par Paul
+     * @param i la ligne voulue
+     * @param j la colonne voulue
+     * @return la case avec les coordonnées normale
+     */
+    public Point getNormalCoordinate(int i, int j){
+        if (j==2 || j==3)
+            return new Point(i,j+1);
+        else if (j==4||j==5)
+            return new Point(i,j+2);
+        else if (j==6||j==7)
+            return new Point(i,j+3);
+        else if (j==8)
+            return new Point(i,j+4);
+        else
+            return new Point(i,j);
+    }
+    public Point getNormalCoordinate(Point p){
+        return getNormalCoordinate(p.x,p.y);
     }
 }

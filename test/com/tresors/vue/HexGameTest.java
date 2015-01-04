@@ -9,6 +9,9 @@ import java.util.TreeMap;
 
 import static org.junit.Assert.*;
 
+/**
+ * Test les hexagons (WIP)
+ */
 public class HexGameTest {
 
     @Before

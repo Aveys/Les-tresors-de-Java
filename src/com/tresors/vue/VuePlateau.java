@@ -207,6 +207,9 @@ public class VuePlateau extends JPanel {
     }
 
     public void getClickedCase(int x, int y){
-        System.out.println(HexMech.pxtoHex(x, y).toString());   // Récupération de l'hexagone cliqué et convertir en Case
+        System.out.println("Pixel cliqué : "+x+","+y);
+        Point tmp = HexMech.pxtoHex(x, y);
+        System.out.println(tmp.toString());   // Récupération de l'hexagone cliqué et convertir en Case
+        HexMech.hexToPx(tmp);
     }
 }
