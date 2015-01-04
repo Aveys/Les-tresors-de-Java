@@ -189,4 +189,8 @@ public class ControllerReparer extends Controller {
 
     }
 
+    @Override
+    public void notifyActionAttaquer() {
+
+    }
 }
