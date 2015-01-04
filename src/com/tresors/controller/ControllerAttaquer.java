@@ -211,7 +211,7 @@ public class ControllerAttaquer extends Controller  {
                 for(int i = 0; i < nbCanons; i++){
                     tabDe[i] = (int) (1 + (Math.random() * (6 - 1)));
                     navireSelectedAttack.supprimerChargeAt(tabDe[i]);
-                    tabDeResult += tabDe[i] + ", ";
+                    tabDeResult += Integer.toString(tabDe[i]+1) + ", ";
                 }
                 stateAttaque = RIPOSTER;// change l'etat
             }
