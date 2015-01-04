@@ -1,7 +1,6 @@
 package com.tresors.vue;
 
 import com.tresors.controller.Controller;
-
 import com.tresors.controller.ControllerAttaquer;
 import com.tresors.event.navire.INavireChargeListener;
 import com.tresors.event.navire.NavireChargeAddedEvent;

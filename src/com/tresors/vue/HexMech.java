@@ -1,7 +1,5 @@
 package com.tresors.vue;
 
-import com.tresors.model.Case;
-
 import java.awt.*;
 
 /**
@@ -196,6 +194,14 @@ public class HexMech {
         i=i+1;
         int y = (i * h - ((h/2*j))); //complexe (en gros : On prend la hauteur de la colonne 0 (la plus basse) et on soustrait la taille d'un hexagon * le nombre de colonnes
         int x = (int) (h + (j*(0.75*(s*2))));
+        if (j==2||j==3)
+            y+=100;
+        else if (j==4||j==5)
+            y+=200;
+        else if (j==6||j==7)
+            y+=300;
+        else if (j==8)
+            y+=400;
         System.out.println("[DEBUG] Coordonnées de l'hexagon en "+i+","+j+":"+x+","+y);
         return new Point(x,y);
     }

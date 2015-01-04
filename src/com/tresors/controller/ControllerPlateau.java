@@ -1,17 +1,13 @@
 package com.tresors.controller;
 
 
-
-import com.tresors.event.navire.INavireChargeListener;
 import com.tresors.model.*;
 import com.tresors.vue.FramePrincipal;
 import com.tresors.vue.HexMech;
 import com.tresors.vue.VuePlateau;
-import com.tresors.vue.VueReparer;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 

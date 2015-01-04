@@ -1,13 +1,12 @@
 package com.tresors.vue;
 
+import com.sun.xml.internal.ws.policy.AssertionSet;
 import com.tresors.model.Plateau;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.TreeMap;
-
-import static org.junit.Assert.*;
 
 /**
  * Test les hexagons (WIP)
@@ -28,6 +27,6 @@ public class HexGameTest {
 
     @Test
     public void testGetCasePaulCoordinate() throws Exception {
-
+        Assert.assertTrue(true);
     }
 }
