@@ -4,6 +4,7 @@ import com.tresors.model.Case;
 import com.tresors.model.Navire;
 
 import javax.swing.*;
+import javax.swing.plaf.basic.BasicTableUI;
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -38,33 +39,15 @@ public class HexGame extends JPanel{
 
         int offsetX = 0;
         int offsetY = 0;
-        int nbBateau = 0;
 
         for(int i = 0; i < this.navires.size(); i++){
             BateauAffichagePanel tmp = new BateauAffichagePanel(this.navires.get(i).getColor(), true);
-            Point pointTmp = HexMech.hexToPx(1,0);
-            pointTmp.translate(offsetX, offsetY - 20);
-            tmp.changePosition(pointTmp);
             listBateau.add(tmp);
-            offsetX += 15;
-            if (i % 3 == 0){
-                offsetX = 0;
-                offsetY += 15;
-            }
         }
 
         for(BateauAffichagePanel b : listBateau){
             this.add(b);
         }
-
-        //Pour tester : commanter les deux for et ajouter les bateau comme ceci :
-
-        /*
-            BateauAffichagePanel test1 = new BateauAffichagePanel(ENavirColor.blanc);
-            test1.setLocation(150,150);
-            this.add(test1);
-         */
-
     }
 
     /**
@@ -84,9 +67,43 @@ public class HexGame extends JPanel{
                 Case tmp = plateau[i][j];// on récupére la case du plateau
                 if(tmp !=null)//Si elle est null, on ne la dessine pas
                     HexMech.drawHex(i, j, Case.getTypeCase(tmp), g2);// Utilisation de la fonction de dessin de debug (texte) )
+
+                ArrayList<BateauAffichagePanel> listBateauOnSameCase = getBateauOnCase(i,j);
+                this.displayBateau(listBateauOnSameCase, new Point(i, j));
             }
         }
        // for(navire n : navires){this.GraphicsNavires.add(new NavireComponent(n));        }
+    }
+
+    public ArrayList<BateauAffichagePanel> getBateauOnCase(int x, int y){
+
+        ArrayList<BateauAffichagePanel> listBateauOnSameCase = new ArrayList<BateauAffichagePanel>();
+        for(int i = 0; i < this.navires.size(); i++){
+            if(this.navires.get(i).getCoordonnees().getX() == x && this.navires.get(i).getCoordonnees().getY() == y){
+                listBateauOnSameCase.add(listBateau.get(i));
+            }
+        }
+        return listBateauOnSameCase;
+    }
+
+    public void displayBateau(ArrayList<BateauAffichagePanel> listBateau, Point coord){
+
+        int offsetX = 0;
+        int offsetY = 0;
+        int nbBateau = 0;
+
+        for(int i = 0; i < listBateau.size(); i++){
+            Point pointTmp = HexMech.hexToPx(coord);
+            pointTmp.translate(offsetX, offsetY - 20);
+            listBateau.get(i).changePosition(pointTmp);
+            offsetX += 15;
+            nbBateau++;
+            if (nbBateau % 3 == 0){
+                offsetX = 0;
+                offsetY += 15;
+            }
+        }
+
     }
 
     public void drawCircle(Graphics cg, int xCenter, int yCenter, int r) {
