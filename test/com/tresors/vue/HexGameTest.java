@@ -18,7 +18,7 @@ public class HexGameTest {
     public void setUp() throws Exception {
         HexMech.setHeight(100);
         HexMech.setBorders(5);
-        ArrayList<String> list = new ArrayList<>();
+        ArrayList<String> list = new ArrayList<String>();
         list.add("Edward Teach");
         list.add("Rackam");
         list.add("Davy Jones");

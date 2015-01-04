@@ -5,12 +5,15 @@ package com.tresors.controller;
 import com.tresors.event.navire.INavireChargeListener;
 import com.tresors.model.*;
 import com.tresors.vue.FramePrincipal;
+import com.tresors.vue.HexMech;
 import com.tresors.vue.VuePlateau;
 import com.tresors.vue.VueReparer;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by arthurveys on 21/11/14.
@@ -28,7 +31,8 @@ public class ControllerPlateau extends Controller {
     private FramePrincipal framePrincipal;
     private int currentPlayer;//valeur de l'index du joueur actuel commence à 1 et pas 0
     private int currentPlayerStage; //Variable indiquant à quel etape en est le joueur. Conditionne les actions possibles, etape 1 on peux attaquer ou se déplacer, etape 2 on peut attaquer ou réparer
-    private Navire NavireSelectedAttack;
+    private Navire navireSelectedAttack;
+    private boolean deplacementAutorise=false;
 
     //dostartgame
     public ControllerPlateau(Plateau model, FramePrincipal f, ControllerPrincipal controllerPrincipal) {
@@ -135,6 +139,27 @@ public class ControllerPlateau extends Controller {
 
     @Override
     public void notifyPlayerMoved(int x, int y) {
+        Point p = new Point(HexMech.pxtoHex(x, y));
+        Navire n=model.getListJoueurs().get(currentPlayer);
+        Set<Point> deplacements = new HashSet<Point>();
+        Set<Point> deplacementsTransformes = new HashSet<Point>();
+        deplacements=getModel().deplacementPossible(n);
+        for(Point pt : deplacements)
+        {
+
+            deplacementsTransformes.add(HexMech.getNormalCoordinate(pt));
+        }
+        System.out.println(n.getCoordonnees());
+        if(deplacementsTransformes.contains(p))
+        {
+            n.setCoordonnees(p);
+            nextStage();
+        }
+        System.out.println(n.getCoordonnees());
+        System.out.println(p);
+        System.out.println(deplacements);
+
+        //todo fire next stage + affichage bateau!!!
         model.getListJoueurs().get(currentPlayer).fireEmplacementChanged(new Point(x, y));
     }
 
@@ -189,18 +214,26 @@ public class ControllerPlateau extends Controller {
         //todo selection du navire à attaquer
 
         if(model.getListJoueurs().size()>=2) {
-            NavireSelectedAttack=model.getListJoueurs().get(1);
+            navireSelectedAttack=model.getListJoueurs().get(1);
             this.controllerPrincipal.doStartAttaquer();
         }
         else{System.out.print("pas assez de joueur");}
     }
 
     public Navire getNavireSelectedAttack() {
-        return NavireSelectedAttack;
+        return navireSelectedAttack;
     }
 
     @Override
     public void notifyActionAttaquer() {
 
     }
+
+    public void setDeplacementAutoriseTrue() {
+        this.deplacementAutorise = true;
+    }
+    public boolean isDeplacementAutorise() {
+        return deplacementAutorise;
+    }
+
 }

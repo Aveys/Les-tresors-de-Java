@@ -35,4 +35,6 @@ public abstract class Controller {
     public abstract Navire getNavireSelectedAttack();
     public abstract void doStartAttaquer();
     public abstract void notifyActionAttaquer();
+    public abstract void setDeplacementAutoriseTrue();
+    public abstract boolean isDeplacementAutorise();
 }

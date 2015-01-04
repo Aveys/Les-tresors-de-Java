@@ -192,4 +192,14 @@ public class ControllerReparer extends Controller {
     public void notifyActionAttaquer() {
 
     }
+
+    @Override
+    public void setDeplacementAutoriseTrue() {
+
+    }
+
+    @Override
+    public boolean isDeplacementAutorise() {
+        return false;
+    }
 }

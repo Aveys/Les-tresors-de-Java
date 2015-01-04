@@ -238,6 +238,17 @@ public class ControllerAttaquer extends Controller  {
 
     }
 
+    @Override
+    public void setDeplacementAutoriseTrue() {
+
+    }
+
+    @Override
+    public boolean isDeplacementAutorise() {
+        return false;
+    }
+
+
     public int getStateAttaque() {
         return stateAttaque;
     }
