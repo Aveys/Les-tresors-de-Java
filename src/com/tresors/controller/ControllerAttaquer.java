@@ -5,7 +5,7 @@ import com.tresors.model.*;
 import com.tresors.vue.FramePrincipal;
 import com.tresors.vue.VueAttaquer;
 import com.tresors.vue.VuePlateau;
-import com.tresors.vue.VueReparer;
+
 
 import javax.swing.*;
 import java.awt.*;
@@ -30,6 +30,11 @@ public class ControllerAttaquer extends Controller  {
     private Navire navireSelectedAttack;
     private Navire navireJoueurActuel;
 
+    private int stateAttaque ; //
+    private static final int ATTAQUER = 0;
+    private static final int RIPOSTER = 1;
+    private static final int QUITTER = 2;
+
     //dostartgame
     public ControllerAttaquer(Plateau model, FramePrincipal f, ControllerPrincipal controllerPrincipal,Navire attackedNavire) {
         initController(model,f,controllerPrincipal);
@@ -41,6 +46,9 @@ public class ControllerAttaquer extends Controller  {
         navireJoueurActuel=model.getListJoueurs().get(currentPlayer);
         view = new VueAttaquer(this);
         currentPlayerStage = 1;
+
+        stateAttaque = ATTAQUER;
+
         framePrincipal.changeView(view);
         addListenersToModel();
     }
@@ -188,5 +196,49 @@ public class ControllerAttaquer extends Controller  {
     @Override
     public void doStartAttaquer() {
 
+    }
+
+
+    @Override
+    public void notifyActionAttaquer(){
+        if(stateAttaque!=QUITTER){
+            String tabDeResult = "";
+            Navire nAttaquant = this.getModel().getListJoueurs().get(this.getCurrentPlayer());
+            if (stateAttaque==ATTAQUER){
+
+                int nbCanons= nAttaquant.getNbCanons();
+                int[] tabDe = new int[nbCanons];
+                for(int i = 0; i < nbCanons; i++){
+                    tabDe[i] = (int) (1 + (Math.random() * (6 - 1)));
+                    navireSelectedAttack.supprimerChargeAt(tabDe[i]);
+                    tabDeResult += tabDe[i] + ", ";
+                }
+                stateAttaque = RIPOSTER;// change l'etat
+            }
+            else{// alors etat riposter
+                //Navire n = this.getModel().getListJoueurs().get(this.getCurrentPlayer());
+                int nbCanons=navireSelectedAttack.getNbCanons();
+                int[] tabDe = new int[nbCanons];
+                for(int i = 0; i < nbCanons; i++){
+                    tabDe[i] = (int) (1 + (Math.random() * (6 - 1)));
+                    nAttaquant.supprimerChargeAt(tabDe[i]);
+                    tabDeResult += tabDe[i] + ", ";
+                }
+                stateAttaque= QUITTER;
+            }
+
+            //tabDeResult = tabDeResult.substring(0, tabDeResult.lastIndexOf(',') - 1);
+
+            JOptionPane.showMessageDialog(view.getParent(), "Résultat des dés:   " + tabDeResult);
+        }
+        else{// state quitter -> fermer panel
+            this.controllerPrincipal.doStartPlateau();
+            currentPlayerStage=3;
+        }
+
+    }
+
+    public int getStateAttaque() {
+        return stateAttaque;
     }
 }
