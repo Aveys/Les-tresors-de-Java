@@ -2,9 +2,12 @@ package com.tresors.controller;
 
 import com.tresors.model.Case;
 import com.tresors.model.Repaire;
+import sun.plugin.javascript.navig.Array;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
 
 /**
  * Created by arthurveys on 25/11/14.
@@ -20,14 +23,14 @@ public class HexToolbox {
      */
     public static ArrayList<Point> getVoisins(Point source){
         ArrayList<Point> res = new ArrayList<Point>();
-        int neighbors[][]={{+1,  0},{+1, +1},{ 0, +1},{-1,  0},{-1, -1},{ 0, -1}};
-        for (int[] calc : neighbors){
-            Point tempPoint =new Point(source.x+calc[0],source.y+calc[1]);
-            if ((tempPoint.x>=0 && tempPoint.x<9)&&(tempPoint.y>=0 && tempPoint.y<9)){
-                res.add(tempPoint);
+        ArrayList<Point> neighbors = new ArrayList<Point>(Arrays.asList(new Point((source.x + 1), (source.y + 0)), new Point((source.x + 1), (source.y + 1)), new Point((source.x + 0), (source.y + 1)), new Point((source.x - 1), (source.y + 0)), new Point((source.x + 0), (source.y - 1)), new Point((source.x + 1), (source.y - 1))));
+        for(Point p :neighbors){
+            if(!((p.x<0||p.x>8)||(p.y<0||p.y>5))){
+                res.add(p);
             }
         }
         return res;
+
     }
 
     /**
