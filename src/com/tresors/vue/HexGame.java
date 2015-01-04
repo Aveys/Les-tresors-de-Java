@@ -1,9 +1,12 @@
 package com.tresors.vue;
 
+import com.tresors.controller.HexToolbox;
 import com.tresors.model.Case;
+import com.tresors.model.ENavireColor;
 import com.tresors.model.Navire;
 
 import javax.swing.*;
+import javax.swing.plaf.basic.BasicTableUI;
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -18,6 +21,8 @@ public class HexGame extends JPanel{
     private final Case[][] plateau;
     private final ArrayList<Navire> navires;
     public ArrayList<NavireComponent> GraphicsNavires;
+    private ArrayList<BateauAffichagePanel> listBateau;
+
 
     /**
      * Crée un panel de'hexagons
@@ -29,6 +34,27 @@ public class HexGame extends JPanel{
         this.plateau=plateau;
         this.navires=listJoueurs;
         HexMech.setHeight(hexSize);
+
+        listBateau = new ArrayList<BateauAffichagePanel>();
+
+        for(Navire n : listJoueurs)
+        {
+            BateauAffichagePanel tmp = new BateauAffichagePanel(n.getColor());
+            tmp.setLocation(hexToPixel(n.getCoordonnees()));
+        }
+
+        for(BateauAffichagePanel b : listBateau){
+            this.add(b);
+        }
+
+        //Pour tester : commanter les deux for et ajouter les bateau comme ceci :
+
+        /*
+            BateauAffichagePanel test1 = new BateauAffichagePanel(ENavirColor.blanc);
+            test1.setLocation(150,150);
+            this.add(test1);
+         */
+
     }
 
     /**
@@ -56,4 +82,24 @@ public class HexGame extends JPanel{
     public void drawCircle(Graphics cg, int xCenter, int yCenter, int r) {
         cg.fillOval(xCenter-r, yCenter-r, 2*r, 2*r);
     }//end drawCircle
+
+    /**
+     * Hommage à notre chef de projet
+     * Renvoi la case selon le systéme de coordonnées voulues par Paul
+     * @param i la ligne voulue
+     * @param j la colonne voulue
+     * @return la bonne case selon Paul
+     */
+    public Case GetCasePaulCoordinate(int i, int j){
+        if (j==2 || j==3)
+            return plateau[i][j-1];
+        else if (j==4||j==5)
+            return plateau[i][j-2];
+        else if (j==6||j==7)
+            return plateau[i][j-3];
+        else if (j==8)
+            return plateau[i][j-4];
+        else
+            return plateau[i][j];
+    }
 }

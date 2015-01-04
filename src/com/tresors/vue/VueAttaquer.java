@@ -1,31 +1,40 @@
 package com.tresors.vue;
 
 import com.tresors.controller.Controller;
-import com.tresors.model.ENavireColor;
-import com.tresors.model.Navire;
+
+import com.tresors.controller.ControllerAttaquer;
+import com.tresors.event.navire.INavireChargeListener;
+import com.tresors.event.navire.NavireChargeAddedEvent;
+import com.tresors.event.navire.NavireChargeRemovedEvent;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+
 /**
  * Created by Nicolas Sagon on 21/12/2014.
  */
-public class VueAttaquer extends JPanel{
+public class VueAttaquer extends JPanel implements INavireChargeListener{
 
     private BateauPanel bateau1;
     private BateauPanel bateau2;
     private JButton buttonAttaquer;
-    private Controller controller = null;
+    private ControllerAttaquer controller = null;
+
+    private static final int ATTAQUER = 0;
+    private static final int RIPOSTER = 1;
+    private static final int QUITTER = 2;
+
 
     public VueAttaquer(Controller controllerAttaquer) {
 
         super();
-        this.controller=controllerAttaquer;
+        this.controller=(ControllerAttaquer)controllerAttaquer;
         bateau1 = new BateauPanel(controller.getModel().getListJoueurs().get(controller.getCurrentPlayer()));
         bateau2 = new BateauPanel(controller.getNavireSelectedAttack());
-        buttonAttaquer = new JButton("Attaquer");
+        buttonAttaquer = new JButton("ATTAQUER");
         this.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.BOTH;
@@ -44,14 +53,21 @@ public class VueAttaquer extends JPanel{
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                Navire n =controller.getModel().getListJoueurs().get(controller.getCurrentPlayer());
-                int nbCanons=n.getNbCanons();
-                int[] tabDe = new int[nbCanons];
-                for(int i = 0; i < nbCanons; i++){
-                    tabDe[i] = (int) (1 + (Math.random() * (6 - 1)));
+                controller.notifyActionAttaquer();
+                switch (controller.getStateAttaque()){
+                    case ATTAQUER:
+                        buttonAttaquer.setText("ATTAQUER");
+                        break;
+
+                    case RIPOSTER:
+                        buttonAttaquer.setText("RIPOSTER");
+                        break;
+
+                    case QUITTER:
+                        buttonAttaquer.setText("QUITTER");
+                        break;
+
                 }
-                JOptionPane.showMessageDialog(getPanel().getParent(),
-                        "Résultat du dé :   " + tabDe);
             }
         });
     }
@@ -60,6 +76,28 @@ public class VueAttaquer extends JPanel{
         return this;
     }
 
+    @Override
+    public void chargeRemoved(NavireChargeRemovedEvent event) {
+        switch (controller.getStateAttaque()){
+            case ATTAQUER:
+                bateau1.removeCharge(event.getPosChargeRemoved());
+                break;
+
+            case RIPOSTER:
+                bateau2.removeCharge(event.getPosChargeRemoved());
+                break;
+
+            default:
+                System.out.println(" NavireChargeRemovedEvent non realisable par view");
+                break;
+        }
 
 
+    }
+
+
+    @Override
+    public void chargeAdded(NavireChargeAddedEvent event) {
+
+    }
 }

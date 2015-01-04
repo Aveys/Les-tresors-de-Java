@@ -34,4 +34,5 @@ public abstract class Controller {
     public abstract void setView(JPanel view);
     public abstract Navire getNavireSelectedAttack();
     public abstract void doStartAttaquer();
+    public abstract void notifyActionAttaquer();
 }

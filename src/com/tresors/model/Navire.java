@@ -148,14 +148,19 @@ public class Navire {
      * @param pos La position à détruire
      * @return true si l'emplacement est détruit, false si il etait vide
      */
-    private boolean supprimerChargeAt(int pos){
-    if(emplacement.get(pos)==null)
-        return false;
-    else {
-        int position= emplacement.get(pos).getPosition();
-        emplacement.remove(pos);
-        fireChargeRemoved(position);
-       }
+    public boolean supprimerChargeAt(int pos){
+        int  indexChARemov=9;//9 car pas possible
+        int i;
+        for(i= 0; i<emplacement.size() ; i++){
+            if(emplacement.get(i).getPosition()==pos){
+                indexChARemov=i;
+            }
+        }
+        //int position= emplacement.get(pos).getPosition();
+        if(indexChARemov!=9){
+            emplacement.remove(indexChARemov);
+            fireChargeRemoved(pos);
+        }
        return true;
     }
 
@@ -165,7 +170,7 @@ public class Navire {
      */
     public HashMap<Integer,Charge> getContenuNavire() {
         HashMap<Integer, Charge> list = new HashMap<Integer, Charge>();
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < emplacement.size(); i++) {
             list.put(i, emplacement.get(i));
         }
         return list;
@@ -203,7 +208,7 @@ public class Navire {
     }
 
     public void supprimerPirate() {
-        for (int i = 0; i <6 ; i++) {
+        for (int i = 0; i <emplacement.size() ; i++) {
                 if (emplacement.get(i) instanceof Pirate) {
                     {
                         int pos= emplacement.get(i).getPosition();
@@ -218,7 +223,7 @@ public class Navire {
     }
 
     public void supprimerCanon() {
-        for (int i = 0; i <6 ; i++) {
+        for (int i = 0; i <emplacement.size() ; i++) {
             if (emplacement.get(i) instanceof Canon) {
                 int pos= emplacement.get(i).getPosition();
                 emplacement.remove(i);

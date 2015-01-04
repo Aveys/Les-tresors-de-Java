@@ -199,4 +199,8 @@ public class ControllerPlateau extends Controller {
         return NavireSelectedAttack;
     }
 
+    @Override
+    public void notifyActionAttaquer() {
+
+    }
 }

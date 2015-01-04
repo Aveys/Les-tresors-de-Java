@@ -126,4 +126,9 @@ public class ControllerMenu extends Controller {
         this.framePrincipal = frame;
         this.controllerPrincipal = controller;
     }
+
+    @Override
+    public void notifyActionAttaquer() {
+
+    }
 }
