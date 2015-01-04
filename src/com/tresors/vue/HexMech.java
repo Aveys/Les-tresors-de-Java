@@ -204,7 +204,7 @@ public class HexMech {
      * @param j la colonne voulue
      * @return la bonne case selon Paul
      */
-    public Point getPaulCoordinate(int i, int j){
+    public static Point getPaulCoordinate(int i, int j){
         if (j==2 || j==3)
             return new Point(i,j-1);
         else if (j==4||j==5)
@@ -216,7 +216,7 @@ public class HexMech {
         else
             return new Point(i,j);
     }
-    public Point getPaulCoordinate(Point p){
+    public static Point getPaulCoordinate(Point p){
         return getPaulCoordinate(p.x,p.y);
     }
 
@@ -226,7 +226,7 @@ public class HexMech {
      * @param j la colonne voulue
      * @return la case avec les coordonnées normale
      */
-    public Point getNormalCoordinate(int i, int j){
+    public static Point getNormalCoordinate(int i, int j){
         if (j==2 || j==3)
             return new Point(i,j+1);
         else if (j==4||j==5)
@@ -238,7 +238,7 @@ public class HexMech {
         else
             return new Point(i,j);
     }
-    public Point getNormalCoordinate(Point p){
+    public static Point getNormalCoordinate(Point p){
         return getNormalCoordinate(p.x,p.y);
     }
 }
