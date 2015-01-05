@@ -131,5 +131,15 @@ public class ControllerHexGame extends Controller {
         return false;
     }
 
+    @Override
+    public void setDeplacementAutoriseFalse() {
+
+    }
+
+    @Override
+    public void doRepaintBateauPanel() {
+
+    }
+
 
 }

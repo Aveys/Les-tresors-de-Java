@@ -37,4 +37,8 @@ public abstract class Controller {
     public abstract void notifyActionAttaquer();
     public abstract void setDeplacementAutoriseTrue();
     public abstract boolean isDeplacementAutorise();
+
+    public abstract void setDeplacementAutoriseFalse();
+
+    public abstract void doRepaintBateauPanel();
 }

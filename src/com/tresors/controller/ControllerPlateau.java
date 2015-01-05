@@ -32,14 +32,14 @@ public class ControllerPlateau extends Controller {
     private boolean deplacementAutorise=false;
 
     //dostartgame
-    public ControllerPlateau(Plateau model, FramePrincipal f, ControllerPrincipal controllerPrincipal) {
+    public ControllerPlateau(Plateau model, FramePrincipal f, ControllerPrincipal controllerPrincipal, int currentPlayer, int currentPlayerStage) {
         initController(model,f,controllerPrincipal);
 
 
         //test reparer ajout des pirates / canons
         ////
         ////
-        currentPlayer = 0;
+      /*  currentPlayer = 0;
 
         Navire n =this.getModel().getListJoueurs().get(currentPlayer);
         if(n.getNbCanons()+n.getNbPirates()<=0) {
@@ -49,14 +49,14 @@ public class ControllerPlateau extends Controller {
 
             n.ajouterCanon(new Canon(4));
             n.ajouterCanon(new Canon(0));
-        }
+        }*/
         ///
         ///
         //fin de test
         //test Attaquer ajout des pirates / canons
         ////
         ////
-        if(this.getModel().getListJoueurs().size()>=2) {
+   /*     if(this.getModel().getListJoueurs().size()>=2) {
             currentPlayer = 1;
 
             n = this.getModel().getListJoueurs().get(currentPlayer);
@@ -68,14 +68,15 @@ public class ControllerPlateau extends Controller {
                 n.ajouterCanon(new Canon(4));
                 n.ajouterCanon(new Canon(0));
             }
-        }
+        }*/
         ///
         ///
         //fin de test
 
-        currentPlayer = 0;
+        this.currentPlayer = currentPlayer;
+        this.currentPlayerStage = currentPlayerStage;
+
         view = new VuePlateau(this);
-        currentPlayerStage = 1;
 
         framePrincipal.changeView(view);
         addListenersToModel();
@@ -148,14 +149,19 @@ public class ControllerPlateau extends Controller {
         if(deplacementsTransformes.contains(p))
         {
             n.setCoordonnees(p);
-            nextStage();
         }
 
     }
 
     @Override
     public void doStartRepair() {
-        this.controllerPrincipal.doStartRepair();
+        boolean isLimited;
+        Point p1 = new Point(0,1);
+        Point p2 = new Point(1,0);
+        if (getModel().getListJoueurs().get(getCurrentPlayer()).getCoordonnees().equals(p1) || getModel().getListJoueurs().get(getCurrentPlayer()).getCoordonnees().equals(p2))
+            this.controllerPrincipal.doStartRepair(false, getCurrentPlayer());
+        else
+            this.controllerPrincipal.doStartRepair(true, getCurrentPlayer());
     }
 
     @Override
@@ -221,9 +227,19 @@ public class ControllerPlateau extends Controller {
 
     public void setDeplacementAutoriseTrue() {
         this.deplacementAutorise = true;
+        System.out.print("Deplacement autorisé = true\n");
+    }
+    public void setDeplacementAutoriseFalse() {
+        this.deplacementAutorise = false;
+        System.out.print("Deplacement autorisé = false\n");
     }
     public boolean isDeplacementAutorise() {
         return deplacementAutorise;
+    }
+
+    @Override
+    public void doRepaintBateauPanel(){
+        this.controllerPrincipal.doStartPlateau(currentPlayer, currentPlayerStage);
     }
 
 }

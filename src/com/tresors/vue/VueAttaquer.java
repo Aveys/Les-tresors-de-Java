@@ -17,8 +17,8 @@ import java.awt.event.ActionListener;
  */
 public class VueAttaquer extends JPanel implements INavireChargeListener{
 
-    private BateauPanel bateau1;
-    private BateauPanel bateau2;
+    private BateauPanel bateauAttaquant;
+    private BateauPanel bateauAttacked;
     private JButton buttonAttaquer;
     private ControllerAttaquer controller = null;
 
@@ -31,17 +31,17 @@ public class VueAttaquer extends JPanel implements INavireChargeListener{
 
         super();
         this.controller=(ControllerAttaquer)controllerAttaquer;
-        bateau1 = new BateauPanel(controller.getModel().getListJoueurs().get(controller.getCurrentPlayer()));
-        bateau2 = new BateauPanel(controller.getNavireSelectedAttack());
+        bateauAttaquant = new BateauPanel(controller.getModel().getListJoueurs().get(controller.getCurrentPlayer()));
+        bateauAttacked = new BateauPanel(controller.getNavireSelectedAttack());
         buttonAttaquer = new JButton("ATTAQUER");
         this.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.BOTH;
         gbc.anchor = GridBagConstraints.CENTER;
-        bateau1.setPreferredSize(new Dimension(224,448));
-        bateau2.setPreferredSize(new Dimension(224,448));
-        this.add(bateau1, gbc);
-        this.add(bateau2, gbc);
+        bateauAttaquant.setPreferredSize(new Dimension(224, 448));
+        bateauAttacked.setPreferredSize(new Dimension(224, 448));
+        this.add(bateauAttaquant, gbc);
+        this.add(bateauAttacked, gbc);
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridy = 1;
         gbc.insets.left = 224;
@@ -79,11 +79,11 @@ public class VueAttaquer extends JPanel implements INavireChargeListener{
     public void chargeRemoved(NavireChargeRemovedEvent event) {
         switch (controller.getStateAttaque()){
             case ATTAQUER:
-                bateau1.removeCharge(event.getPosChargeRemoved());
+                bateauAttaquant.removeCharge(event.getPosChargeRemoved());
                 break;
 
             case RIPOSTER:
-                bateau2.removeCharge(event.getPosChargeRemoved());
+                bateauAttacked.removeCharge(event.getPosChargeRemoved());
                 break;
 
             default:

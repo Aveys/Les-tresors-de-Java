@@ -28,17 +28,22 @@ public class ControllerReparer extends Controller {
     protected FramePrincipal framePrincipal;
     protected int currentPlayer;//valeur de l'index du joueur actuel commence à 1 et pas 0
     protected int currentPlayerStage; //Variable indiquant à quel etape en est le joueur. Conditionne les actions possibles, etape 1 on peux attaquer ou se déplacer, etape 2 on peut attaquer ou réparer
-
+    private int nbReparationAuthorized;
 
     //dostartgame
-    public ControllerReparer(Plateau model, FramePrincipal f, ControllerPrincipal controllerPrincipal) {
+    public ControllerReparer(Plateau model, FramePrincipal f, ControllerPrincipal controllerPrincipal, boolean isLimited, int currentPlayer) {
         initController(model,f,controllerPrincipal);
 
 
-
-        currentPlayer = 0;
+        if (isLimited){
+            nbReparationAuthorized = 2;
+        }
+        else if (!isLimited){
+            nbReparationAuthorized = -1;
+        }
+        this.currentPlayer = currentPlayer;
+        //currentPlayerStage = currentPlayerStage;
         view = new VueReparer(this);
-        currentPlayerStage = 1;
         framePrincipal.changeView(view);
         addListenersToModel();
     }
@@ -108,8 +113,10 @@ public class ControllerReparer extends Controller {
     public void ajouterPirateRepair() {
         Navire n =this.getModel().getListJoueurs().get(currentPlayer);
         ArrayList<Integer> positionLibre= n.getPositionLibre();
-        if(positionLibre.size()>0)
+        if(positionLibre.size()>0 && nbReparationAuthorized != 0){
             n.ajouterPirate(new Pirate(positionLibre.get(0)));
+            nbReparationAuthorized --;
+        }
         else {
             System.out.println("action imposible");
         }
@@ -119,8 +126,10 @@ public class ControllerReparer extends Controller {
     public void ajouterCanonRepair() {
         Navire n =this.getModel().getListJoueurs().get(currentPlayer);
         ArrayList<Integer> positionLibre= n.getPositionLibre();
-        if(positionLibre.size()>0)
+        if(positionLibre.size()>0 && nbReparationAuthorized != 0) {
             n.ajouterCanon(new Canon(positionLibre.get(0)));
+            nbReparationAuthorized --;
+        }
         else {
             System.out.println("action imposible");
         }
@@ -154,9 +163,7 @@ public class ControllerReparer extends Controller {
 
     @Override
     public void doStartPlateau() {
-        this.controllerPrincipal.doStartPlateau();
-        currentPlayerStage=3;
-
+        this.controllerPrincipal.doStartPlateau(currentPlayer,currentPlayerStage);
     }
 
     public void setCurrentPlayerStage(int currentPlayerStage) {
@@ -201,5 +208,15 @@ public class ControllerReparer extends Controller {
     @Override
     public boolean isDeplacementAutorise() {
         return false;
+    }
+
+    @Override
+    public void setDeplacementAutoriseFalse() {
+
+    }
+
+    @Override
+    public void doRepaintBateauPanel() {
+
     }
 }

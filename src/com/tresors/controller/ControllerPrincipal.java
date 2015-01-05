@@ -32,11 +32,11 @@ public class ControllerPrincipal {
 
     public void showViewPlateau(){
 
-        this.activeController = new ControllerPlateau(model, frame, this);
+        this.activeController = new ControllerPlateau(model, frame, this, 0, 1);
     }
-    public void doStartRepair(){
+    public void doStartRepair(boolean isLimited, int currentPlayer){
 
-    this.activeController = new ControllerReparer(this.model, this.frame, this);
+    this.activeController = new ControllerReparer(this.model, this.frame, this, isLimited, currentPlayer);
 
     }
 
@@ -44,13 +44,15 @@ public class ControllerPrincipal {
         this.activeController = new ControllerInitNavire(this.model, this.frame,this);
     }
 
-    public void doStartPlateau() {
-            this.activeController = new ControllerPlateau(this.model, this.frame,this);
+    public void doStartPlateau(int currentPlayer, int currentPlayerStage) {
+            this.activeController = new ControllerPlateau(this.model, this.frame,this, currentPlayer, currentPlayerStage);
     }
+
     public void doStartAttaquer() {
         //test
         Navire n = activeController.getNavireSelectedAttack();
         this.activeController = new ControllerAttaquer(this.model, this.frame,this, n);
     }
+
 
 }

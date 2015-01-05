@@ -59,7 +59,14 @@ public class VuePlateau extends JPanel implements INavirePositionListener {
         plateauPanel.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                getClickedCase(e.getX(),e.getY());
+                if(getController().isDeplacementAutorise()){
+                    getController().nextStage();
+                    updateCurrentPlayerName();
+                    updateStageLabel();
+                    updateAllowedActions();
+                    getClickedCase(e.getX(),e.getY());
+                    getController().setDeplacementAutoriseFalse();
+                }
             }
 
             @Override
@@ -86,7 +93,7 @@ public class VuePlateau extends JPanel implements INavirePositionListener {
 
 
         //Panel Action
-        labelAction = new JLabel("Etape 1");
+        labelAction = new JLabel("Etape " + getController().getCurrentPlayerStage());
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 1;
         gbc.gridy = 1;
@@ -118,7 +125,10 @@ public class VuePlateau extends JPanel implements INavirePositionListener {
         repairButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                getController().nextStage();
+                updateCurrentPlayerName();
+                updateStageLabel();
+                updateAllowedActions();
                 getController().doStartRepair();
 
             }
@@ -130,7 +140,13 @@ public class VuePlateau extends JPanel implements INavirePositionListener {
         moveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                 getController().setDeplacementAutoriseTrue();
+                if (getController().isDeplacementAutorise()) {
+                    getController().setDeplacementAutoriseFalse();
+                }
+                else{
+                    getController().setDeplacementAutoriseTrue();
+                }
+
             }
         });
         mainPanel.add(moveButton, gbc);
@@ -145,28 +161,9 @@ public class VuePlateau extends JPanel implements INavirePositionListener {
                 updateStageLabel();
                 updateAllowedActions();
 
-                bateauPanel.changeCouleur(getController().getModel().getListJoueurs().get(getController().getCurrentPlayer()).getColor());
+                //bateauPanel.changeCouleur(getController().getModel().getListJoueurs().get(getController().getCurrentPlayer()).getColor());
 
-               /* switch (getController().getCurrentPlayer()) {
-                    case 0:
-                        bateauPanel.changeCouleur(ENavireColor.Bleu);
-                        break;
-                    case 1:
-                        bateauPanel.changeCouleur(ENavireColor.Violet);
-                        break;
-                    case 2:
-                        bateauPanel.changeCouleur(ENavireColor.Jaune);
-                        break;
-                    case 3:
-                        bateauPanel.changeCouleur(ENavireColor.Orange);
-                        break;
-                    case 4:
-                        bateauPanel.changeCouleur(ENavireColor.Rouge);
-                        break;
-                    case 5:
-                        bateauPanel.changeCouleur(ENavireColor.Blanc);
-                        break;
-                }*/
+                getController().doRepaintBateauPanel();
             }
         });
         mainPanel.add(buttonPassTour, gbc);

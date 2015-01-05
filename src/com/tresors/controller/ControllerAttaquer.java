@@ -163,8 +163,8 @@ public class ControllerAttaquer extends Controller  {
 
     @Override
     public void doStartPlateau() {
-        this.controllerPrincipal.doStartPlateau();
-        currentPlayerStage=3;
+        this.controllerPrincipal.doStartPlateau(currentPlayer,currentPlayerStage);
+        //currentPlayerStage=3; Stage 3 inexistant? Quelle utilité?
 
     }
 
@@ -231,8 +231,10 @@ public class ControllerAttaquer extends Controller  {
             JOptionPane.showMessageDialog(view.getParent(), "Résultat des dés:   " + tabDeResult);
         }
         else{// state quitter -> fermer panel
-            this.controllerPrincipal.doStartPlateau();
-            currentPlayerStage=3;
+            nextStage();
+            this.controllerPrincipal.doStartPlateau(currentPlayer, currentPlayerStage);
+            //currentPlayerStage=3; state 3 inexistant
+
         }
 
     }
@@ -245,6 +247,16 @@ public class ControllerAttaquer extends Controller  {
     @Override
     public boolean isDeplacementAutorise() {
         return false;
+    }
+
+    @Override
+    public void setDeplacementAutoriseFalse() {
+
+    }
+
+    @Override
+    public void doRepaintBateauPanel() {
+
     }
 
 
