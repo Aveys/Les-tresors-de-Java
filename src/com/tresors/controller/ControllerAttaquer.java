@@ -35,18 +35,16 @@ public class ControllerAttaquer extends Controller  {
     private static final int QUITTER = 2;
 
     //dostartgame
-    public ControllerAttaquer(Plateau model, FramePrincipal f, ControllerPrincipal controllerPrincipal,Navire attackedNavire) {
+    public ControllerAttaquer(Plateau model, FramePrincipal f, ControllerPrincipal controllerPrincipal,int attacking, Navire attackedNavire, int currentPlayerStage, int stateAttaque) {
         initController(model,f,controllerPrincipal);
 
-
-
-        currentPlayer = 0;
+        currentPlayer = attacking;
+        this.currentPlayerStage = currentPlayerStage;
         navireSelectedAttack=attackedNavire;
         navireJoueurActuel=model.getListJoueurs().get(currentPlayer);
-        view = new VueAttaquer(this);
-        currentPlayerStage = 1;
+        this.stateAttaque = stateAttaque;
 
-        stateAttaque = ATTAQUER;
+        view = new VueAttaquer(this);
 
         framePrincipal.changeView(view);
         addListenersToModel();
@@ -200,10 +198,10 @@ public class ControllerAttaquer extends Controller  {
 
     @Override
     public void notifyActionAttaquer(){
-        if(stateAttaque!=QUITTER){
+        if(stateAttaque!=2){//si on ne quitte pas
             String tabDeResult = "";
             Navire nAttaquant = this.getModel().getListJoueurs().get(this.getCurrentPlayer());
-            if (stateAttaque==ATTAQUER){
+            if (stateAttaque==0){
 
                 int nbCanons= nAttaquant.getNbCanons();
                 int[] tabDe = new int[nbCanons];
@@ -212,7 +210,8 @@ public class ControllerAttaquer extends Controller  {
                     navireSelectedAttack.supprimerChargeAt(tabDe[i]);
                     tabDeResult += Integer.toString(tabDe[i]+1) + ", ";
                 }
-                stateAttaque = RIPOSTER;// change l'etat
+                stateAttaque = 1;// change l'etat
+                this.controllerPrincipal.doStartAttaquer(currentPlayer, navireSelectedAttack, currentPlayerStage, 1);
             }
             else{// alors etat riposter
                 //Navire n = this.getModel().getListJoueurs().get(this.getCurrentPlayer());
@@ -223,7 +222,8 @@ public class ControllerAttaquer extends Controller  {
                     nAttaquant.supprimerChargeAt(tabDe[i]);
                     tabDeResult += tabDe[i] + ", ";
                 }
-                stateAttaque= QUITTER;
+                stateAttaque = 2;
+                this.controllerPrincipal.doStartAttaquer(currentPlayer, navireSelectedAttack, currentPlayerStage, 2);
             }
 
             //tabDeResult = tabDeResult.substring(0, tabDeResult.lastIndexOf(',') - 1);

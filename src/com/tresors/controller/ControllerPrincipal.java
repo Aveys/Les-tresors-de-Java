@@ -48,10 +48,10 @@ public class ControllerPrincipal {
             this.activeController = new ControllerPlateau(this.model, this.frame,this, currentPlayer, currentPlayerStage);
     }
 
-    public void doStartAttaquer() {
+    public void doStartAttaquer(int attacking, Navire attacked, int currentStage, int stateAttack) {
         //test
-        Navire n = activeController.getNavireSelectedAttack();
-        this.activeController = new ControllerAttaquer(this.model, this.frame,this, n);
+        //Navire n = activeController.getNavireSelectedAttack();
+        this.activeController = new ControllerAttaquer(this.model, this.frame, this, attacking, attacked, currentStage, stateAttack);
     }
 
 

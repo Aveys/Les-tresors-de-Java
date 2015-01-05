@@ -33,7 +33,21 @@ public class VueAttaquer extends JPanel implements INavireChargeListener{
         this.controller=(ControllerAttaquer)controllerAttaquer;
         bateauAttaquant = new BateauPanel(controller.getModel().getListJoueurs().get(controller.getCurrentPlayer()));
         bateauAttacked = new BateauPanel(controller.getNavireSelectedAttack());
-        buttonAttaquer = new JButton("ATTAQUER");
+        buttonAttaquer = new JButton();
+        switch (controller.getStateAttaque()){
+            case 0:
+                buttonAttaquer.setText("ATTAQUER");
+                break;
+
+            case 1:
+                buttonAttaquer.setText("RIPOSTER");
+                break;
+
+            case 2:
+                buttonAttaquer.setText("QUITTER");
+                break;
+
+        }
         this.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.BOTH;
@@ -52,21 +66,9 @@ public class VueAttaquer extends JPanel implements INavireChargeListener{
 
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 controller.notifyActionAttaquer();
-                switch (controller.getStateAttaque()){
-                    case ATTAQUER:
-                        buttonAttaquer.setText("ATTAQUER");
-                        break;
 
-                    case RIPOSTER:
-                        buttonAttaquer.setText("RIPOSTER");
-                        break;
-
-                    case QUITTER:
-                        buttonAttaquer.setText("QUITTER");
-                        break;
-
-                }
             }
         });
     }
@@ -78,11 +80,11 @@ public class VueAttaquer extends JPanel implements INavireChargeListener{
     @Override
     public void chargeRemoved(NavireChargeRemovedEvent event) {
         switch (controller.getStateAttaque()){
-            case ATTAQUER:
+            case 0:
                 bateauAttaquant.removeCharge(event.getPosChargeRemoved());
                 break;
 
-            case RIPOSTER:
+            case 1:
                 bateauAttacked.removeCharge(event.getPosChargeRemoved());
                 break;
 
