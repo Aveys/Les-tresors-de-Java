@@ -127,7 +127,7 @@ public class HexGame extends JPanel{
         int nbBateau = 0;
 
         for(int i = 0; i < listBateau.size(); i++){
-            Point pointTmp = HexMech.hexToPx(coord);
+            Point pointTmp = HexMech.hexToPx(HexMech.getPaulCoordinate(coord));
             pointTmp.translate(offsetX, offsetY - 20);
             listBateau.get(i).changePosition(pointTmp);
             offsetX += 15;

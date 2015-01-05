@@ -50,7 +50,7 @@ public class ControllerPrincipal {
 
     public void doStartAttaquer(int attacking, Navire attacked, int currentStage, int stateAttack) {
         //test
-        //Navire n = activeController.getNavireSelectedAttack();
+        //navire n = activeController.getNavireSelectedAttack();
         this.activeController = new ControllerAttaquer(this.model, this.frame, this, attacking, attacked, currentStage, stateAttack);
     }
 
