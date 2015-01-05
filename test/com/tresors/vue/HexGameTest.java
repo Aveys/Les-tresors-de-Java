@@ -24,9 +24,4 @@ public class HexGameTest {
         Plateau pl = new Plateau();
         HexGame hg = new HexGame(pl.getPlateau(),100,null, null);
     }
-
-    @Test
-    public void testGetCasePaulCoordinate() throws Exception {
-        Assert.assertTrue(true);
-    }
 }
