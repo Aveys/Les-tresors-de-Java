@@ -34,6 +34,10 @@ public class ControllerAttaquer extends Controller  {
     private static final int RIPOSTER = 1;
     private static final int QUITTER = 2;
 
+    private int vaincue;
+    private static final int ATTGAGNANTE = 1;
+    private static final int RIPPGAGNANTE = 2;
+
     //dostartgame
     public ControllerAttaquer(Plateau model, FramePrincipal f, ControllerPrincipal controllerPrincipal,int attacking, Navire attackedNavire, int currentPlayerStage, int stateAttaque) {
         initController(model,f,controllerPrincipal);
@@ -202,16 +206,24 @@ public class ControllerAttaquer extends Controller  {
             String tabDeResult = "";
             Navire nAttaquant = this.getModel().getListJoueurs().get(this.getCurrentPlayer());
             if (stateAttaque==0){
-
-                int nbCanons= nAttaquant.getNbCanons();
-                int[] tabDe = new int[nbCanons];
-                for(int i = 0; i < nbCanons; i++){
-                    tabDe[i] = (int) (1 + (Math.random() * (6 - 1)));
-                    navireSelectedAttack.supprimerChargeAt(tabDe[i]);
-                    tabDeResult += Integer.toString(tabDe[i]+1) + ", ";
+                if (navireSelectedAttack.checkConfigurationNavire()){
+                    int nbCanons= nAttaquant.getNbCanons();
+                    int[] tabDe = new int[nbCanons];
+                    for(int i = 0; i < nbCanons; i++){
+                        tabDe[i] = (int) (1 + (Math.random() * (6 - 1)));
+                        navireSelectedAttack.supprimerChargeAt(tabDe[i]);
+                        tabDeResult += Integer.toString(tabDe[i]+1) + ", ";
+                    }
+                    if (!navireSelectedAttack.checkConfigurationNavire()){
+                        vaincue = ATTGAGNANTE;
+                    }
+                    stateAttaque = 1;// change l'etat
                 }
-                stateAttaque = 1;// change l'etat
-                this.controllerPrincipal.doStartAttaquer(currentPlayer, navireSelectedAttack, currentPlayerStage, 1);
+                else{
+                    vaincue = ATTGAGNANTE;
+                    stateAttaque = 2;
+                }
+                this.controllerPrincipal.doStartAttaquer(currentPlayer, navireSelectedAttack, currentPlayerStage,stateAttaque);
             }
             else{// alors etat riposter
                 //Navire n = this.getModel().getListJoueurs().get(this.getCurrentPlayer());
@@ -220,15 +232,21 @@ public class ControllerAttaquer extends Controller  {
                 for(int i = 0; i < nbCanons; i++){
                     tabDe[i] = (int) (1 + (Math.random() * (6 - 1)));
                     nAttaquant.supprimerChargeAt(tabDe[i]);
-                    tabDeResult += Integer.toString(tabDe[i]+1) + ", ";
+                    tabDeResult += Integer.toString(tabDe[i]+1) + ", ";//+1 car commence emplacement a 0
                 }
                 stateAttaque = 2;
+                if (!nAttaquant.checkConfigurationNavire()){
+                    vaincue = RIPPGAGNANTE;
+                }
                 this.controllerPrincipal.doStartAttaquer(currentPlayer, navireSelectedAttack, currentPlayerStage, 2);
             }
 
             //tabDeResult = tabDeResult.substring(0, tabDeResult.lastIndexOf(',') - 1);
-
             JOptionPane.showMessageDialog(view.getParent(), "Résultat des dés:   " + tabDeResult);
+            if(vaincue!=ATTAQUER){
+                //TODO implementer pillage
+                JOptionPane.showMessageDialog(view.getParent(), "Pille   :" );
+            }
         }
         else{// state quitter -> fermer panel
             nextStage();
