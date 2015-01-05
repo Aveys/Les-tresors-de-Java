@@ -5,9 +5,9 @@ Jeu developpé par 5 personnes dans le cadre d'un projet d'étude
 
 Documentation
 ----------
-*Tout les documents du projet sont disponible dans le dossier Livraison à la racine du projet
-*Les ressources utilisé dans le dossier res du projet
-*Les librairies utilisées sont disponibles dans le dossier lib à la racine du projet
+* Tout les documents du projet sont disponible dans le dossier Livraison à la racine du projet
+* Les ressources utilisé dans le dossier res du projet
+* Les librairies utilisées sont disponibles dans le dossier lib à la racine du projet
 
 Notre leitmotiv (Humour)
 ----------
