@@ -41,7 +41,7 @@ public class ControllerPlateau extends Controller {
         ////
       /*  currentPlayer = 0;
 
-        Navire n =this.getModel().getListJoueurs().get(currentPlayer);
+        navire n =this.getModel().getListJoueurs().get(currentPlayer);
         if(n.getNbCanons()+n.getNbPirates()<=0) {
             n.ajouterPirate(new Pirate(1));
             n.ajouterPirate(new Pirate(2));
@@ -92,6 +92,12 @@ public class ControllerPlateau extends Controller {
         model.getListJoueurs().get(currentPlayer).addNavirePositionListener((INavirePositionListener)this.view);
     }
 
+    public void selectNavire(Navire name){
+
+        this.navireSelectedAttack = name;
+
+    }
+
 
 
     //Notifications de modification sur le model
@@ -136,21 +142,30 @@ public class ControllerPlateau extends Controller {
 
     @Override
     public void notifyPlayerMoved(int x, int y) {
+        //paul coordinate
         Point p = new Point(HexMech.pxtoHex(x, y));
         Navire n=model.getListJoueurs().get(currentPlayer);
         Set<Point> deplacements = new HashSet<Point>();
         Set<Point> deplacementsTransformes = new HashSet<Point>();
+
+        //normal coordinate
         deplacements=getModel().deplacementPossible(n);
+
         for(Point pt : deplacements)
         {
 
-            deplacementsTransformes.add(HexMech.getNormalCoordinate(pt));
+         deplacementsTransformes.add(HexMech.getPaulCoordinate(pt));
+          //  deplacementsTransformes.add(pt);
         }
+        System.out.println(n.getCoordonnees());
+        System.out.println(p);
+        System.out.println(deplacements);
+        System.out.println(deplacementsTransformes);
         if(deplacementsTransformes.contains(p))
         {
-            n.setCoordonnees(p);
+            n.setCoordonnees(HexMech.getNormalCoordinate(p));
         }
-
+        System.out.println(n.getCoordonnees());
     }
 
     @Override
@@ -209,16 +224,10 @@ public class ControllerPlateau extends Controller {
     public void doStartAttaquer() {
         //todo selection du navire à attaquer
 
-        if(model.getListJoueurs().size()>=2) {
-            for(Navire n : getModel().getListJoueurs()){
-                //Si un navire est sur la meme case et qu'ils sont différents
-                if (n.getCoordonnees().equals(getModel().getListJoueurs().get(currentPlayer).getCoordonnees()) && n != getModel().getListJoueurs().get(currentPlayer) ){
-                    navireSelectedAttack = n;
-                }
-            }
-            this.controllerPrincipal.doStartAttaquer(currentPlayer,navireSelectedAttack, currentPlayerStage, 0);
+        if(navireSelectedAttack.getCoordonnees().equals(getModel().getListJoueurs().get(currentPlayer).getCoordonnees())){
+            this.controllerPrincipal.doStartAttaquer(currentPlayer, navireSelectedAttack, currentPlayerStage, 0);
         }
-        else{System.out.print("pas assez de joueur");}
+
     }
 
     public Navire getNavireSelectedAttack() {

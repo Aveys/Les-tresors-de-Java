@@ -199,6 +199,11 @@ public class ControllerAttaquer extends Controller  {
 
     }
 
+    @Override
+    public void selectNavire(Navire name) {
+
+    }
+
 
     @Override
     public void notifyActionAttaquer(){
@@ -226,7 +231,7 @@ public class ControllerAttaquer extends Controller  {
                 this.controllerPrincipal.doStartAttaquer(currentPlayer, navireSelectedAttack, currentPlayerStage,stateAttaque);
             }
             else{// alors etat riposter
-                //Navire n = this.getModel().getListJoueurs().get(this.getCurrentPlayer());
+                //navire n = this.getModel().getListJoueurs().get(this.getCurrentPlayer());
                 int nbCanons=navireSelectedAttack.getNbCanons();
                 int[] tabDe = new int[nbCanons];
                 for(int i = 0; i < nbCanons; i++){

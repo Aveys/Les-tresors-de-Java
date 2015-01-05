@@ -1,11 +1,15 @@
 package com.tresors.vue;
 
+import com.tresors.controller.Controller;
+import com.tresors.controller.ControllerPrincipal;
 import com.tresors.model.Case;
 import com.tresors.model.Navire;
 
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicTableUI;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 /**
@@ -20,6 +24,7 @@ public class HexGame extends JPanel{
     private ArrayList<Navire> navires;
     public ArrayList<NavireComponent> GraphicsNavires;
     private ArrayList<BateauAffichagePanel> listBateau;
+    private Controller controller;
 
 
     /**
@@ -28,9 +33,11 @@ public class HexGame extends JPanel{
      * @param hexSize La taille des hexagons
      * @param listJoueurs
      */
-    public HexGame(Case[][] plateau, int hexSize, ArrayList<Navire> listJoueurs) {
+    public HexGame(Case[][] plateau, int hexSize, ArrayList<Navire> listJoueurs, final Controller controller) {
         this.plateau=plateau;
         this.navires=listJoueurs;
+        this.controller = controller;
+
         HexMech.setHeight(hexSize);
 
         this.setLayout(null);
@@ -47,6 +54,33 @@ public class HexGame extends JPanel{
 
         for(BateauAffichagePanel b : listBateau){
             this.add(b);
+            final int index = listBateau.indexOf(b);
+            b.addMouseListener(new MouseListener() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    controller.selectNavire(navires.get(index));
+                }
+
+                @Override
+                public void mousePressed(MouseEvent e) {
+
+                }
+
+                @Override
+                public void mouseReleased(MouseEvent e) {
+
+                }
+
+                @Override
+                public void mouseEntered(MouseEvent e) {
+
+                }
+
+                @Override
+                public void mouseExited(MouseEvent e) {
+
+                }
+            });
         }
     }
 
@@ -93,7 +127,7 @@ public class HexGame extends JPanel{
         int nbBateau = 0;
 
         for(int i = 0; i < listBateau.size(); i++){
-            Point pointTmp = HexMech.hexToPx(coord);
+            Point pointTmp = HexMech.hexToPx(HexMech.getPaulCoordinate(coord));
             pointTmp.translate(offsetX, offsetY - 20);
             listBateau.get(i).changePosition(pointTmp);
             offsetX += 15;

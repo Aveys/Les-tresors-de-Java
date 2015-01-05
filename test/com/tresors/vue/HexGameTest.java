@@ -22,7 +22,7 @@ public class HexGameTest {
         list.add("Rackam");
         list.add("Davy Jones");
         Plateau pl = new Plateau();
-        HexGame hg = new HexGame(pl.getPlateau(),100,null);
+        HexGame hg = new HexGame(pl.getPlateau(),100,null, null);
     }
 
     @Test

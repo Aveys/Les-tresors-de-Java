@@ -82,7 +82,7 @@ public class HexMech {
         g2.drawPolygon(poly);
         switch(type){
             case 'M':
-                g2.setColor(Color.BLUE);//bleu pour la mer
+                g2.setColor(Color.cyan);//bleu pour la mer
                 //g2.drawPolygon(poly);//on dessine l'hexagon
                 g2.fillPolygon(poly);//on le rempli
                 break;
@@ -216,13 +216,13 @@ public class HexMech {
      */
     public static Point getPaulCoordinate(int i, int j){
         if (j==2 || j==3)
-            return new Point(i,j-1);
+            return new Point(i-1,j);
         else if (j==4||j==5)
-            return new Point(i,j-2);
+            return new Point(i-2,j);
         else if (j==6||j==7)
-            return new Point(i,j-3);
+            return new Point(i-3,j);
         else if (j==8)
-            return new Point(i,j-4);
+            return new Point(i-4,j);
         else
             return new Point(i,j);
     }
@@ -238,13 +238,13 @@ public class HexMech {
      */
     public static Point getNormalCoordinate(int i, int j){
         if (j==2 || j==3)
-            return new Point(i,j+1);
+            return new Point(i+1,j);
         else if (j==4||j==5)
-            return new Point(i,j+2);
+            return new Point(i+2,j);
         else if (j==6||j==7)
-            return new Point(i,j+3);
+            return new Point(i+3,j);
         else if (j==8)
-            return new Point(i,j+4);
+            return new Point(i+4,j);
         else
             return new Point(i,j);
     }

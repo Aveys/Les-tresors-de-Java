@@ -116,6 +116,11 @@ public class ControllerMenu extends Controller {
     }
 
     @Override
+    public void selectNavire(Navire name) {
+
+    }
+
+    @Override
     public void doStartPlateau() {
 
     }

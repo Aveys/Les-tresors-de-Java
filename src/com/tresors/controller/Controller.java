@@ -34,6 +34,7 @@ public abstract class Controller {
     public abstract void setView(JPanel view);
     public abstract Navire getNavireSelectedAttack();
     public abstract void doStartAttaquer();
+    public abstract void selectNavire(Navire name);
     public abstract void notifyActionAttaquer();
     public abstract void setDeplacementAutoriseTrue();
     public abstract boolean isDeplacementAutorise();
