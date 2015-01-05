@@ -220,7 +220,7 @@ public class ControllerAttaquer extends Controller  {
                 for(int i = 0; i < nbCanons; i++){
                     tabDe[i] = (int) (1 + (Math.random() * (6 - 1)));
                     nAttaquant.supprimerChargeAt(tabDe[i]);
-                    tabDeResult += tabDe[i] + ", ";
+                    tabDeResult += Integer.toString(tabDe[i]+1) + ", ";
                 }
                 stateAttaque = 2;
                 this.controllerPrincipal.doStartAttaquer(currentPlayer, navireSelectedAttack, currentPlayerStage, 2);

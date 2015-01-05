@@ -133,7 +133,7 @@ public class BateauPanel extends JPanel {
     }
 
     public void addPirate(int position) {
-      System.out.println("lol");
+     // System.out.println("lol");
         Point pointTemp = locationList.get(position);
         tabCharge[position] = new ChargePanel(ChargePanel.Type.pirate);
         tabCharge[position].setSize(33, 71);
