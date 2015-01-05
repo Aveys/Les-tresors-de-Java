@@ -13,7 +13,7 @@ import static org.junit.Assert.fail;
  */
 public class HexToolboxTest {
     @Test
-    public void getVoisinsTest() {
+    public void TestgetVoisinsTest() {
        // Assert.assertEquals("Type de case incorrect",'P',pl.getTypeCase(1,1));
         Point mPoint = new Point(5,5);
         ArrayList<Point> ret;
@@ -21,7 +21,7 @@ public class HexToolboxTest {
         ret = getVoisins(mPoint);
         for (Point point: ret) {
             if (point.x< 0 || point.y <0 || point.x>= 9 || point.y>=9 ){
-                fail("ret est hor champs");
+                fail("ret est hors champ");
             }
         }
 
@@ -29,7 +29,7 @@ public class HexToolboxTest {
         ret = getVoisins(mPoint);
         for (Point point: ret) {
             if (point.x< 0 || point.y <0 || point.x>= 9 || point.y>=9){
-                fail("ret est hor champs");
+                fail("ret est hors champ");
             }
         }
     }
