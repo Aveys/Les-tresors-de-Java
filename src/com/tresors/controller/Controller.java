@@ -3,6 +3,7 @@ package com.tresors.controller;
 import com.tresors.model.ENavireColor;
 import com.tresors.model.Navire;
 import com.tresors.model.Plateau;
+import com.tresors.model.Repaire;
 import com.tresors.vue.FramePrincipal;
 
 import javax.swing.*;
@@ -33,7 +34,9 @@ public abstract class Controller {
     public abstract void supprimerPirateRepair();
     public abstract void setView(JPanel view);
     public abstract Navire getNavireSelectedAttack();
+    public abstract Repaire getRepaireSelectedAttack();
     public abstract void doStartAttaquer();
+    public abstract void doStartAttaquerRepaire();
     public abstract void selectNavire(Navire name);
     public abstract void notifyActionAttaquer();
     public abstract void setDeplacementAutoriseTrue();

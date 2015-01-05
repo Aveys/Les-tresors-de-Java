@@ -2,6 +2,7 @@ package com.tresors.controller;
 
 import com.tresors.model.Navire;
 import com.tresors.model.Plateau;
+import com.tresors.model.Repaire;
 import com.tresors.vue.FramePrincipal;
 
 import javax.swing.*;
@@ -52,6 +53,10 @@ public class ControllerPrincipal {
         //test
         //navire n = activeController.getNavireSelectedAttack();
         this.activeController = new ControllerAttaquer(this.model, this.frame, this, attacking, attacked, currentStage, stateAttack);
+    }
+
+    public void doStartAttaqueRepaire(int attacking, Repaire attacked, int currentStage, int stateAttack){
+        this.activeController = new  ControllerAttaquerRepaire(this.model, this.frame, this, attacking, attacked, currentStage, stateAttack);
     }
 
 

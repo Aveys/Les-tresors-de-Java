@@ -194,7 +194,17 @@ public class ControllerReparer extends Controller {
     }
 
     @Override
+    public Repaire getRepaireSelectedAttack() {
+        return null;
+    }
+
+    @Override
     public void doStartAttaquer() {
+
+    }
+
+    @Override
+    public void doStartAttaquerRepaire() {
 
     }
 

@@ -9,6 +9,7 @@ import com.tresors.vue.VuePlateau;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -29,6 +30,7 @@ public class ControllerPlateau extends Controller {
     private int currentPlayer;//valeur de l'index du joueur actuel commence à 1 et pas 0
     private int currentPlayerStage; //Variable indiquant à quel etape en est le joueur. Conditionne les actions possibles, etape 1 on peux attaquer ou se déplacer, etape 2 on peut attaquer ou réparer
     private Navire navireSelectedAttack;
+    private Repaire repaireSelectedAttack;
     private boolean deplacementAutorise=false;
 
     //dostartgame
@@ -96,6 +98,10 @@ public class ControllerPlateau extends Controller {
 
         this.navireSelectedAttack = name;
 
+    }
+
+    public void selectNavire(Repaire r){
+        this.repaireSelectedAttack = r;
     }
 
 
@@ -230,8 +236,25 @@ public class ControllerPlateau extends Controller {
 
     }
 
+    @Override
+    public void doStartAttaquerRepaire() {
+        ArrayList<Point> voisinPlayer = HexToolbox.getVoisins(model.getListJoueurs().get(currentPlayer).getCoordonnees());
+        for( Point p : voisinPlayer){
+            if (p.x== repaireSelectedAttack.getCoordonnees().x && p.y== repaireSelectedAttack.getCoordonnees().y){
+                this.controllerPrincipal.doStartAttaqueRepaire(currentPlayer, repaireSelectedAttack, currentPlayerStage, 0);
+                return;
+            }
+        }
+
+    }
+
     public Navire getNavireSelectedAttack() {
         return navireSelectedAttack;
+    }
+
+    @Override
+    public Repaire getRepaireSelectedAttack() {
+        return null;
     }
 
     @Override

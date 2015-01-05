@@ -3,6 +3,7 @@ package com.tresors.controller;
 import com.tresors.model.ENavireColor;
 import com.tresors.model.Navire;
 import com.tresors.model.Plateau;
+import com.tresors.model.Repaire;
 import com.tresors.vue.FramePrincipal;
 import com.tresors.vue.HexGame;
 import com.tresors.vue.HexMech;
@@ -19,6 +20,11 @@ public class ControllerHexGame extends Controller {
     private JPanel view;
     private ControllerPrincipal controllerPrincipal;
 
+
+    @Override
+    public Repaire getRepaireSelectedAttack() {
+        return null;
+    }
 
     public ControllerHexGame(Plateau model, FramePrincipal frame, ControllerPrincipal controller) {
         initController(model, frame, controller);
@@ -108,6 +114,11 @@ public class ControllerHexGame extends Controller {
 
     @Override
     public void doStartAttaquer() {
+
+    }
+
+    @Override
+    public void doStartAttaquerRepaire() {
 
     }
 

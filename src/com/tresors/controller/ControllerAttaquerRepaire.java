@@ -1,9 +1,10 @@
 package com.tresors.controller;
 
-import com.tresors.event.navire.INavireChargeListener;
+import com.tresors.event.Repaire.IRepaireChargeListener;
 import com.tresors.model.*;
 import com.tresors.vue.FramePrincipal;
 import com.tresors.vue.VueAttaquer;
+import com.tresors.vue.VueAttaquerRepaire;
 import com.tresors.vue.VuePlateau;
 
 import javax.swing.*;
@@ -11,10 +12,18 @@ import java.awt.*;
 import java.util.ArrayList;
 
 /**
- * Created by gael on 24/12/2014.
+ * Created by aurelia on 05/01/2015.
  */
-public class ControllerAttaquer extends Controller  {
+public class ControllerAttaquerRepaire extends Controller  {
+    @Override
+    public void doStartAttaquerRepaire() {
 
+    }
+
+    @Override
+    public Navire getNavireSelectedAttack() {
+        return null;
+    }
 
     /*The Repair View, initialized to NULL*/
     public JPanel view = null;
@@ -26,13 +35,8 @@ public class ControllerAttaquer extends Controller  {
     private FramePrincipal framePrincipal;
     private int currentPlayer;//valeur de l'index du joueur actuel commence à 1 et pas 0
     private int currentPlayerStage; //Variable indiquant à quel etape en est le joueur. Conditionne les actions possibles, etape 1 on peux attaquer ou se déplacer, etape 2 on peut attaquer ou réparer
-    private Navire navireSelectedAttack;
     private Navire navireJoueurActuel;
-
-    @Override
-    public void doStartAttaquerRepaire() {
-
-    }
+    private Repaire repaireAttacked;
 
     private int stateAttaque ; //
     private static final int ATTAQUER = 0;
@@ -44,29 +48,34 @@ public class ControllerAttaquer extends Controller  {
     private static final int RIPPGAGNANTE = 2;
 
     //dostartgame
-    public ControllerAttaquer(Plateau model, FramePrincipal f, ControllerPrincipal controllerPrincipal,int attacking, Navire attackedNavire, int currentPlayerStage, int stateAttaque) {
+    public ControllerAttaquerRepaire(Plateau model, FramePrincipal f, ControllerPrincipal controllerPrincipal,int attacking,Repaire attackedRepaire , int currentPlayerStage, int stateAttaque) {
         initController(model,f,controllerPrincipal);
 
         currentPlayer = attacking;
         this.currentPlayerStage = currentPlayerStage;
-        navireSelectedAttack=attackedNavire;
+        repaireAttacked=attackedRepaire;
         navireJoueurActuel=model.getListJoueurs().get(currentPlayer);
         this.stateAttaque = stateAttaque;
 
-        view = new VueAttaquer(this);
+        view = new VueAttaquerRepaire(this);
 
         framePrincipal.changeView(view);
         addListenersToModel();
     }
 
-    //les autres
+    @Override
+    public Repaire getRepaireSelectedAttack() {
+        return repaireAttacked;
+    }
+//les autres
 
     /**
      * A Method that adds listeners to the model
      */
     private void addListenersToModel() {
 
-        model.getListJoueurs().get(currentPlayer).addRepairChargeListener((INavireChargeListener) this.view);
+        model.getListJoueurs().get(currentPlayer).addRepairChargeListener((com.tresors.event.navire.INavireChargeListener) this.view);
+        repaireAttacked.addRepairChargeListener((IRepaireChargeListener) this.view);
     }
 
 
@@ -74,6 +83,10 @@ public class ControllerAttaquer extends Controller  {
     //Notifications de modification sur le model
     public void notifyAddJoueur(String nameJoueur, ENavireColor couleurJoueur){
         model.getListJoueurs().add(new Navire(nameJoueur,couleurJoueur));
+    }
+
+    public Repaire getRepaireAttacked() {
+        return repaireAttacked;
     }
 
     public void nextPlayer(){
@@ -194,15 +207,6 @@ public class ControllerAttaquer extends Controller  {
         this.view = view;
     }
 
-    @Override
-    public Navire getNavireSelectedAttack() {
-        return navireSelectedAttack;
-    }
-
-    @Override
-    public Repaire getRepaireSelectedAttack() {
-        return null;
-    }
 
     @Override
     public void doStartAttaquer() {
@@ -221,46 +225,39 @@ public class ControllerAttaquer extends Controller  {
             String tabDeResult = "";
             Navire nAttaquant = this.getModel().getListJoueurs().get(this.getCurrentPlayer());
             if (stateAttaque==0){
-                if (nAttaquant.checkConfigurationNavire()){
+                if (repaireAttacked.checkRepaireAttaquable()){
                     int nbCanons= nAttaquant.getNbCanons();
                     int[] tabDe = new int[nbCanons];
                     for(int i = 0; i < nbCanons; i++){
                         tabDe[i] = (int) (1 + (Math.random() * (6 - 1)));
-                        navireSelectedAttack.supprimerChargeAt(tabDe[i]);
-                        tabDeResult += Integer.toString(tabDe[i]+1) + ", ";
+                        repaireAttacked.supprimerEmplacement((tabDe[i]+1));
+                        tabDeResult += Integer.toString(tabDe[i]) + ", ";
                     }
-                    if (!navireSelectedAttack.checkConfigurationNavire()){
+                    if (!repaireAttacked.checkRepaireAttaquable()){
                         vaincue = ATTGAGNANTE;
                     }
                     stateAttaque = 1;// change l'etat
                 }
                 else{
-                    tabDeResult = "Pas assez de pirate ou de cannons";
                     vaincue = ATTGAGNANTE;
                     stateAttaque = 2;
                 }
-                this.controllerPrincipal.doStartAttaquer(currentPlayer, navireSelectedAttack, currentPlayerStage,stateAttaque);
+                this.controllerPrincipal.doStartAttaqueRepaire(currentPlayer, repaireAttacked, currentPlayerStage, stateAttaque);
             }
             else{// alors etat riposter
                 //navire n = this.getModel().getListJoueurs().get(this.getCurrentPlayer());
-                int nbCanons=navireSelectedAttack.getNbCanons();
+                int nbCanons=repaireAttacked.getNbCanons();
                 int[] tabDe = new int[nbCanons];
-                if(navireSelectedAttack.checkConfigurationNavire()){
-                    for(int i = 0; i < nbCanons; i++){
-                        tabDe[i] = (int) (1 + (Math.random() * (6 - 1)));
-                        System.out.println(tabDe[i]);
-                        nAttaquant.supprimerChargeAt(tabDe[i]);
-                        tabDeResult += Integer.toString(tabDe[i] + 1) + ", ";
-                    }
-                }
-                else{
-                    tabDeResult = "Pas assez de Pirate ou de Cannons";
+                for(int i = 0; i < nbCanons; i++){
+                    tabDe[i] = (int) (1 + (Math.random() * (6 - 1)));
+                    nAttaquant.supprimerChargeAt(tabDe[i]);
+                    tabDeResult += Integer.toString(tabDe[i]+1) + ", ";//+1 car commence emplacement a 0
                 }
                 stateAttaque = 2;
                 if (!nAttaquant.checkConfigurationNavire()){
                     vaincue = RIPPGAGNANTE;
                 }
-                this.controllerPrincipal.doStartAttaquer(currentPlayer, navireSelectedAttack, currentPlayerStage, 2);
+                this.controllerPrincipal.doStartAttaqueRepaire(currentPlayer, repaireAttacked, currentPlayerStage, 2);
             }
 
             //tabDeResult = tabDeResult.substring(0, tabDeResult.lastIndexOf(',') - 1);

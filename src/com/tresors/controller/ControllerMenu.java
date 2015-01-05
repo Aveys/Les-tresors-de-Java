@@ -3,6 +3,7 @@ package com.tresors.controller;
 import com.tresors.model.ENavireColor;
 import com.tresors.model.Navire;
 import com.tresors.model.Plateau;
+import com.tresors.model.Repaire;
 import com.tresors.vue.FramePrincipal;
 import com.tresors.vue.VueMenu;
 import com.tresors.vue.VuePlateau;
@@ -111,7 +112,17 @@ public class ControllerMenu extends Controller {
     }
 
     @Override
+    public Repaire getRepaireSelectedAttack() {
+        return null;
+    }
+
+    @Override
     public void doStartAttaquer() {
+
+    }
+
+    @Override
+    public void doStartAttaquerRepaire() {
 
     }
 

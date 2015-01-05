@@ -51,6 +51,7 @@ public class Plateau extends Observable{
                     this.plateau[i][j] = new Mer(i,j);
                 if( grilleRef[i][j] == 4){
                     Repaire repaireTemp = this.repaireAleatoire();
+                    repaireTemp.setCoordonnees(new Point(i,j));
                     this.plateau[i][j] = repaireTemp;
                     listDesRepaires.add(repaireTemp);
                 }
@@ -258,6 +259,37 @@ public class Plateau extends Observable{
      */
     public ArrayList<Navire> getNavire(int x,int y){
         return getNavire(new Point(x,y));
+    }
+
+
+    /**
+     * Retourne les Navires situé à un point particulier
+     * @param p Le point à analyser
+     * @return la liste des navires présent sur le point
+     */
+    public Repaire getRepaire(Point p){
+        Repaire mRepaire = new Repaire();
+        for (Repaire r: listDesRepaires){
+            if(r.getCoordonnees().x == p.x && r.getCoordonnees().y==p.y){
+                mRepaire = r;
+            }
+        }
+        return mRepaire;
+    }
+
+
+    /**
+     * voir {@link #getNavire(Point p)}
+     * @param x la position en x
+     * @param y la position en y
+     * @return la liste des navires présent sur le point
+     */
+    public Repaire getRepaire(int x,int y){
+        return getRepaire(new Point(x, y));
+    }
+
+    public ArrayList<Repaire> getListDesRepaires() {
+        return listDesRepaires;
     }
 
     /**

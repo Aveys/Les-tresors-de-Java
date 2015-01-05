@@ -26,6 +26,7 @@ public class VuePlateau extends JPanel implements INavirePositionListener {
     private JLabel labelAction;
     private JButton buttonPassTour;
     private Controller controller = null;
+    private boolean attaqueRp;
 
 
     public VuePlateau(Controller controllerPlateau) {
@@ -112,8 +113,10 @@ public class VuePlateau extends JPanel implements INavirePositionListener {
         attackButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-                getController().doStartAttaquer();
+                if(attaqueRp){
+                    getController().doStartAttaquerRepaire();
+                }
+                else getController().doStartAttaquer();
 
             }
         });
