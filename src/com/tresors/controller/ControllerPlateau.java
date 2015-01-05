@@ -92,6 +92,12 @@ public class ControllerPlateau extends Controller {
         model.getListJoueurs().get(currentPlayer).addNavirePositionListener((INavirePositionListener)this.view);
     }
 
+    public void selectNavire(Navire name){
+
+        this.navireSelectedAttack = name;
+
+    }
+
 
 
     //Notifications de modification sur le model
@@ -209,16 +215,10 @@ public class ControllerPlateau extends Controller {
     public void doStartAttaquer() {
         //todo selection du navire à attaquer
 
-        if(model.getListJoueurs().size()>=2) {
-            for(Navire n : getModel().getListJoueurs()){
-                //Si un navire est sur la meme case et qu'ils sont différents
-                if (n.getCoordonnees().equals(getModel().getListJoueurs().get(currentPlayer).getCoordonnees()) && n != getModel().getListJoueurs().get(currentPlayer) ){
-                    navireSelectedAttack = n;
-                }
-            }
-            this.controllerPrincipal.doStartAttaquer(currentPlayer,navireSelectedAttack, currentPlayerStage, 0);
+        if(navireSelectedAttack.getCoordonnees().equals(getModel().getListJoueurs().get(currentPlayer).getCoordonnees())){
+            this.controllerPrincipal.doStartAttaquer(currentPlayer, navireSelectedAttack, currentPlayerStage, 0);
         }
-        else{System.out.print("pas assez de joueur");}
+
     }
 
     public Navire getNavireSelectedAttack() {

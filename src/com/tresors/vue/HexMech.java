@@ -82,7 +82,7 @@ public class HexMech {
         g2.drawPolygon(poly);
         switch(type){
             case 'M':
-                g2.setColor(Color.BLUE);//bleu pour la mer
+                g2.setColor(Color.cyan);//bleu pour la mer
                 //g2.drawPolygon(poly);//on dessine l'hexagon
                 g2.fillPolygon(poly);//on le rempli
                 break;

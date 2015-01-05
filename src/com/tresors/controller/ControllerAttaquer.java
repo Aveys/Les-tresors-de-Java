@@ -195,6 +195,11 @@ public class ControllerAttaquer extends Controller  {
 
     }
 
+    @Override
+    public void selectNavire(Navire name) {
+
+    }
+
 
     @Override
     public void notifyActionAttaquer(){

@@ -49,7 +49,7 @@ public class VuePlateau extends JPanel implements INavirePositionListener {
         mainPanel.add(panelScore, gbc);
 
         //Panel Plateau
-        plateauPanel = new HexGame(getController().getModel().getPlateau(), 100, getController().getModel().getListJoueurs());
+        plateauPanel = new HexGame(getController().getModel().getPlateau(), 100, getController().getModel().getListJoueurs(), controller);
         gbc.fill = GridBagConstraints.BOTH;
         gbc.gridx = 0;
         gbc.gridy = 1;
