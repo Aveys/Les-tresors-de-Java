@@ -163,8 +163,11 @@ public class ControllerReparer extends Controller {
 
     @Override
     public void doStartPlateau() {
-        this.controllerPrincipal.doStartPlateau(currentPlayer,currentPlayerStage);
-    }
+        if(currentPlayer+1 >= getModel().getListJoueurs().size())
+            this.controllerPrincipal.doStartPlateau(0,1);
+        else
+            this.controllerPrincipal.doStartPlateau(currentPlayer + 1,1);
+    }//la réparation à lieu obligatoirement à la deuxieme etape, donc on passe au joueur suivant et on retourne à l'etape 1
 
     public void setCurrentPlayerStage(int currentPlayerStage) {
         this.currentPlayerStage = currentPlayerStage;

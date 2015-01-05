@@ -159,9 +159,9 @@ public class ControllerPlateau extends Controller {
         Point p1 = new Point(0,1);
         Point p2 = new Point(1,0);
         if (getModel().getListJoueurs().get(getCurrentPlayer()).getCoordonnees().equals(p1) || getModel().getListJoueurs().get(getCurrentPlayer()).getCoordonnees().equals(p2))
-            this.controllerPrincipal.doStartRepair(false, getCurrentPlayer());
+            this.controllerPrincipal.doStartRepair(false, this.getCurrentPlayer());
         else
-            this.controllerPrincipal.doStartRepair(true, getCurrentPlayer());
+            this.controllerPrincipal.doStartRepair(true, this.getCurrentPlayer());
     }
 
     @Override

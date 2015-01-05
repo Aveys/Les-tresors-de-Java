@@ -121,14 +121,12 @@ public class VuePlateau extends JPanel implements INavirePositionListener {
 
         repairButton = new JButton("Réparer");
         gbc.insets.top = 60;
-        repairButton.setEnabled(false);
+        if (getController().getCurrentPlayerStage() == 1)
+            repairButton.setEnabled(false);
         repairButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                getController().nextStage();
-                updateCurrentPlayerName();
-                updateStageLabel();
-                updateAllowedActions();
+                
                 getController().doStartRepair();
 
             }
@@ -137,6 +135,8 @@ public class VuePlateau extends JPanel implements INavirePositionListener {
 
         moveButton = new JButton("Se deplacer");
         gbc.insets.top = 90;
+        if (getController().getCurrentPlayerStage() == 2)
+            moveButton.setEnabled(false);
         moveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -182,7 +182,7 @@ public class VuePlateau extends JPanel implements INavirePositionListener {
     }
 
     private void updateCurrentPlayerName() {
-        labelJoueur1.setText("C'est le tour de : " + controller.getModel().getListJoueurs().get(controller.getCurrentPlayer()).getCapitaine());
+        labelJoueur1.setText("C'est au tour de : " + controller.getModel().getListJoueurs().get(controller.getCurrentPlayer()).getCapitaine());
     }
 
     public void updateAllowedActions(){
