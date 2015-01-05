@@ -211,7 +211,7 @@ public class ControllerAttaquer extends Controller  {
             String tabDeResult = "";
             Navire nAttaquant = this.getModel().getListJoueurs().get(this.getCurrentPlayer());
             if (stateAttaque==0){
-                if (navireSelectedAttack.checkConfigurationNavire()){
+                if (nAttaquant.checkConfigurationNavire()){
                     int nbCanons= nAttaquant.getNbCanons();
                     int[] tabDe = new int[nbCanons];
                     for(int i = 0; i < nbCanons; i++){
@@ -225,6 +225,7 @@ public class ControllerAttaquer extends Controller  {
                     stateAttaque = 1;// change l'etat
                 }
                 else{
+                    tabDeResult = "Pas assez de pirate ou de cannons";
                     vaincue = ATTGAGNANTE;
                     stateAttaque = 2;
                 }
@@ -234,10 +235,16 @@ public class ControllerAttaquer extends Controller  {
                 //navire n = this.getModel().getListJoueurs().get(this.getCurrentPlayer());
                 int nbCanons=navireSelectedAttack.getNbCanons();
                 int[] tabDe = new int[nbCanons];
-                for(int i = 0; i < nbCanons; i++){
-                    tabDe[i] = (int) (1 + (Math.random() * (6 - 1)));
-                    nAttaquant.supprimerChargeAt(tabDe[i]);
-                    tabDeResult += Integer.toString(tabDe[i]+1) + ", ";//+1 car commence emplacement a 0
+                if(navireSelectedAttack.checkConfigurationNavire()){
+                    for(int i = 0; i < nbCanons; i++){
+                        tabDe[i] = (int) (1 + (Math.random() * (6 - 1)));
+                        System.out.println(tabDe[i]);
+                        nAttaquant.supprimerChargeAt(tabDe[i]);
+                        tabDeResult += Integer.toString(tabDe[i] + 1) + ", ";
+                    }
+                }
+                else{
+                    tabDeResult = "Pas assez de Pirate ou de Cannons";
                 }
                 stateAttaque = 2;
                 if (!nAttaquant.checkConfigurationNavire()){

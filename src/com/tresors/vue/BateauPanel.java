@@ -156,7 +156,9 @@ public class BateauPanel extends JPanel {
     }
 
     public void removeCharge(int posChargeRemoved) {
-        this.remove(tabCharge[posChargeRemoved]);
-        this.repaint();
+        if(tabCharge[posChargeRemoved] != null) {
+            this.remove(tabCharge[posChargeRemoved]);
+            this.repaint();
+        }
     }
 }
