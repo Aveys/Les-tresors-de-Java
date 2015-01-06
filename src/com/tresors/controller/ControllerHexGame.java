@@ -30,7 +30,7 @@ public class ControllerHexGame extends Controller {
         initController(model, frame, controller);
         HexMech.setHeight(100);
         HexMech.setBorders(5);
-        /*view = new HexGame(model.getPlateau(),100,model.getListJoueurs());//TODO : j'en suis là
+        /*view = new HexGame(model.getPlateau(),100,model.getListJoueurs());//
         framePrincipal.changeView(view);*/
     }
 
@@ -154,6 +154,21 @@ public class ControllerHexGame extends Controller {
 
     @Override
     public void doRepaintBateauPanel() {
+
+    }
+
+    @Override
+    public void selectRepaire(Repaire repaireAttaquer) {
+
+    }
+
+    @Override
+    public boolean getAttaqueRp() {
+        return false;
+    }
+
+    @Override
+    public void setAttaqueRp(boolean estVrai) {
 
     }
 

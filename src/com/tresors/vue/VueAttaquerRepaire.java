@@ -43,22 +43,24 @@ public class VueAttaquerRepaire extends JPanel implements IRepaireChargeListener
         repaireAttaquer = controller.getRepaireSelectedAttack();
         buttonAttaquer = new JButton();
         repairePirates = new JLabel();
-        repairePirates.setText("Positions Pirates :");
         repaireCannons = new JLabel();
-        repaireCannons.setText("Positions Cannon :");
         repaireTresore = new JLabel();
-        repaireTresore.setText(Integer.toString(controller.getRepaireSelectedAttack().getMontantTresors()));
+        repaireTresore.setText("Tresore : "+Integer.toString(controller.getRepaireSelectedAttack().getMontantTresors()));
         System.out.print(repaireAttaquer.getNbCanons());
         System.out.print(repaireAttaquer.getNbPirates());
 
+        String  strTempPirate = "";
+        String strTempCanons = "";
         for(Charge c :repaireAttaquer.getCharges()){
             if( c instanceof Pirate){
-                repairePirates.setText(repairePirates.getText()+"; "+Integer.toString(c.getPosition()));
+                strTempPirate = strTempPirate.concat(Integer.toString(c.getPosition())).concat("; ") ;
             }
             if( c instanceof Canon){
-                repaireCannons.setText(repairePirates.getText()+"; "+Integer.toString(c.getPosition()));
+                strTempCanons = strTempCanons.concat(Integer.toString(c.getPosition())).concat("; ") ;
             }
         }
+        repairePirates.setText("Positions Pirates : "+strTempPirate);
+        repaireCannons.setText("Positions Canons : "+strTempCanons);
 //INIT JLAB
         switch (controller.getStateAttaque()){
             case 0:
@@ -79,13 +81,17 @@ public class VueAttaquerRepaire extends JPanel implements IRepaireChargeListener
         gbc.fill = GridBagConstraints.BOTH;
         gbc.anchor = GridBagConstraints.CENTER;
         bateauAttaquant.setPreferredSize(new Dimension(224, 448));
-        repairePirates.setPreferredSize(new Dimension(224, 448));
-        repaireCannons.setPreferredSize(new Dimension(224, 448));
-        repaireTresore.setPreferredSize(new Dimension(224, 448));
+        repairePirates.setPreferredSize(new Dimension(200,50));
+        repaireCannons.setPreferredSize(new Dimension(200,50));
+        repaireTresore.setPreferredSize(new Dimension(200,50));
 
+        //gbc.insets.top = 30;
         this.add(bateauAttaquant, gbc);
+        //gbc.insets.top = 50;
         this.add(repaireCannons, gbc);
+        //gbc.insets.top = 120;
         this.add(repaireTresore, gbc);
+        //gbc.insets.top = 220;
         this.add(repairePirates, gbc);
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridy = 1;

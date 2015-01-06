@@ -3,6 +3,7 @@ package com.tresors.vue;
 import com.tresors.controller.Controller;
 import com.tresors.event.navire.INavirePositionListener;
 import com.tresors.event.navire.NavirePositionChangedEvent;
+import com.tresors.model.Repaire;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 /**
  * Created by Nicolas Sagon on 25/11/2014.
@@ -26,7 +28,7 @@ public class VuePlateau extends JPanel implements INavirePositionListener {
     private JLabel labelAction;
     private JButton buttonPassTour;
     private Controller controller = null;
-    private boolean attaqueRp;
+
 
 
     public VuePlateau(Controller controllerPlateau) {
@@ -65,9 +67,9 @@ public class VuePlateau extends JPanel implements INavirePositionListener {
                     updateCurrentPlayerName();
                     updateStageLabel();
                     updateAllowedActions();
-                    getClickedCase(e.getX(),e.getY());
-                    getController().setDeplacementAutoriseFalse();
                 }
+                getClickedCase(e.getX(),e.getY());
+                getController().setDeplacementAutoriseFalse();
             }
 
             @Override
@@ -113,10 +115,12 @@ public class VuePlateau extends JPanel implements INavirePositionListener {
         attackButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(attaqueRp){
+                if(controller.getAttaqueRp()){
                     getController().doStartAttaquerRepaire();
                 }
-                else getController().doStartAttaquer();
+                else{
+                    getController().doStartAttaquer();
+                }
 
             }
         });
@@ -210,9 +214,24 @@ public class VuePlateau extends JPanel implements INavirePositionListener {
     public void getClickedCase(int x, int y){
         /*System.out.println("Pixel cliqué : "+x+","+y);
         Point tmp = HexMech.pxtoHex(x, y);
+        System.out.println("Point :" + tmp.toString());
+        Point tmpPT3 = HexMech.getPaulCoordinate(tmp);
+        System.out.println("Point Paule:" + tmpPT3.toString());
+        ArrayList<Repaire> tmp2=  getController().getModel().getListDesRepaires();
         System.out.println(tmp.toString());   // Récupération de l'hexagone cliqué et convertir en Case
         HexMech.hexToPx(tmp);*/
-        if(getController().isDeplacementAutorise()) getController().notifyPlayerMoved(x, y);
+        getController().setAttaqueRp(false);
+        if(getController().isDeplacementAutorise()){
+            getController().notifyPlayerMoved(x, y);
+
+        }
+        Point tmp = HexMech.pxtoHex(x, y);
+        tmp = HexMech.getAureliaCoordinate(tmp);
+        Repaire rTemp = getController().getModel().getRepaire(tmp.x,tmp.y);
+        if (!(rTemp.getMontantTresors()==0)){
+            getController().setAttaqueRp(true);//TODO verifier que cela n'interfaire pas avec les autres fonctionnaliter comme deplacement
+            getController().selectRepaire(rTemp);
+        }
 
     }
 

@@ -29,8 +29,8 @@ public class Repaire extends Case{
 
     private final EventListenerList listeners = new EventListenerList();
 
-    public Repaire(List<Charge> Charges,int montantTresors) {
-        this.charges = charges;
+    public Repaire(List<Charge> chargesPasser,int montantTresors) {
+        this.charges = chargesPasser;
         this.montantTresors=montantTresors;
     }
 
@@ -157,7 +157,6 @@ public class Repaire extends Case{
         IRepaireChargeListener[] listenerList = (IRepaireChargeListener[])listeners.getListeners(IRepaireChargeListener.class);
 
         for (IRepaireChargeListener listener : listenerList) {
-            //TODO gérer le traitement de l'ajout d'une charge
             System.out.print(charge.getPosition());
             listener.chargeAdded(new RepaireChargeAddedEvent(this, charge));
         }
@@ -166,7 +165,6 @@ public class Repaire extends Case{
     public void fireChargeRemoved(int position){
         IRepaireChargeListener[] listenerList = (IRepaireChargeListener[])listeners.getListeners(IRepaireChargeListener.class);
         for (IRepaireChargeListener listener : listenerList) {
-            //TODO gérer le traitement de l'ajout d'une charge
             listener.chargeRemoved(new RepaireChargeRemoveEvent(this, position));
         }
     }

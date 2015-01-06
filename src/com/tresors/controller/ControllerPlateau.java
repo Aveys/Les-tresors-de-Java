@@ -32,6 +32,7 @@ public class ControllerPlateau extends Controller {
     private Navire navireSelectedAttack;
     private Repaire repaireSelectedAttack;
     private boolean deplacementAutorise=false;
+    private boolean attaqueRp=false;
 
     //dostartgame
     public ControllerPlateau(Plateau model, FramePrincipal f, ControllerPrincipal controllerPrincipal, int currentPlayer, int currentPlayerStage) {
@@ -86,6 +87,13 @@ public class ControllerPlateau extends Controller {
 
   //les autres
 
+    public boolean getAttaqueRp(){
+        return  attaqueRp;
+    }
+
+    public void setAttaqueRp(boolean estAttaquer){
+         attaqueRp = estAttaquer;
+    }
 
     /**
      * A Method that adds listeners to the model
@@ -100,7 +108,7 @@ public class ControllerPlateau extends Controller {
 
     }
 
-    public void selectNavire(Repaire r){
+    public void selectRepaire(Repaire r){
         this.repaireSelectedAttack = r;
     }
 
@@ -228,7 +236,6 @@ public class ControllerPlateau extends Controller {
 
     @Override
     public void doStartAttaquer() {
-        //todo selection du navire à attaquer
 
         if(navireSelectedAttack.getCoordonnees().equals(getModel().getListJoueurs().get(currentPlayer).getCoordonnees())){
             this.controllerPrincipal.doStartAttaquer(currentPlayer, navireSelectedAttack, currentPlayerStage, 0);

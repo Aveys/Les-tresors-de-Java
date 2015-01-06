@@ -144,6 +144,18 @@ public class BateauPanel extends JPanel {
 
     }
 
+    public void addTresore(int position) {
+        // System.out.println("lol");
+        Point pointTemp = locationList.get(position);
+        tabCharge[position] = new ChargePanel(ChargePanel.Type.tresor1);
+        tabCharge[position].setSize(33, 71);
+        tabCharge[position].setLocation(pointTemp.x, pointTemp.y);
+
+        this.add(tabCharge[position]);
+        this.repaint();
+
+    }
+
     public void addCanon(int position) {
 
         Point pointTemp = locationList.get(position);

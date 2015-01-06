@@ -9,6 +9,7 @@ import com.tresors.controller.Controller;
 import com.tresors.event.navire.INavireChargeListener;
 import com.tresors.event.navire.NavireChargeAddedEvent;
 import com.tresors.event.navire.NavireChargeRemovedEvent;
+import com.tresors.model.Canon;
 import com.tresors.model.Pirate;
 
 import javax.swing.*;
@@ -162,7 +163,14 @@ public class VueReparer extends JPanel implements INavireChargeListener{
         }
         else
         {
+            if (event.getChargeAdded() instanceof Canon){
             bateauPanel.addCanon(event.getChargeAdded().getPosition());
+
+            }
+            else{
+            bateauPanel.addTresore(event.getChargeAdded().getPosition());
+            }
+
         }
 
     }

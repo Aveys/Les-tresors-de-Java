@@ -59,6 +59,7 @@ public class HexGame extends JPanel{
                 @Override
                 public void mouseClicked(MouseEvent e) {
                     controller.selectNavire(navires.get(index));
+                    controller.setAttaqueRp(false);
                 }
 
                 @Override

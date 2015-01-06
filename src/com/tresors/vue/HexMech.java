@@ -230,6 +230,23 @@ public class HexMech {
         return getPaulCoordinate(p.x,p.y);
     }
 
+
+    public static Point getAureliaCoordinate(int i, int j){
+        if (j==2 || j==3)
+            return new Point(i+1,j);
+        else if (j==4||j==5)
+            return new Point(i+2,j);
+        else if (j==6||j==7)
+            return new Point(i+3,j);
+        else if (j==8)
+            return new Point(i+4,j);
+        else
+            return new Point(i,j);
+    }
+    public static Point getAureliaCoordinate(Point p){
+        return getAureliaCoordinate(p.x,p.y);
+    }
+
     /**
      * renvoi les coodonnées comme stocké dans le tableau à partir des coordonnées voulues par Paul
      * @param i la ligne voulue

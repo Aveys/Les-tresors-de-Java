@@ -38,6 +38,7 @@ public abstract class Controller {
     public abstract void doStartAttaquer();
     public abstract void doStartAttaquerRepaire();
     public abstract void selectNavire(Navire name);
+    public abstract void selectRepaire(Repaire repaireAttaquer);
     public abstract void notifyActionAttaquer();
     public abstract void setDeplacementAutoriseTrue();
     public abstract boolean isDeplacementAutorise();
@@ -45,4 +46,8 @@ public abstract class Controller {
     public abstract void setDeplacementAutoriseFalse();
 
     public abstract void doRepaintBateauPanel();
+
+    public abstract boolean getAttaqueRp();//autorisation attaque repaire en le select
+    public abstract void setAttaqueRp(boolean estVrai);
+
 }

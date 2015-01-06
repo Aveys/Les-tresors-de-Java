@@ -21,7 +21,6 @@ public class Navire {
     private ArrayList<Charge> emplacement;
 
     private final EventListenerList listeners = new EventListenerList();
-    //TODO verifier que l'emplacement commence a 1 pour que ça correspond au de
 
     public Navire(String capitaine, ENavireColor color) {
         this.capitaine = capitaine;
@@ -85,6 +84,13 @@ public class Navire {
         if(montant>0)
             emplacement.set(pos,new Tresor(montant,pos));
     }
+
+    public int getTresore(){
+        if (getEmplacement(5) instanceof Tresor){
+            return ((Tresor) getEmplacement(5)).getMontant();
+        }
+        return 0;
+    }
     /**
      * Echange la position entre deux charges
      * @param pos1 la premiere position
@@ -94,7 +100,7 @@ public class Navire {
         Charge tmp;
         tmp=emplacement.get(pos1);
         emplacement.set(pos1,emplacement.get(pos2));
-        emplacement.set(pos2,tmp);
+        emplacement.set(pos2, tmp);
     }
     /**
      * Determine si l'emplacement est vide ou contient un object
@@ -364,7 +370,6 @@ public class Navire {
         INavireChargeListener[] listenerList = (INavireChargeListener[])listeners.getListeners(INavireChargeListener.class);
 
         for (INavireChargeListener listener : listenerList) {
-            //TODO gérer le traitement de l'ajout d'une charge
             System.out.print(charge.getPosition());
             listener.chargeAdded(new NavireChargeAddedEvent(this, charge));
         }
@@ -373,7 +378,6 @@ public class Navire {
     public void fireChargeRemoved(int position){
         INavireChargeListener[] listenerList = (INavireChargeListener[])listeners.getListeners(INavireChargeListener.class);
         for (INavireChargeListener listener : listenerList) {
-            //TODO gérer le traitement de l'ajout d'une charge
             listener.chargeRemoved(new NavireChargeRemovedEvent(this, position));
         }
     }

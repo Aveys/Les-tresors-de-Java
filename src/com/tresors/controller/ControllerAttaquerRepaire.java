@@ -74,7 +74,7 @@ public class ControllerAttaquerRepaire extends Controller  {
      */
     private void addListenersToModel() {
 
-        model.getListJoueurs().get(currentPlayer).addRepairChargeListener((com.tresors.event.navire.INavireChargeListener) this.view);
+      //  model.getListJoueurs().get(currentPlayer).addRepairChargeListener((com.tresors.event.navire.INavireChargeListener) this.view);
         repaireAttacked.addRepairChargeListener((IRepaireChargeListener) this.view);
     }
 
@@ -218,6 +218,21 @@ public class ControllerAttaquerRepaire extends Controller  {
 
     }
 
+    @Override
+    public void setAttaqueRp(boolean estVrai) {
+
+    }
+
+    @Override
+    public boolean getAttaqueRp() {
+        return false;
+    }
+
+    @Override
+    public void selectRepaire(Repaire repaireAttaquer) {
+
+    }
+
 
     @Override
     public void notifyActionAttaquer(){
@@ -229,9 +244,9 @@ public class ControllerAttaquerRepaire extends Controller  {
                     int nbCanons= nAttaquant.getNbCanons();
                     int[] tabDe = new int[nbCanons];
                     for(int i = 0; i < nbCanons; i++){
-                        tabDe[i] = (int) (1 + (Math.random() * (6 - 1)));
-                        repaireAttacked.supprimerEmplacement((tabDe[i]+1));
-                        tabDeResult += Integer.toString(tabDe[i]) + ", ";
+                        tabDe[i] = (int) ( (Math.random() * (6)));
+                        repaireAttacked.supprimerEmplacement((tabDe[i]+1));// 0 est indestructible pour repère
+                        tabDeResult += Integer.toString(tabDe[i]+1) + ", ";
                     }
                     if (!repaireAttacked.checkRepaireAttaquable()){
                         vaincue = ATTGAGNANTE;
@@ -249,7 +264,7 @@ public class ControllerAttaquerRepaire extends Controller  {
                 int nbCanons=repaireAttacked.getNbCanons();
                 int[] tabDe = new int[nbCanons];
                 for(int i = 0; i < nbCanons; i++){
-                    tabDe[i] = (int) (1 + (Math.random() * (6 - 1)));
+                    tabDe[i] = (int) ( (Math.random() * (6 )));
                     nAttaquant.supprimerChargeAt(tabDe[i]);
                     tabDeResult += Integer.toString(tabDe[i]+1) + ", ";//+1 car commence emplacement a 0
                 }
@@ -262,9 +277,11 @@ public class ControllerAttaquerRepaire extends Controller  {
 
             //tabDeResult = tabDeResult.substring(0, tabDeResult.lastIndexOf(',') - 1);
             JOptionPane.showMessageDialog(view.getParent(), "Résultat des dés:   " + tabDeResult);
-            if(vaincue!=ATTAQUER){
+                if(vaincue==ATTGAGNANTE){//repaire ne peux pas pillé un bateau
                 //TODO implementer pillage
-                JOptionPane.showMessageDialog(view.getParent(), "Pille   :" );
+                    JOptionPane.showMessageDialog(view.getParent(), "Pille   :"+Integer.toString(repaireAttacked.getMontantTresors()) );
+                    nAttaquant.ajouterTresor(5,repaireAttacked.getMontantTresors());
+                    repaireAttacked.setMontantTresors(0);
             }
         }
         else{// state quitter -> fermer panel

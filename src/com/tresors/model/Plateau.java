@@ -268,7 +268,7 @@ public class Plateau extends Observable{
      * @return la liste des navires présent sur le point
      */
     public Repaire getRepaire(Point p){
-        Repaire mRepaire = new Repaire();
+        Repaire mRepaire = null;
         for (Repaire r: listDesRepaires){
             if(r.getCoordonnees().x == p.x && r.getCoordonnees().y==p.y){
                 mRepaire = r;

@@ -168,5 +168,20 @@ public class ControllerMenu extends Controller {
 
     }
 
+    @Override
+    public void selectRepaire(Repaire repaireAttaquer) {
+
+    }
+
+    @Override
+    public boolean getAttaqueRp() {
+        return false;
+    }
+
+    @Override
+    public void setAttaqueRp(boolean estVrai) {
+
+    }
+
 
 }

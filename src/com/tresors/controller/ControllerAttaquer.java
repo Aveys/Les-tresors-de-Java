@@ -225,7 +225,7 @@ public class ControllerAttaquer extends Controller  {
                     int nbCanons= nAttaquant.getNbCanons();
                     int[] tabDe = new int[nbCanons];
                     for(int i = 0; i < nbCanons; i++){
-                        tabDe[i] = (int) (1 + (Math.random() * (6 - 1)));
+                        tabDe[i] = (int) ( (Math.random() * (6 )));
                         navireSelectedAttack.supprimerChargeAt(tabDe[i]);
                         tabDeResult += Integer.toString(tabDe[i]+1) + ", ";
                     }
@@ -247,7 +247,7 @@ public class ControllerAttaquer extends Controller  {
                 int[] tabDe = new int[nbCanons];
                 if(navireSelectedAttack.checkConfigurationNavire()){
                     for(int i = 0; i < nbCanons; i++){
-                        tabDe[i] = (int) (1 + (Math.random() * (6 - 1)));
+                        tabDe[i] = (int) ( (Math.random() * (6)));
                         System.out.println(tabDe[i]);
                         nAttaquant.supprimerChargeAt(tabDe[i]);
                         tabDeResult += Integer.toString(tabDe[i] + 1) + ", ";
@@ -264,10 +264,22 @@ public class ControllerAttaquer extends Controller  {
             }
 
             //tabDeResult = tabDeResult.substring(0, tabDeResult.lastIndexOf(',') - 1);
+
             JOptionPane.showMessageDialog(view.getParent(), "Résultat des dés:   " + tabDeResult);
             if(vaincue!=ATTAQUER){
                 //TODO implementer pillage
-                JOptionPane.showMessageDialog(view.getParent(), "Pille   :" );
+                if(vaincue==ATTGAGNANTE){
+                    if(navireSelectedAttack.getTresore()!=0){
+                        JOptionPane.showMessageDialog(view.getParent(), "Pille   :"+Integer.toString(navireSelectedAttack.getTresore()) );
+                        nAttaquant.ajouterTresor(5,navireSelectedAttack.getTresore());
+                    }
+                }
+                if(vaincue==RIPPGAGNANTE){
+                    if(nAttaquant.getTresore()!=0){
+                        JOptionPane.showMessageDialog(view.getParent(), "Pille   :" +Integer.toString(nAttaquant.getTresore()));
+                        navireSelectedAttack.ajouterTresor(5,nAttaquant.getTresore());
+                    }
+                }
             }
         }
         else{// state quitter -> fermer panel
@@ -296,6 +308,21 @@ public class ControllerAttaquer extends Controller  {
 
     @Override
     public void doRepaintBateauPanel() {
+
+    }
+
+    @Override
+    public void selectRepaire(Repaire repaireAttaquer) {
+
+    }
+
+    @Override
+    public boolean getAttaqueRp() {
+        return false;
+    }
+
+    @Override
+    public void setAttaqueRp(boolean estVrai) {
 
     }
 
